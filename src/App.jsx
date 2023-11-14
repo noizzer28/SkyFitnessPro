@@ -1,16 +1,16 @@
+
+import { AppRoutes } from './routes'
 import * as S from './App.styles'
 
-function App() {
+export const App = () => {
   return (
     <>
       <S.GlobalStyle />
       <S.Wrapper>
         <S.Container>
-          <h1>hello</h1>
+          <AppRoutes />
         </S.Container>
       </S.Wrapper>
     </>
   )
 }
-
-export default App
