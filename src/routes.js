@@ -8,7 +8,7 @@ import { Workout } from './pages/workout-page/Workout'
 import { Login } from './pages/login-page/Login'
 import { Register } from './pages/login-page/Registration'
 
-export function AppRoutes() {
+export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
