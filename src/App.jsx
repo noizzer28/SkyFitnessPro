@@ -1,9 +1,18 @@
+import * as S from './App.styles'
+
 function App() {
   return (
-    <div className="App">
-      <div>hello</div>
-    </div>
-  );
+    <>
+      <S.GlobalStyle />
+      <S.Wrapper>
+        <S.Container>
+          <div>
+            <h1>hello</h1>
+          </div>
+        </S.Container>
+      </S.Wrapper>
+    </>
+  )
 }
 
-export default App;
+export default App
