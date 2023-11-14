@@ -1,13 +1,16 @@
+
 import { AppRoutes } from './routes'
+import * as S from './App.styles'
 
 export const App = () => {
   return (
-    <div className="wrapper">
-      <div className="container">
-        <div className="App">
+    <>
+      <S.GlobalStyle />
+      <S.Wrapper>
+        <S.Container>
           <AppRoutes />
-        </div>
-      </div>
-    </div>
+        </S.Container>
+      </S.Wrapper>
+    </>
   )
 }
