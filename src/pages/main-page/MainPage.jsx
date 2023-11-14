@@ -1,3 +1,3 @@
 export const Main = () => {
-  return <div className="main">1 страница (список курсов)</div>
+  return <h1>это 1 страница сайта (список курсов)</h1>
 }

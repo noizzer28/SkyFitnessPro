@@ -1,6 +1,6 @@
 import { AppRoutes } from './routes'
 
-function App() {
+export const App = () => {
   return (
     <div className="wrapper">
       <div className="container">
@@ -11,5 +11,3 @@ function App() {
     </div>
   )
 }
-
-export default App
