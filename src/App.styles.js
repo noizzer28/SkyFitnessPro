@@ -27,7 +27,7 @@ a:visited {
 	text-decoration: none;
 	font-family: "StratosSkyeng", sans-serif;
 	cursor: pointer;
-	color: var(--color-text);
+	color: #000;
 }
 ul li {
 	list-style: none;
@@ -40,7 +40,10 @@ html, body {
 	width: 100%;
 	height: 100%;
 	font-family: "StratosSkyeng", sans-serif;
-	color: var(--color-text);
+	color: #000;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
 }
 
 ::-webkit-scrollbar {
