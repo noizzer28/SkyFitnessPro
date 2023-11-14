@@ -6,9 +6,7 @@ function App() {
       <S.GlobalStyle />
       <S.Wrapper>
         <S.Container>
-          <div className="app">
-            <h1>hello</h1>
-          </div>
+          <h1>hello</h1>
         </S.Container>
       </S.Wrapper>
     </>
