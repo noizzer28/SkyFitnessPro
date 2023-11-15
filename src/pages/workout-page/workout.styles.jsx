@@ -37,6 +37,7 @@ export const ExercisesListItem = styled.li`
   font-size: 24px;
   line-height: 32px;
   list-style-type: disc;
+  max-width: 380px;
 `
 export const ProgressButton = styled.button`
   width: 275px;

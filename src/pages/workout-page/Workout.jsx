@@ -28,10 +28,10 @@ export const Workout = () => {
                 Наклон вперед (10 повторений)
               </S.ExercisesListItem>
               <S.ExercisesListItem>
-                Наклон назад (10 повторений){' '}
+                Наклон назад (10 повторений)
               </S.ExercisesListItem>
               <S.ExercisesListItem>
-                Поднятие ног, согнутых в коленях (5 повторений){' '}
+                Поднятие ног, согнутых в коленях (5 повторений)
               </S.ExercisesListItem>
             </S.ExercisesList>
             <S.ProgressButton>Заполнить свой прогресс</S.ProgressButton>
