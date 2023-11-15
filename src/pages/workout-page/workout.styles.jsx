@@ -14,9 +14,22 @@ export const CenterHeader = styled.h1`
 export const Video = styled.div`
   margin-top: 40px;
 `
-export const BreadCrumps = styled.h2`
+export const BreadCrumps = styled.ul`
   font-size: 32px;
   line-height: 40px;
+  display: flex;
+`
+export const BreadCrumpsItem = styled.li`
+  position: relative;
+  margin-right: 30px;
+  &:not(:first-child)::before {
+    content: ' / ';
+    position: absolute;
+    left: -20px;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
 `
 export const CenterBottom = styled.div`
   display: flex;
@@ -42,19 +55,6 @@ export const ExercisesListItem = styled.li`
 export const ProgressButton = styled.button`
   width: 275px;
   height: 52px;
-  border-radius: 46px;
-  background: var(--palette-purple-90, #580ea2);
-  color: #fafafa;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.05px;
-  transition: 0.2s;
-  &:hover {
-    background-color: #3f007d;
-  }
-  &:active {
-    background-color: var(--palette-purple-100, #271a58);
-  }
 `
 
 export const Progress = styled.div`
@@ -108,7 +108,6 @@ export const ProgressBarThree = styled(ProgressBar)`
   background: var(--violet-10, #f9ebff);
 `
 export const ProgressBarTop = styled.div`
-  width: 136px;
   height: 36px;
   color: #fff;
   font-size: 24px;
@@ -120,11 +119,91 @@ export const ProgressBarTop = styled.div`
 `
 
 export const ProgressBarTopOne = styled(ProgressBarTop)`
+  width: ${(props) => props.width || '0'}%;
   background-color: #565eef;
 `
 export const ProgressBarTopTwo = styled(ProgressBarTop)`
+  width: ${(props) => props.width || '0'}%;
   background-color: #ff6d00;
 `
 export const ProgressBarTopThree = styled(ProgressBarTop)`
+  width: ${(props) => props.width || '0'}%;
   background-color: #9a48f1;
+`
+export const ModalBackground = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+`
+export const ModalProgress = styled.div`
+  width: 444px;
+  height: 544px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+  gap: 30px;
+`
+export const Modaltext = styled.p`
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+`
+export const ModalHeader = styled.h2`
+  font-size: 32px;
+  line-height: 40px;
+  margin-top: 30px;
+`
+export const ModalInput = styled.input`
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #d0cece;
+  padding: 5px;
+  width: 100%;
+  margin-top: 20px;
+  -moz-appearance: textfield;
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`
+export const ModalBlock = styled.div`
+  width: 361px;
+`
+export const ModalButton = styled.button`
+  width: 278px;
+  height: 52px;
+`
+export const ModalSuccess = styled.div`
+  width: 444px;
+  height: 360px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 2;
+`
+export const ModalSuccessHeader = styled.h2`
+  font-size: 32px;
+  line-height: 40px;
+  margin-top: 41px;
+`
+export const ModalSuccessPicture = styled.div`
+  max-width: 200px;
+  height: 254px;
+  display: flex;
+`
+export const ModalSuccessImg = styled.img`
+  width: 100%;
+  height: auto;
+  display: block;
+  justify-self: flex-end;
 `
