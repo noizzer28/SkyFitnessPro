@@ -9,8 +9,9 @@ export const Section = styled.div`
   `
 
   export const Container = styled.div`
+    /* padding-left: 140px;
+    padding-right: 140px; */
     width: 100%;
-    padding: 0 140px;
     display: flex;
     flex-direction: column;
     max-width: 1160px;
@@ -59,6 +60,7 @@ export const Section = styled.div`
     font-weight: 400;
     line-height: 24px; 
     letter-spacing: -0.05px;
+    border: 0;
   `
 
   export const CardPart = styled.div`
@@ -77,8 +79,8 @@ export const Section = styled.div`
   `
 
   export const CardList = styled.div`
-    display: flex;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: 360px 360px 360px;
   `
 
   export const Card = styled.div`
@@ -103,6 +105,7 @@ export const Section = styled.div`
     gap: 10px;
     border-radius: 80px;
     background: #C7E957;
+    border: 0;
     &:hover {
         background-color: #DAF289;
       }
