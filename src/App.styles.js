@@ -67,11 +67,11 @@ export const Wrapper = styled.div`
   background-color: #fafafa;
 `
 export const Container = styled.div`
-  max-width: 1190px;
-  padding: 0 15px;
+//   max-width: 1190px;
+//   padding: 0 15px;
   height: 100vh;
   margin: 0 auto;
   position: relative;
-  display: flex;
-  justify-content: center;
+//   display: flex;
+//   justify-content: center;
 `

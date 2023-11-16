@@ -1,8 +1,11 @@
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
+import { CourseInfo } from '../../components/CourseInfo/CourseInfo'
 
 export const Сourse = () => {
-  const params = useParams()
-  const { id } = params
+  // const params = useParams()
+  // const { id } = params
 
-  return <h1>это 2 страница сайта (описание курса № {id})</h1>
+  return <CourseInfo
+  //  id={id} 
+   />
 }
