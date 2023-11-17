@@ -69,8 +69,39 @@ export const Wrapper = styled.div`
 `
 export const Container = styled.div`
   //   max-width: 1190px;
-  //   height: 100vh;
-  //   margin: 0 auto;
+
   //   padding: 0 15px;
-  //   position: relative;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  //   display: flex;
+  //   justify-content: center;
+`
+export const ButtonPurple = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  width: 278px;
+  height: 52px;
+  border-radius: 46px;
+  background: var(--palette-purple-90, #580ea2);
+  border: none;
+  font-style: normal;
+  font-weight: 400;
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+
+  &:disabled {
+    background-color: #303030;
+  }
+  &:hover {
+    background-color: #3f007d;
+  }
+  &:active {
+    background-color: var(--palette-purple-100, #271a58);
+  }
 `
