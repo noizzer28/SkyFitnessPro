@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ButtonPurple } from '../../App.styles'
 
 export const CourseInfoPage = styled.main`
   margin-left: calc(50% - 580px);
@@ -92,15 +93,7 @@ export const FooterText = styled.p`
   margin-bottom: 34px;
 `
 
-export const FooterButton = styled.button`
+export const FooterButton = styled(ButtonPurple)`
   width: 275px;
-  height: 52px;
-  border-radius: 46px;
-  background: var(--palette-purple-90, #580ea2);
-  color: #fff;
-  font-variant-numeric: lining-nums proportional-nums;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.05px;
 `
 export const FooterImg = styled.img``
