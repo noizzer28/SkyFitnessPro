@@ -46,28 +46,30 @@ html, body {
 	font-weight: 400;
 }
 
-::-webkit-scrollbar {
-		width: 4px;
-		height: 4px;
-	 }
-	 ::-webkit-scrollbar-track {
-		background: #4b4949;
-	 }
-	 ::-webkit-scrollbar-thumb {
-		background-color: #ffffff;
-		border-radius: 2px;
-	 }
+// ::-webkit-scrollbar {
+// 		width: 4px;
+// 		height: 4px;
+// 	 }
+// 	 ::-webkit-scrollbar-track {
+// 		background: #4b4949;
+// 	 }
+// 	 ::-webkit-scrollbar-thumb {
+// 		background-color: #ffffff;
+// 		border-radius: 2px;
+// 	 }
 	 
 `
 
 export const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-  background-color: #fafafa;
+  //   width: 100%;
+  //   height: 100%;
+  //   min-height: 100vh;
+  //   overflow: hidden;
+  //   background-color: #fafafa;
 `
 export const Container = styled.div`
   //   max-width: 1190px;
+
   //   padding: 0 15px;
   height: 100vh;
   margin: 0 auto;
