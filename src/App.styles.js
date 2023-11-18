@@ -44,7 +44,7 @@ h6 {
 button {
 	cursor: pointer;
 	border-radius: 46px;
-  background: var(--palette-purple-90, #580ea2);
+  background: var(--palette-purple-90);
   color: #fafafa;
   font-size: 18px;
   line-height: 24px;
@@ -54,7 +54,7 @@ button {
     background-color: #3f007d;
   }
   &:active {
-    background-color: var(--palette-purple-100, #271a58);
+    background-color: var(--palette-purple-100);
   }
 }
 html, body {
@@ -107,7 +107,7 @@ export const ButtonPurple = styled.button`
   width: 278px;
   height: 52px;
   border-radius: 46px;
-  background: var(--palette-purple-90, #580ea2);
+  background: var(--palette-purple-90);
   border: none;
   font-style: normal;
   font-weight: 400;
@@ -123,6 +123,6 @@ export const ButtonPurple = styled.button`
     background-color: #3f007d;
   }
   &:active {
-    background-color: var(--palette-purple-100, #271a58);
+    background-color: var(--palette-purple-100);
   }
 `
