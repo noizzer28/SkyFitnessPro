@@ -32,9 +32,30 @@ a:visited {
 ul li {
 	list-style: none;
 }
-button,
-._btn {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-style: normal;
+	font-weight: 400;
+}
+button {
 	cursor: pointer;
+	border-radius: 46px;
+  background: var(--palette-purple-90, #580ea2);
+  color: #fafafa;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+  transition: 0.2s;
+  &:hover {
+    background-color: #3f007d;
+  }
+  &:active {
+    background-color: var(--palette-purple-100, #271a58);
+  }
 }
 html, body {
 	width: 100%;
@@ -44,6 +65,8 @@ html, body {
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 400;
+	display: flex;
+	justify-content: center;
 }
 
 // ::-webkit-scrollbar {
@@ -57,7 +80,6 @@ html, body {
 // 		background-color: #ffffff;
 // 		border-radius: 2px;
 // 	 }
-	 
 `
 
 export const Wrapper = styled.div`
@@ -69,7 +91,6 @@ export const Wrapper = styled.div`
 `
 export const Container = styled.div`
   //   max-width: 1190px;
-
   //   padding: 0 15px;
   height: 100vh;
   margin: 0 auto;
