@@ -11,7 +11,7 @@ export const Section = styled.div`
 
 export const Container = styled.div`
   /* padding-left: 140px;
-    padding-right: 140px; */
+   padding-right: 140px; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,6 @@ export const ProfileInfo = styled.div`
 
 export const Line = styled.p`
   color: #000;
-  font-family: StratosSkyeng;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -60,7 +59,6 @@ export const CardPart = styled.div`
 
 export const Header = styled.h2`
   color: #000;
-  font-family: StratosSkyeng;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -105,7 +103,6 @@ export const TitleCard = styled.p`
   left: 50px;
   top: 50px;
   color: #000;
-  font-family: Abhaya Libre ExtraBold;
   font-size: 36px;
   font-style: normal;
   font-weight: 800;
