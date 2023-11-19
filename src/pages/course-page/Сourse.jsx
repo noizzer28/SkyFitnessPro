@@ -20,7 +20,7 @@ export const Сourse = () => {
             </S.ItemText>
           </S.ItemAdvantages>
           <S.ItemAdvantages>
-          <div>
+            <div>
               <S.ItemCircle>2</S.ItemCircle>
             </div>
             <S.ItemText>
@@ -29,7 +29,7 @@ export const Сourse = () => {
             </S.ItemText>
           </S.ItemAdvantages>
           <S.ItemAdvantages>
-          <div>
+            <div>
               <S.ItemCircle>3</S.ItemCircle>
             </div>
             <S.ItemText>Ищете активность, полезную для тела и души.</S.ItemText>
@@ -62,7 +62,7 @@ export const Сourse = () => {
           </S.FooterText>
           <S.FooterButton>Записаться на тренировку</S.FooterButton>
         </S.FooterLeft>
-        <S.FooterImg src="/icon/handset.png" alt="handset" />
+        <S.FooterImg src="/img/handset.png" alt="handset" />
       </S.Footer>
     </S.CourseInfoPage>
   )
