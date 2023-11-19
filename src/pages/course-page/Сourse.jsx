@@ -12,20 +12,26 @@ export const Сourse = () => {
         <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
         <S.ListAdvantages>
           <S.ItemAdvantages>
-            <S.ItemImg src="/icon/num1.png" alt="num1" />
+            <div>
+              <S.ItemCircle>1</S.ItemCircle>
+            </div>
             <S.ItemText>
               Давно хотели попробовать йогу, но не решались начать.
             </S.ItemText>
           </S.ItemAdvantages>
           <S.ItemAdvantages>
-            <S.ItemImg src="/icon/num2.png" alt="num2" />
+          <div>
+              <S.ItemCircle>2</S.ItemCircle>
+            </div>
             <S.ItemText>
               Хотите укрепить позвоночник, избавиться от болей в спине и
               суставах.
             </S.ItemText>
           </S.ItemAdvantages>
           <S.ItemAdvantages>
-            <S.ItemImg src="/icon/num3.png" alt="num3" />
+          <div>
+              <S.ItemCircle>3</S.ItemCircle>
+            </div>
             <S.ItemText>Ищете активность, полезную для тела и души.</S.ItemText>
           </S.ItemAdvantages>
         </S.ListAdvantages>

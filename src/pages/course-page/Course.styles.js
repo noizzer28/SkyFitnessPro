@@ -34,9 +34,17 @@ export const ItemAdvantages = styled.div`
   gap: 24px;
 `
 
-export const ItemImg = styled.img`
+export const ItemCircle = styled.div`
+  border-radius: 1202.287px;
+  background: #c7e957;
   width: 67px;
   height: 67px;
+  color: #000;
+  font-size: 32px;
+  line-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const ItemText = styled.p`
