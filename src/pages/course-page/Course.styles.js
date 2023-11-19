@@ -5,11 +5,24 @@ export const CourseInfoPage = styled.main`
   margin-left: calc(50% - 580px);
   margin-right: calc(50% - 580px);
 `
+export const CourseTop = styled.div`
+  position: relative;
+  margin-top: 75px;
+`
 
 export const CourseImg = styled.img`
-  margin-top: 75px;
   width: 1160px;
   height: 310px;
+`
+export const CourseTitle = styled.p`
+  position: absolute;
+  color: #000;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -0.8px;
+  top: 30px;
+  left: 30px;
 `
 
 export const CourseAdvantages = styled.section``

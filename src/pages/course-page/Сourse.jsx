@@ -7,7 +7,10 @@ export const Сourse = () => {
 
   return (
     <S.CourseInfoPage>
-      <S.CourseImg src="/img/yoga.png" alt="title" />
+      <S.CourseTop>
+        <S.CourseImg src="/img/yoga.png" alt="yoga" />
+        <S.CourseTitle>Йога</S.CourseTitle>
+      </S.CourseTop>
       <S.CourseAdvantages>
         <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
         <S.ListAdvantages>
