@@ -1,7 +1,7 @@
 import { Header } from '../../components/header/header'
 import * as S from './workout.styles'
 import { useState } from 'react'
-const imagePath = process.env.PUBLIC_URL + '/img/progressOk.png'
+import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
 
 export const Workout = () => {
   const [isModal, setModal] = useState(false)
@@ -85,14 +85,7 @@ export const Workout = () => {
               <S.ModalButton onClick={handleProgress}>Отправить</S.ModalButton>
             </S.ModalProgress>
           ) : (
-            <S.ModalSuccess>
-              <S.ModalSuccessHeader>
-                Ваш прогресс засчитан!
-              </S.ModalSuccessHeader>
-              <S.ModalSuccessPicture>
-                <S.ModalSuccessImg src={imagePath}></S.ModalSuccessImg>
-              </S.ModalSuccessPicture>
-            </S.ModalSuccess>
+            <ModalSuccess text={'Ваш прогресс засчитан!'} />
           )}
         </S.ModalBackground>
       )}
