@@ -21,7 +21,7 @@ export const TitleBlockContent = styled.div`
   width: 830px;
 `
 export const TitleBlockTitle = styled.h3`
-  color: var(--monochrome-white-20, #fff);
+  color: var(--monochrome-white-20);
   font-size: 20px;
   font-weight: 400;
   line-height: 115%;
