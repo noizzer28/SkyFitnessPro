@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 
 export const Header = styled.div`
-  margin-top: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  margin-bottom: 50px;
 `
 export const HeaderLogo = styled.div`
-width: 220px;
-height: 35px;
-}
+  display: flex;
 `
-
+export const HeaderLogoText = styled.p`
+  color: #000;
+  font-size: 30px;
+  font-weight: 600;
+`
 export const HeaderFlex = styled.div`
   display: flex;
   align-items: center;

@@ -1,30 +1,20 @@
 import { styled } from 'styled-components'
 import { ButtonPurple } from '../../App.styles'
 
-export const Section = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
 export const Container = styled.div`
-  /* padding-left: 140px;
-    padding-right: 140px; */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  max-width: 1160px;
-  gap: 75px;
+  //   width: 100%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   max-width: 1160px;
+  //   gap: 75px;
 `
 
 export const ProfileInfo = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: left;
   gap: 40px;
+  margin-bottom: 75px;
 `
 
 export const Line = styled.p`
@@ -58,40 +48,43 @@ export const CardPart = styled.div`
   flex-direction: column;
 `
 
-export const Header = styled.h2`
-  color: #000;
-  font-family: StratosSkyeng;
+export const Title = styled.h2`
   font-size: 48px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 56px;
 `
 
 export const CardList = styled.div`
+  margin-top: 20px;
   display: grid;
-  grid-template-columns: 360px 360px 360px;
+  //   grid-template-columns: 360px 360px 360px;
+  grid-template: auto/ repeat(3, 360px);
+  justify-content: space-between;
+  row-gap: 44px;
 `
 
 export const Card = styled.div`
   position: relative;
-`
-
-export const Image = styled.img`
   width: 360px;
   height: 480px;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow:
+    -10px 10px 15.99882px 0px rgba(0, 0, 0, 0.1),
+    10px -10px 16px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 `
 
+export const Image = styled.img``
+
 export const RedirectButton = styled.button`
+  color: #000;
+  font-size: 20px;
+  line-height: 115%;
   height: 43px;
   width: 136px;
   position: absolute;
-  left: 50px;
-  bottom: 50px;
-  display: inline-flex;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  left: 30px;
+  bottom: 27px;
   border-radius: 80px;
   background: #c7e957;
   border: 0;

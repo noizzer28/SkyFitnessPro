@@ -1,3 +1,4 @@
+import { Header } from '../header/header'
 import * as S from './Styles'
 
 export const CourseInfo = (
@@ -7,6 +8,7 @@ export const CourseInfo = (
 ) => {
   return (
     <S.CourseInfoPage>
+      <Header></Header>
       <S.CourseImg src="/img/yoga.png" alt="title" />
       <S.CourseAdvantages>
         <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
