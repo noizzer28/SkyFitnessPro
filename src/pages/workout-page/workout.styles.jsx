@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
-  width: 1160px;
-`
-export const Center = styled.div`
-  padding-top: 75px;
-`
+export const Center = styled.div``
 export const CenterHeader = styled.h1`
   font-size: 48px;
   line-height: 56px;

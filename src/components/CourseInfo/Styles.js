@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import { ButtonPurple } from '../../App.styles'
 
 export const CourseInfoPage = styled.main`
-  margin-left: calc(50% - 580px);
-  margin-right: calc(50% - 580px);
+  //   margin-left: calc(50% - 580px);
+  //   margin-right: calc(50% - 580px);
 `
 
 export const CourseImg = styled.img`
-  margin-top: 75px;
+  //   margin-top: 50px;
   width: 1160px;
   height: 310px;
 `

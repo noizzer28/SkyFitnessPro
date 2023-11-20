@@ -58,52 +58,30 @@ button {
   }
 }
 html, body {
-	width: 100%;
-	height: 100%;
 	font-family: "StratosSkyeng", sans-serif;
 	color: #000;
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 400;
-	display: flex;
-	justify-content: center;
 }
-
-// ::-webkit-scrollbar {
-// 		width: 4px;
-// 		height: 4px;
-// 	 }
-// 	 ::-webkit-scrollbar-track {
-// 		background: #4b4949;
-// 	 }
-// 	 ::-webkit-scrollbar-thumb {
-// 		background-color: #ffffff;
-// 		border-radius: 2px;
-// 	 }
 `
 
 export const Wrapper = styled.div`
-  //   width: 100%;
-  //   height: 100%;
-  //   min-height: 100vh;
-  //   overflow: hidden;
-  //   background-color: #fafafa;
+  background-color: #fafafa;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 `
 export const Container = styled.div`
-  //   max-width: 1190px;
-  //   padding: 0 15px;
-  height: 100vh;
+  max-width: 1190px;
+  padding: 0 15px;
   margin: 0 auto;
-  position: relative;
-  //   display: flex;
-  //   justify-content: center;
 `
 export const ButtonPurple = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-
   width: 278px;
   height: 52px;
   border-radius: 46px;

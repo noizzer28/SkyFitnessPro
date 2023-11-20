@@ -1,20 +1,23 @@
 import { styled } from 'styled-components'
 
-export const Wrapper = styled.div`
+export const WrapMain = styled.div`
   background: #271a58;
-  height: 100vh;
+  position: absolute;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  left: 0px;
+  top: 0px;
+`
+export const ContainerMain = styled.div`
   max-width: 1190px;
   padding: 0 15px;
   margin: 0 auto;
 `
-export const Header = styled.div`
-  font-size: 50px;
-  height: 100px;
-  color: #fff;
-`
 export const TitleBlock = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: -40px;
   margin-bottom: 52px;
 `
 export const TitleBlockContent = styled.div`
