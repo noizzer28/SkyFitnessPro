@@ -118,3 +118,15 @@ export const FooterButton = styled(ButtonPurple)`
   width: 275px;
 `
 export const FooterImg = styled.img``
+
+export const ModalBackground = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+`

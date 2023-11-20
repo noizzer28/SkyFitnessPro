@@ -131,7 +131,7 @@ export const ProgressBarTopThree = styled(ProgressBarTop)`
   background-color: #9a48f1;
 `
 export const ModalBackground = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
@@ -180,30 +180,4 @@ export const ModalBlock = styled.div`
 export const ModalButton = styled.button`
   width: 278px;
   height: 52px;
-`
-export const ModalSuccess = styled.div`
-  width: 444px;
-  height: 360px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  z-index: 2;
-`
-export const ModalSuccessHeader = styled.h2`
-  font-size: 32px;
-  line-height: 40px;
-  margin-top: 41px;
-`
-export const ModalSuccessPicture = styled.div`
-  max-width: 200px;
-  height: 254px;
-  display: flex;
-`
-export const ModalSuccessImg = styled.img`
-  width: 100%;
-  height: auto;
-  display: block;
-  justify-self: flex-end;
 `
