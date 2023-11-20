@@ -95,12 +95,12 @@ export const ProgressBarOne = styled(ProgressBar)`
   background: #edecff;
 `
 export const ProgressBarTwo = styled(ProgressBar)`
-  border: 2px solid var(--orange-90, #ff6d00);
-  background: var(--orange-10, #fff2e0);
+  border: 2px solid var(--orange-90);
+  background: var(--orange-10);
 `
 export const ProgressBarThree = styled(ProgressBar)`
-  border: 2px solid var(--palette-purple-80, #9a48f1);
-  background: var(--violet-10, #f9ebff);
+  border: 2px solid var(--palette-purple-80);
+  background: var(--violet-10);
 `
 export const ProgressBarTop = styled.div`
   height: 36px;

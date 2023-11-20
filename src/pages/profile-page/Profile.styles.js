@@ -19,7 +19,6 @@ export const ProfileInfo = styled.div`
 
 export const Line = styled.p`
   color: #000;
-  font-family: StratosSkyeng;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -98,7 +97,6 @@ export const TitleCard = styled.p`
   left: 50px;
   top: 50px;
   color: #000;
-  font-family: Abhaya Libre ExtraBold;
   font-size: 36px;
   font-style: normal;
   font-weight: 800;
