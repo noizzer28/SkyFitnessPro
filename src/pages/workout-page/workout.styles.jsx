@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ButtonPurple } from '../../App.styles'
 
 export const Center = styled.div``
 export const CenterHeader = styled.h1`
@@ -44,9 +45,8 @@ export const ExercisesListItem = styled.li`
   list-style-type: disc;
   max-width: 380px;
 `
-export const ProgressButton = styled.button`
+export const ProgressButton = styled(ButtonPurple)`
   width: 275px;
-  height: 52px;
 `
 
 export const Progress = styled.div`
@@ -170,7 +170,4 @@ export const ModalInput = styled.input`
 export const ModalBlock = styled.div`
   width: 361px;
 `
-export const ModalButton = styled.button`
-  width: 278px;
-  height: 52px;
-`
+export const ModalButton = styled(ButtonPurple)``

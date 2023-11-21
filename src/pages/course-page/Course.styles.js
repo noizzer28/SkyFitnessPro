@@ -17,7 +17,6 @@ export const CourseImg = styled.img`
 export const CourseTitle = styled.p`
   position: absolute;
   color: #000;
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 64px;
   line-height: 72px;
   letter-spacing: -0.8px;
@@ -28,7 +27,6 @@ export const CourseTitle = styled.p`
 export const CourseAdvantages = styled.section``
 
 export const CourseHeaders = styled.p`
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 40px;
   line-height: 48px;
   margin-top: 75px;
@@ -61,7 +59,6 @@ export const ItemCircle = styled.div`
 `
 
 export const ItemText = styled.p`
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 24px;
   line-height: 32px;
 `
@@ -79,13 +76,11 @@ export const ListDirections = styled.ul`
 export const ItemDirections = styled.li`
   list-style-type: disc;
   list-style-position: inside;
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 24px;
   line-height: 32px;
 `
 
 export const CourseDescription = styled.p`
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 24px;
   line-height: 32px;
   margin-top: 75px;
@@ -108,7 +103,6 @@ export const FooterLeft = styled.div`
 `
 
 export const FooterText = styled.p`
-  font-variant-numeric: lining-nums proportional-nums;
   font-size: 32px;
   line-height: 40px;
   margin-bottom: 34px;

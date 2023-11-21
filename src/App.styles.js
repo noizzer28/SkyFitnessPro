@@ -41,23 +41,6 @@ h6 {
 	font-style: normal;
 	font-weight: 400;
 }
-button {
-	cursor: pointer;
-	border-radius: 46px;
-  background: var(--palette-purple-90);
-  color: #fafafa;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.05px;
-  transition: 0.2s;
-  border-color: transparent;
-  &:hover {
-    background-color: #3f007d;
-  }
-  &:active {
-    background-color: var(--palette-purple-100);
-  }
-}
 html, body {
 	font-family: "StratosSkyeng", sans-serif;
 	color: #000;
@@ -89,12 +72,11 @@ export const ButtonPurple = styled.button`
   border-radius: 46px;
   background: var(--palette-purple-90);
   border: none;
-  font-style: normal;
-  font-weight: 400;
   color: #fff;
   font-size: 18px;
   line-height: 24px;
   letter-spacing: -0.05px;
+  cursor: pointer;
 
   &:disabled {
     background-color: #303030;

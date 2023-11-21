@@ -34,7 +34,9 @@ export const Main = () => {
             <Card name={'Степ-аэробика'} position={4}></Card>
             <Card name={'Бодифлекс'} position={5}></Card>
           </S.MainList>
-          <S.MainButton>кнопочка Наверх ↑</S.MainButton>
+          <S.MainFooter>
+            <S.MainButton>Наверх ↑</S.MainButton>
+          </S.MainFooter>
         </Container>
       </DarkBG>
     </>
