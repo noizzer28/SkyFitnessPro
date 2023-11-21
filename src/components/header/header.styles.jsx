@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ButtonPurple } from '../../App.styles'
 
 export const Header = styled.div`
   display: flex;
@@ -41,11 +42,17 @@ export const HeaderButton = styled.div`
   position: relative;
 `
 
-export const EnterButton = styled.button`
+export const EnterButton = styled(ButtonPurple)`
   width: 77px;
   height: 36px;
   font-size: 16px;
-  background-color: #140d40;
+  background: #140d40;
+  &:hover {
+    background: #2d1f79;
+  }
+  &:active {
+    background: #3b29a1;
+  }
 `
 export const Dropdown = styled.div`
   position: relative;

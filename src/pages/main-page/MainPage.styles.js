@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { ButtonPurple } from '../../App.styles'
 
 export const TitleBlock = styled.div`
   display: flex;
@@ -50,7 +51,24 @@ export const MainList = styled.ul`
   row-gap: 44px;
   margin-bottom: 34px;
 `
-export const MainButton = styled.div`
-  width: 200px;
-  margin: 0 auto;
+export const MainFooter = styled.div`
+  display: flex;
+  justify-content: center;
+`
+export const MainButton = styled(ButtonPurple)`
+  width: 147px;
+  height: 48px;
+  margin-bottom: 60px;
+  border-radius: 46px;
+  background: #c7e957;
+  color: #000;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.1px;
+  &:hover {
+    background: #daf289;
+  }
+  & active {
+    background: #ebffab;
+  }
 `

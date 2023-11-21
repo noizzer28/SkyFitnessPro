@@ -75,7 +75,9 @@ export const Card = styled.div`
 
 export const Image = styled.img``
 
-export const RedirectButton = styled.button`
+export const RedirectButton = styled(ButtonPurple)`
+  border-radius: 80px;
+  background: #c7e957;
   color: #000;
   font-size: 20px;
   line-height: 115%;
@@ -84,11 +86,11 @@ export const RedirectButton = styled.button`
   position: absolute;
   left: 30px;
   bottom: 27px;
-  border-radius: 80px;
-  background: #c7e957;
-  border: 0;
   &:hover {
-    background-color: #daf289;
+    background: #daf289;
+  }
+  & active {
+    background: #ebffab;
   }
 `
 
