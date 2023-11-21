@@ -1,16 +1,9 @@
 import styled from 'styled-components'
 import { ButtonPurple } from '../../App.styles'
 
-export const PageContainer = styled.div`
-  max-width: 100%;
-  height: 100vh;
-  background: #271a58;
-`
-
 export const ModalForm = styled.div`
   --modal-width: 366px;
   --modal-height: 439px;
-
   position: absolute;
   left: calc(50% - (var(--modal-width) / 2));
   top: calc(50% - (var(--modal-height) / 2));
@@ -29,11 +22,11 @@ export const ModalLogo = styled.div`
   background-color: transparent;
 `
 
-export const ModalLogoImage = styled.img`
-  width: 220px;
-  height: 35px;
+export const LogoText = styled.p`
+  color: #000;
+  font-size: 30px;
+  font-weight: 600;
 `
-
 export const Inputs = styled.div`
   display: flex;
   flex-direction: column;
