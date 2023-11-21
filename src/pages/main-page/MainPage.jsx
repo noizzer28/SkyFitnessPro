@@ -1,5 +1,6 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
+import { DarkBG, Container } from '../../App.styles'
 import * as S from './MainPage.styles'
 
 const imagePath = process.env.PUBLIC_URL + '/img/'
@@ -7,8 +8,8 @@ const imagePath = process.env.PUBLIC_URL + '/img/'
 export const Main = () => {
   return (
     <>
-      <S.WrapMain>
-        <S.ContainerMain>
+      <DarkBG>
+        <Container>
           <Header></Header>
           <S.TitleBlock>
             <S.TitleBlockContent>
@@ -34,8 +35,8 @@ export const Main = () => {
             <Card name={'Бодифлекс'} position={5}></Card>
           </S.MainList>
           <S.MainButton>кнопочка Наверх ↑</S.MainButton>
-        </S.ContainerMain>
-      </S.WrapMain>
+        </Container>
+      </DarkBG>
     </>
   )
 }

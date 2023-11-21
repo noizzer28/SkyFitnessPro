@@ -1,19 +1,5 @@
 import { styled } from 'styled-components'
 
-export const WrapMain = styled.div`
-  background: #271a58;
-  position: absolute;
-  min-height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  left: 0px;
-  top: 0px;
-`
-export const ContainerMain = styled.div`
-  max-width: 1190px;
-  padding: 0 15px;
-  margin: 0 auto;
-`
 export const TitleBlock = styled.div`
   display: flex;
   justify-content: space-between;

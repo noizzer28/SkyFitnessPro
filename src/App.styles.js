@@ -106,3 +106,12 @@ export const ButtonPurple = styled.button`
     background-color: var(--palette-purple-100);
   }
 `
+export const DarkBG = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #271a58;
+  overflow: hidden;
+`
