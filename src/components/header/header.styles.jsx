@@ -19,12 +19,18 @@ export const HeaderLogoText = styled.p`
 export const HeaderFlex = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `
 export const HeaderUserLogo = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  overflow: hidden;
   background-color: rgb(165, 163, 163);
+`
+export const HeaderUserImg = styled.img`
+  width: 50px;
+  height: 50px;
 `
 export const HeaderName = styled.p`
   margin-left: 15px;
@@ -32,7 +38,6 @@ export const HeaderName = styled.p`
   margin-right: 12px;
 `
 export const HeaderButton = styled.div`
-  cursor: pointer;
   position: relative;
 `
 
@@ -45,23 +50,18 @@ export const EnterButton = styled.button`
 export const Dropdown = styled.div`
   position: relative;
 `
-export const DropdownMenu = styled.ul`
+export const DropdownMenu = styled.div`
   position: absolute;
   width: 200px;
-  left: -185px;
+  right: 0px;
   top: 50px;
-  background-color: #e9d4ff;
-  border-radius: 10px;
-  padding: 15px 35px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  z-index: 3;
 `
-export const DropdownMenuItem = styled.li`
-  &:not(:last-child) {
-    margin-bottom: 10px;
-  }
+export const DropdownMenuItem = styled.p`
+  padding-bottom: 10px;
   &:hover {
     text-decoration: underline;
   }

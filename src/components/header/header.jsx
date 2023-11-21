@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as S from './header.styles'
 import { useState } from 'react'
 
 export const Header = () => {
   const [isProfileMenu, setProfileMenu] = useState(false)
-  let isAuthorized = false
+  let isAuthorized = true
   let colorTextBlack = true
   const navigate = useNavigate()
   if (useLocation().pathname === '/') {
@@ -85,16 +86,15 @@ export const Header = () => {
         </S.HeaderLogoText>
       </S.HeaderLogo>
       {isAuthorized ? (
-        <S.HeaderFlex>
-          <S.HeaderUserLogo></S.HeaderUserLogo>
+        <S.HeaderFlex onClick={() => setProfileMenu((prev) => !prev)}>
+          <S.HeaderUserLogo>
+            <S.HeaderUserImg src="/img/userLogo.jpg"></S.HeaderUserImg>
+          </S.HeaderUserLogo>
           <S.HeaderName style={{ color: colorTextBlack ? '' : '#FFF' }}>
             Сергей
           </S.HeaderName>
           <S.Dropdown>
-            <S.HeaderButton
-              className="_btn"
-              onClick={() => setProfileMenu((prev) => !prev)}
-            >
+            <S.HeaderButton className="_btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
@@ -112,15 +112,27 @@ export const Header = () => {
             </S.HeaderButton>
             {isProfileMenu && (
               <S.DropdownMenu>
-                <S.DropdownMenuItem>
-                  <a href="/profile">Мой профиль</a>
-                </S.DropdownMenuItem>
-                <S.DropdownMenuItem>
-                  <a href="#">Тренировки</a>
-                </S.DropdownMenuItem>
-                <S.DropdownMenuItem>
-                  <a href="#">Выйти</a>
-                </S.DropdownMenuItem>
+                <Link to={`/profile`}>
+                  <S.DropdownMenuItem
+                    style={{ color: colorTextBlack ? '' : '#FFF' }}
+                  >
+                    Мой профиль
+                  </S.DropdownMenuItem>
+                </Link>
+                <Link to={`/workout`}>
+                  <S.DropdownMenuItem
+                    style={{ color: colorTextBlack ? '' : '#FFF' }}
+                  >
+                    Тренировки
+                  </S.DropdownMenuItem>
+                </Link>
+                <Link to={`/`}>
+                  <S.DropdownMenuItem
+                    style={{ color: colorTextBlack ? '' : '#FFF' }}
+                  >
+                    Выйти
+                  </S.DropdownMenuItem>
+                </Link>
               </S.DropdownMenu>
             )}
           </S.Dropdown>
