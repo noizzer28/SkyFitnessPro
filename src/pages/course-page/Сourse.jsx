@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import * as S from './Course.styles'
 import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
+import { Header } from '../../components/header/header'
 
 export const Сourse = () => {
   const params = useParams()
@@ -14,6 +15,7 @@ export const Сourse = () => {
 
   return (
     <>
+      <Header></Header>
       <S.CourseInfoPage>
         <S.CourseTop>
           <S.CourseImg src="/img/yoga.png" alt="yoga" />
@@ -82,7 +84,10 @@ export const Сourse = () => {
       </S.CourseInfoPage>
       {isSuccessWindow ? (
         <S.ModalBackground>
-          <ModalSuccess setSuccessWindow={setSuccessWindow} text={'Вы успешно записались!'} />
+          <ModalSuccess
+            setSuccessWindow={setSuccessWindow}
+            text={'Вы успешно записались!'}
+          />
         </S.ModalBackground>
       ) : (
         ''

@@ -22,9 +22,6 @@ export const BreadCrumpsItem = styled.li`
     position: absolute;
     left: -20px;
   }
-  &:hover {
-    text-decoration: underline;
-  }
 `
 export const CenterBottom = styled.div`
   display: flex;
@@ -135,6 +132,7 @@ export const ModalBackground = styled.div`
   justify-content: center;
   top: 0;
   left: 0;
+  z-index: 2;
 `
 export const ModalProgress = styled.div`
   width: 444px;
@@ -143,7 +141,7 @@ export const ModalProgress = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  z-index: 2;
+  z-index: 3;
   gap: 30px;
 `
 export const Modaltext = styled.p`

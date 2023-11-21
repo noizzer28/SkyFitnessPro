@@ -1,14 +1,25 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as S from './header.styles'
+import { useState } from 'react'
 
 export const Header = () => {
+  const [isProfileMenu, setProfileMenu] = useState(false)
+  let isAuthorized = false
   let colorTextBlack = true
+  const navigate = useNavigate()
   if (useLocation().pathname === '/') {
     colorTextBlack = false
   }
+  if (
+    useLocation().pathname === '/workout' ||
+    useLocation().pathname === '/profile'
+  ) {
+    isAuthorized = true
+  }
+
   return (
     <S.Header>
-      <S.HeaderLogo>
+      <S.HeaderLogo onClick={() => navigate('/')}>
         <svg
           width="40"
           height="36"
@@ -73,27 +84,49 @@ export const Header = () => {
           SkyFitnessPro
         </S.HeaderLogoText>
       </S.HeaderLogo>
-      <S.HeaderFlex>
-        <S.HeaderUserLogo></S.HeaderUserLogo>
-        <S.HeaderName style={{ color: colorTextBlack ? '' : '#FFF' }}>
-          Сергей
-        </S.HeaderName>
-        <S.HeaderButton className="_btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="9"
-            viewBox="0 0 14 9"
-            fill="none"
-          >
-            <path
-              d="M12.3553 1.03308L6.67773 6.7107L1.00012 1.03308"
-              stroke={colorTextBlack ? '#000' : '#FFF'}
-              strokeWidth="2"
-            />
-          </svg>
-        </S.HeaderButton>
-      </S.HeaderFlex>
+      {isAuthorized ? (
+        <S.HeaderFlex>
+          <S.HeaderUserLogo></S.HeaderUserLogo>
+          <S.HeaderName style={{ color: colorTextBlack ? '' : '#FFF' }}>
+            Сергей
+          </S.HeaderName>
+          <S.Dropdown>
+            <S.HeaderButton
+              className="_btn"
+              onClick={() => setProfileMenu((prev) => !prev)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="9"
+                viewBox="0 0 14 9"
+                fill="none"
+              >
+                <path
+                  d="M12.3553 1.03308L6.67773 6.7107L1.00012 1.03308"
+                  stroke={colorTextBlack ? '#000' : '#FFF'}
+                  strokeWidth="2"
+                />
+              </svg>
+            </S.HeaderButton>
+            {isProfileMenu && (
+              <S.DropdownMenu>
+                <S.DropdownMenuItem>
+                  <a href="/profile">Мой профиль</a>
+                </S.DropdownMenuItem>
+                <S.DropdownMenuItem>
+                  <a href="#">Тренировки</a>
+                </S.DropdownMenuItem>
+                <S.DropdownMenuItem>
+                  <a href="#">Выйти</a>
+                </S.DropdownMenuItem>
+              </S.DropdownMenu>
+            )}
+          </S.Dropdown>
+        </S.HeaderFlex>
+      ) : (
+        <S.EnterButton onClick={() => navigate('/login')}>Войти</S.EnterButton>
+      )}
     </S.Header>
   )
 }
