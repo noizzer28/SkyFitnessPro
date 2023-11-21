@@ -50,6 +50,7 @@ button {
   line-height: 24px;
   letter-spacing: -0.05px;
   transition: 0.2s;
+  border-color: transparent;
   &:hover {
     background-color: #3f007d;
   }
@@ -63,6 +64,7 @@ html, body {
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 400;
+  user-select: none;
 }
 `
 

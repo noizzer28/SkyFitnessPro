@@ -94,15 +94,9 @@ export const Workout = () => {
       <S.Center>
         <S.CenterHeader>Йога</S.CenterHeader>
         <S.BreadCrumps>
-          <S.BreadCrumpsItem>
-            <a href="#">Красота и здоровье</a>
-          </S.BreadCrumpsItem>
-          <S.BreadCrumpsItem>
-            <a href="#">Йога на каждый день</a>
-          </S.BreadCrumpsItem>
-          <S.BreadCrumpsItem>
-            <a href="#">2 день</a>
-          </S.BreadCrumpsItem>
+          <S.BreadCrumpsItem>Красота и здоровье</S.BreadCrumpsItem>
+          <S.BreadCrumpsItem>Йога на каждый день</S.BreadCrumpsItem>
+          <S.BreadCrumpsItem>2 день</S.BreadCrumpsItem>
         </S.BreadCrumps>
         <S.Video>
           <iframe
