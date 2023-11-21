@@ -1,10 +1,5 @@
 import { styled } from 'styled-components'
 
-export const ContainerMain = styled.div`
-  max-width: 1190px;
-  padding: 0 15px;
-  margin: 0 auto;
-`
 export const TitleBlock = styled.div`
   display: flex;
   justify-content: space-between;
