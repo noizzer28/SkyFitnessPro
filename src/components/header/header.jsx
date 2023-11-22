@@ -1,9 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import * as S from './header.styles'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { removeUser } from 'store/slices/userSlice'
+import * as S from './header.styles'
 
 export const Header = () => {
+  const dispatch = useDispatch()
   const [isProfileMenu, setProfileMenu] = useState(false)
   let isAuthorized = true
   let colorTextBlack = true
@@ -126,13 +129,12 @@ export const Header = () => {
                     Тренировки
                   </S.DropdownMenuItem>
                 </Link>
-                <Link to={`/`}>
-                  <S.DropdownMenuItem
-                    style={{ color: colorTextBlack ? '' : '#FFF' }}
-                  >
-                    Выйти
-                  </S.DropdownMenuItem>
-                </Link>
+                <S.DropdownMenuItem
+                  onClick={() => dispatch(removeUser())}
+                  style={{ color: colorTextBlack ? '' : '#FFF' }}
+                >
+                  Выйти
+                </S.DropdownMenuItem>
               </S.DropdownMenu>
             )}
           </S.Dropdown>
