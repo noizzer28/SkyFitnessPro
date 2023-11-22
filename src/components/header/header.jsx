@@ -1,21 +1,20 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import * as S from './header.styles'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { removeUser } from 'store/slices/userSlice'
+import { useAuth } from 'hooks/use-auth'
+import * as S from './header.styles'
 
 export const Header = () => {
-  const [isProfileMenu, setProfileMenu] = useState(false)
-  let isAuthorized = true
-  let colorTextBlack = true
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { isAuth, email } = useAuth()
+  const [isProfileMenu, setProfileMenu] = useState(false)
+
+  let colorTextBlack = true
   if (useLocation().pathname === '/') {
     colorTextBlack = false
-  }
-  if (
-    useLocation().pathname === '/workout' ||
-    useLocation().pathname === '/profile'
-  ) {
-    isAuthorized = true
   }
 
   return (
@@ -85,13 +84,13 @@ export const Header = () => {
           SkyFitnessPro
         </S.HeaderLogoText>
       </S.HeaderLogo>
-      {isAuthorized ? (
+      {isAuth ? (
         <S.HeaderFlex onClick={() => setProfileMenu((prev) => !prev)}>
           <S.HeaderUserLogo>
             <S.HeaderUserImg src="/img/userLogo.jpg"></S.HeaderUserImg>
           </S.HeaderUserLogo>
           <S.HeaderName style={{ color: colorTextBlack ? '' : '#FFF' }}>
-            Сергей
+            {email}
           </S.HeaderName>
           <S.Dropdown>
             <S.HeaderButton className="_btn">
@@ -126,13 +125,12 @@ export const Header = () => {
                     Тренировки
                   </S.DropdownMenuItem>
                 </Link>
-                <Link to={`/`}>
-                  <S.DropdownMenuItem
-                    style={{ color: colorTextBlack ? '' : '#FFF' }}
-                  >
-                    Выйти
-                  </S.DropdownMenuItem>
-                </Link>
+                <S.DropdownMenuItem
+                  onClick={() => dispatch(removeUser())}
+                  style={{ color: colorTextBlack ? '' : '#FFF' }}
+                >
+                  Выйти
+                </S.DropdownMenuItem>
               </S.DropdownMenu>
             )}
           </S.Dropdown>

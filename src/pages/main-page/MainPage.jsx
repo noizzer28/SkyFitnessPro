@@ -1,11 +1,14 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
+import { useAuth } from 'hooks/use-auth'
 import * as S from './MainPage.styles'
 
 const imagePath = process.env.PUBLIC_URL + '/img/'
 
 export const Main = () => {
+  const { isAuth } = useAuth()
+  console.log(isAuth)
   return (
     <>
       <DarkBG>
