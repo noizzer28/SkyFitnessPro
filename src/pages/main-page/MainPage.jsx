@@ -1,7 +1,6 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
-import { useAuth } from 'hooks/use-auth'
 import { useState } from 'react'
 import * as S from './MainPage.styles'
 
