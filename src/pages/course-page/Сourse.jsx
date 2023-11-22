@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import * as S from './Course.styles'
 import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
 import { Header } from '../../components/header/header'
+import { Cources } from '../../utils/mock-course-page'
 
 export const Сourse = () => {
   const params = useParams()
@@ -12,61 +13,40 @@ export const Сourse = () => {
   const toggleModeWindow = () => {
     setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
   }
-
+  const pageCourseObject = Cources[Number(id - 1)]
   return (
     <>
-      <Header></Header>
+      <Header />
       <S.CourseInfoPage>
         <S.CourseTop>
           <S.CourseImg src="/img/yoga.png" alt="yoga" />
-          <S.CourseTitle>Йога</S.CourseTitle>
+          <S.CourseTitle>{pageCourseObject.title}</S.CourseTitle>
         </S.CourseTop>
         <S.CourseAdvantages>
           <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
           <S.ListAdvantages>
-            <S.ItemAdvantages>
-              <div>
-                <S.ItemCircle>1</S.ItemCircle>
-              </div>
-              <S.ItemText>
-                Давно хотели попробовать йогу, но не решались начать.
-              </S.ItemText>
-            </S.ItemAdvantages>
-            <S.ItemAdvantages>
-              <div>
-                <S.ItemCircle>2</S.ItemCircle>
-              </div>
-              <S.ItemText>
-                Хотите укрепить позвоночник, избавиться от болей в спине и
-                суставах.
-              </S.ItemText>
-            </S.ItemAdvantages>
-            <S.ItemAdvantages>
-              <div>
-                <S.ItemCircle>3</S.ItemCircle>
-              </div>
-              <S.ItemText>
-                Ищете активность, полезную для тела и души.
-              </S.ItemText>
-            </S.ItemAdvantages>
+            {pageCourseObject.advantages.map((el) => {
+              return (
+                <S.ItemAdvantages key={el.num}>
+                  <div>
+                    <S.ItemCircle>{el.num}</S.ItemCircle>
+                  </div>
+                  <S.ItemText>{el.text}</S.ItemText>
+                </S.ItemAdvantages>
+              )
+            })}
           </S.ListAdvantages>
         </S.CourseAdvantages>
         <S.CourseDirections>
           <S.CourseHeaders>Направления:</S.CourseHeaders>
           <S.ListDirections>
-            <S.ItemDirections>Йога для новичков</S.ItemDirections>
-            <S.ItemDirections>Классическая йога</S.ItemDirections>
-            <S.ItemDirections>Йогатерапия</S.ItemDirections>
-            <S.ItemDirections>Кундалини-йога</S.ItemDirections>
-            <S.ItemDirections>Хатха-йога</S.ItemDirections>
-            <S.ItemDirections>Аштанга-йога</S.ItemDirections>
+            {pageCourseObject.directions.map((el) => {
+              return <S.ItemDirections key={1}>{el}</S.ItemDirections>
+            })}
           </S.ListDirections>
         </S.CourseDirections>
         <S.CourseDescription>
-          Благодаря комплексному воздействию упражнений происходит проработка
-          всех групп мышц, тренировка суставов, улучшается циркуляция крови.
-          Кроме того, упражнения дарят отличное настроение, заряжают бодростью и
-          помогают противостоять стрессам.
+         {pageCourseObject.description}
         </S.CourseDescription>
         <S.Footer>
           <S.FooterLeft>

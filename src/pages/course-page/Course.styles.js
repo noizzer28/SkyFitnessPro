@@ -14,7 +14,7 @@ export const CourseImg = styled.img`
   width: 1160px;
   height: 310px;
 `
-export const CourseTitle = styled.p`
+export const CourseTitle = styled.h1`
   position: absolute;
   color: #000;
   font-size: 64px;
@@ -26,7 +26,7 @@ export const CourseTitle = styled.p`
 
 export const CourseAdvantages = styled.section``
 
-export const CourseHeaders = styled.p`
+export const CourseHeaders = styled.h2`
   font-size: 40px;
   line-height: 48px;
   margin-top: 75px;
