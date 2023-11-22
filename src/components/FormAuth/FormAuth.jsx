@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import * as S from './FormAuth.styles'
 
-export const FormAuth = ({ typeLogin }) => {
-  //   const [email, setEmail] = useState('')
-  //   const [pass, setPass] = useState('')
+export const FormAuth = ({ title, handleClick, typeLogin }) => {
+  const [email, setEmail] = useState('')
+  const [pass, setPass] = useState('')
+  const [repPass, setRepPass] = useState('')
   return (
     <>
       <S.ModalForm>
@@ -75,38 +77,35 @@ export const FormAuth = ({ typeLogin }) => {
             type="email"
             name="email"
             placeholder="Email"
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <S.ModalInput
             type="password"
             name="password"
             placeholder="Пароль"
-            // value={pass}
-            // onChange={(e) => setPass(e.target.value)}
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
           />
           {!typeLogin && (
             <S.ModalInput
               type="password"
-              name="password"
+              name="repeat-password"
               placeholder="Повторите пароль"
-              //   value={pass}
-              //   onChange={(e) => setPass(e.target.value)}
+              value={repPass}
+              onChange={(e) => setRepPass(e.target.value)}
             />
           )}
         </S.Inputs>
         <S.Buttons>
-          {typeLogin && <S.PrimaryButton>Войти</S.PrimaryButton>}
-          <Link to="/register">
-            <S.SecondaryButton
-              style={{
-                backgroundColor: typeLogin ? '' : 'var(--palette-purple-90)',
-                color: typeLogin ? '' : 'var(--monochrome-white-20)',
-              }}
-            >
-              Зарегистрироваться
-            </S.SecondaryButton>
-          </Link>
+          <S.PrimaryButton onClick={() => handleClick(email, pass, repPass)}>
+            {title}
+          </S.PrimaryButton>
+          {typeLogin && (
+            <Link to="/register">
+              <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
+            </Link>
+          )}
         </S.Buttons>
       </S.ModalForm>
     </>

@@ -1,30 +1,38 @@
-// import { Link } from 'react-router-dom'
-// import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { useState } from 'react'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { DarkBG } from '../../App.styles'
 import { FormAuth } from 'components/FormAuth/FormAuth'
-
-// const auth = getAuth()
-// signInWithEmailAndPassword(auth, email, password)
-//   .then((userCredential) => {
-//     // Signed in
-//     const user = userCredential.user
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code
-//     const errorMessage = error.message
-//   })
+import { setUser } from 'store/slices/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 export const Login = () => {
   const dispatch = useDispatch()
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
+  const navigate = useNavigate()
+  const handleLogin = (email, password) => {
+    const auth = getAuth()
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        //   console.log(user)
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          }),
+        )
+        navigate('/')
+      })
+      .catch(console.error)
+  }
+
   return (
     <>
       <DarkBG>
-        <FormAuth typeLogin={true}></FormAuth>
+        <FormAuth
+          title={'Войти'}
+          handleClick={handleLogin}
+          typeLogin={true}
+        ></FormAuth>
       </DarkBG>
     </>
   )
