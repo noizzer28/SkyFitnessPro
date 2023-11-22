@@ -105,3 +105,23 @@ export const TitleCard = styled.p`
   line-height: 110%;
   letter-spacing: -0.5px;
 `
+
+export const ModalBackground = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+`
+
+export const inputChange = styled.input`
+  width: 278px;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid #D0CECE;
+
+`
