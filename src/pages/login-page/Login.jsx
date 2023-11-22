@@ -10,6 +10,8 @@ export const Login = () => {
   const navigate = useNavigate()
   const handleLogin = (email, password) => {
     const auth = getAuth()
+    const apiKey = process.env.REACT_APP_FIREBASE_API_KEY
+    console.log(apiKey)
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(
