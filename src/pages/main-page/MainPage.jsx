@@ -2,13 +2,17 @@ import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
 import { useAuth } from 'hooks/use-auth'
+import { useState } from 'react'
 import * as S from './MainPage.styles'
 
 const imagePath = process.env.PUBLIC_URL + '/img/'
 
 export const Main = () => {
-  const { isAuth } = useAuth()
-  console.log(isAuth)
+  // скрытие кнопки "Наверх ↑"
+  const [offSet, setOffSet] = useState('')
+  window.addEventListener('scroll', () => {
+    window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
+  })
   return (
     <>
       <DarkBG>
@@ -36,10 +40,20 @@ export const Main = () => {
             <Card name={'Танцевальный фитнес'} position={3}></Card>
             <Card name={'Степ-аэробика'} position={4}></Card>
             <Card name={'Бодифлекс'} position={5}></Card>
+            <Card name={'Йога'} position={1}></Card>
+            <Card name={'Стретчинг'} position={2}></Card>
           </S.MainList>
-          <S.MainFooter>
-            <S.MainButton>Наверх ↑</S.MainButton>
-          </S.MainFooter>
+          {offSet && (
+            <S.MainFooter>
+              <S.MainButton
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+              >
+                Наверх ↑
+              </S.MainButton>
+            </S.MainFooter>
+          )}
         </Container>
       </DarkBG>
     </>

@@ -91,7 +91,7 @@ export const Footer = styled.footer`
   border-radius: 30px;
   background: #f9ebff;
   display: flex;
-  margin-bottom: 95 px;
+  margin-bottom: 95px;
 `
 
 export const FooterLeft = styled.div`
