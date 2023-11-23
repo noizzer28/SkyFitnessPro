@@ -3,8 +3,23 @@ import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
 import { useState } from 'react'
 import * as S from './MainPage.styles'
+import { getDatabase, ref, onValue } from 'firebase/database'
+import { app } from '../../firebase'
+
+const baseUrl =
+  'https://fitness-pro-ae1f4-default-rtdb.europe-west1.firebasedatabase.app/'
+
+// const db = getDatabase(app)
 
 export const Main = () => {
+  const db = getDatabase()
+  const starCountRef = ref(db, '/')
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val()
+    //  updateStarCount(postElement, data)
+    console.log(data)
+  })
+
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {

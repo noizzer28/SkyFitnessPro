@@ -14,6 +14,8 @@ const firebaseConfig = {
   storageBucket: 'fitness-pro-ae1f4.appspot.com',
   messagingSenderId: '1034773898251',
   appId: '1:1034773898251:web:7dfa7ec88e44363287d30e',
+  databaseURL:
+    'https://fitness-pro-ae1f4-default-rtdb.europe-west1.firebasedatabase.app',
 }
 
-const app = initializeApp(firebaseConfig)
+export const app = initializeApp(firebaseConfig)
