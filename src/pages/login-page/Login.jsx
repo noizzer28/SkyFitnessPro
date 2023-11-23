@@ -12,8 +12,6 @@ export const Login = () => {
   const navigate = useNavigate()
 
   const handleLogin = async (email, password) => {
-    console.log(process.env.REACT_APP_FIREBASE_API_KEY)
-
     try {
       if (!email) {
         setLoginError('Введите email')

@@ -4,8 +4,6 @@ import { DarkBG, Container } from '../../App.styles'
 import { useState } from 'react'
 import * as S from './MainPage.styles'
 
-const imagePath = process.env.PUBLIC_URL + '/img/'
-
 export const Main = () => {
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
@@ -27,7 +25,7 @@ export const Main = () => {
               </S.TitleBlockSlogan>
             </S.TitleBlockContent>
             <S.SaleSticker>
-              <img src={imagePath + 'sale-sticker.png'}></img>
+              <img src="/img/sale-sticker.png"></img>
               <S.SaleStickerText>
                 Измени своё <br /> тело за полгода
               </S.SaleStickerText>

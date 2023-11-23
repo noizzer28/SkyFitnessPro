@@ -2,9 +2,10 @@ import { Header } from '../../components/header/header'
 import * as S from './Profile.styles'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { useState } from 'react'
+
 export const Profile = () => {
-  const [loginChange, setLoginChange] = useState(false);
-  const [passwordChange, setPasswordChange] = useState(false);
+  const [loginChange, setLoginChange] = useState(false)
+  const [passwordChange, setPasswordChange] = useState(false)
 
   return (
     <S.Container>
@@ -16,8 +17,12 @@ export const Profile = () => {
           <S.Line>Пароль: 4fkhdj880d</S.Line>
         </S.AllLines>
         <S.AllButtons>
-          <S.ProfileButton onClick={() => setLoginChange(true)}>Редактировать логин</S.ProfileButton>
-          <S.ProfileButton onClick={() => setPasswordChange(true)}>Редактировать пароль</S.ProfileButton>
+          <S.ProfileButton onClick={() => setLoginChange(true)}>
+            Редактировать логин
+          </S.ProfileButton>
+          <S.ProfileButton onClick={() => setPasswordChange(true)}>
+            Редактировать пароль
+          </S.ProfileButton>
         </S.AllButtons>
       </S.ProfileInfo>
       <S.CardPart>
@@ -42,11 +47,8 @@ export const Profile = () => {
       </S.CardPart>
       {loginChange ? (
         <S.ModalBackground>
-          <ModalProfileChange
-            toggleOpen={setLoginChange}
-            text={'Новый логин:'}
-          >
-          <S.inputChange placeholder='Логин'></S.inputChange>
+          <ModalProfileChange toggleOpen={setLoginChange} text={'Новый логин:'}>
+            <S.inputChange placeholder="Логин"></S.inputChange>
           </ModalProfileChange>
         </S.ModalBackground>
       ) : (
@@ -58,8 +60,8 @@ export const Profile = () => {
             toggleOpen={setPasswordChange}
             text={'Новый пароль:'}
           >
-            <S.inputChange placeholder='Пароль'></S.inputChange>
-            <S.inputChange placeholder='Повторите пароль'></S.inputChange>
+            <S.inputChange placeholder="Пароль"></S.inputChange>
+            <S.inputChange placeholder="Повторите пароль"></S.inputChange>
           </ModalProfileChange>
         </S.ModalBackground>
       ) : (
