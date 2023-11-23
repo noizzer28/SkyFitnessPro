@@ -41,12 +41,14 @@ export const Сourse = () => {
           <S.CourseHeaders>Направления:</S.CourseHeaders>
           <S.ListDirections>
             {pageCourseObject.directions.map((el) => {
-              return <S.ItemDirections key={1}>{el}</S.ItemDirections>
+              return (
+                <S.ItemDirections key={el.list}>{el.text}</S.ItemDirections>
+              )
             })}
           </S.ListDirections>
         </S.CourseDirections>
         <S.CourseDescription>
-         {pageCourseObject.description}
+          {pageCourseObject.description}
         </S.CourseDescription>
         <S.Footer>
           <S.FooterLeft>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import * as S from './FormAuth.styles'
 
-export const FormAuth = ({ title, handleClick, typeLogin }) => {
+export const FormAuth = ({ title, handleClick, typeLogin, loginError }) => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [repPass, setRepPass] = useState('')
@@ -97,6 +97,7 @@ export const FormAuth = ({ title, handleClick, typeLogin }) => {
             />
           )}
         </S.Inputs>
+        {loginError && <S.Error>{loginError}</S.Error>}
         <S.Buttons>
           <S.PrimaryButton onClick={() => handleClick(email, pass, repPass)}>
             {title}
