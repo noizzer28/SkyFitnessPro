@@ -12,6 +12,7 @@ export const Login = () => {
   const navigate = useNavigate()
 
   const handleLogin = async (email, password) => {
+    console.log(process.env.MY_API_KEY)
 
     try {
       if (!email) {
