@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import * as S from './Course.styles'
 import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
 import { Header } from '../../components/header/header'
 import { Cources } from '../../utils/mock-course-page'
+import * as S from './Course.styles'
 
 export const Сourse = () => {
-  const params = useParams()
-  const { id } = params
+  const { id } = useParams()
   const [isSuccessWindow, setSuccessWindow] = useState(false)
 
   const toggleModeWindow = () => {

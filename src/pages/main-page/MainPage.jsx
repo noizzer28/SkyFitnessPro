@@ -2,9 +2,18 @@ import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
 import { useState } from 'react'
+import { getDatabase, ref, onValue } from 'firebase/database'
 import * as S from './MainPage.styles'
 
 export const Main = () => {
+  const db = getDatabase()
+  const starCountRef = ref(db, '/courses/')
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val()
+    //  updateStarCount(postElement, data)
+    console.log(data)
+  })
+
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {

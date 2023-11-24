@@ -1,11 +1,57 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { login, registration } from 'api'
+import { useDispatch } from 'react-redux'
+import { setUser } from 'store/slices/userSlice'
 import * as S from './FormAuth.styles'
 
-export const FormAuth = ({ title, handleClick, typeLogin, loginError }) => {
+export const FormAuth = ({ title, typeLogin }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [loginError, setLoginError] = useState(null)
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [repPass, setRepPass] = useState('')
+
+  const handleClick = async () => {
+    try {
+      if (!email) {
+        setLoginError('Введите email')
+        return
+      }
+
+      if (!pass) {
+        setLoginError('Введите пароль')
+        return
+      }
+
+      if (!typeLogin && pass !== repPass) {
+        setLoginError('пароли не совпадают')
+        return
+      }
+
+      setLoginError('')
+      let user = {}
+      if (typeLogin) {
+        user = await login({ email, pass })
+      } else {
+        user = await registration({ email, pass })
+      }
+      if (user) {
+        dispatch(
+          setUser({
+            email: user.email,
+            id: user.uid,
+            token: user.accessToken,
+          }),
+        )
+        navigate('/')
+      }
+    } catch (error) {
+      setLoginError(error.message)
+    }
+  }
+
   return (
     <>
       <S.ModalForm>
@@ -99,7 +145,7 @@ export const FormAuth = ({ title, handleClick, typeLogin, loginError }) => {
         </S.Inputs>
         {loginError && <S.Error>{loginError}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={() => handleClick(email, pass, repPass)}>
+          <S.PrimaryButton onClick={() => handleClick()}>
             {title}
           </S.PrimaryButton>
           {typeLogin && (
