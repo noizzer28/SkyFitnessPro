@@ -51,7 +51,6 @@ export const Main = () => {
   window.addEventListener('scroll', () => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
-
   return (
     <>
       <DarkBG>
@@ -73,14 +72,19 @@ export const Main = () => {
               </S.SaleStickerText>
             </S.SaleSticker>
           </S.TitleBlock>
-          <S.MainList>
-            {mapCoursesList}
-            {/* <Card name={'Йога'} position={1}></Card>
+          {!courses ? (
+            <S.Loader></S.Loader>
+          ) : (
+            <S.MainList>
+              {mapCoursesList}
+              {/* <Card name={'Йога'} position={1}></Card>
             <Card name={'Стретчинг'} position={2}></Card>
             <Card name={'Танцевальный фитнес'} position={3}></Card>
             <Card name={'Степ-аэробика'} position={4}></Card>
             <Card name={'Бодифлекс'} position={5}></Card> */}
-          </S.MainList>
+            </S.MainList>
+          )}
+
           {offSet && (
             <S.MainFooter>
               <S.MainButton
