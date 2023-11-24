@@ -9,6 +9,7 @@ export const FormAuth = ({ title, typeLogin }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loginError, setLoginError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [repPass, setRepPass] = useState('')
@@ -29,6 +30,7 @@ export const FormAuth = ({ title, typeLogin }) => {
         setLoginError('пароли не совпадают')
         return
       }
+      setIsLoading(true)
 
       setLoginError('')
       let user = {}
@@ -49,6 +51,8 @@ export const FormAuth = ({ title, typeLogin }) => {
       }
     } catch (error) {
       setLoginError(error.message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -145,8 +149,8 @@ export const FormAuth = ({ title, typeLogin }) => {
         </S.Inputs>
         {loginError && <S.Error>{loginError}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={() => handleClick()}>
-            {title}
+          <S.PrimaryButton disabled={isLoading} onClick={() => handleClick()}>
+            {isLoading ? 'Логинимся' : title}
           </S.PrimaryButton>
           {typeLogin && (
             <Link to="/register">
