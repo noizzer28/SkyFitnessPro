@@ -39,6 +39,7 @@ export const ModalInput = styled.input`
   border: none;
   border-bottom: 1px solid #d0cece;
   padding: 8px 1px;
+  font-size: 22px;
 
   &::placeholder {
     font-style: normal;
