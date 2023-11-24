@@ -1,24 +1,57 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
-import { useState } from 'react'
-import { getDatabase, ref, onValue } from 'firebase/database'
+import { useEffect, useState } from 'react'
+import { getDatabase, ref, onValue, child, get } from 'firebase/database'
+// import { getCourses } from 'api'
+import { useDispatch, useSelector } from 'react-redux'
 import * as S from './MainPage.styles'
+import { setCourses } from 'store/slices/coursesSlice'
 
 export const Main = () => {
-  const db = getDatabase()
-  const starCountRef = ref(db, '/courses/')
-  onValue(starCountRef, (snapshot) => {
-    const data = snapshot.val()
-    //  updateStarCount(postElement, data)
-    console.log(data)
-  })
+  const { courses } = useSelector((state) => state.courses)
+  const dispatch = useDispatch()
 
+  // преобразуем объект в массив
+  const objArrList = (data) => {
+    let arrList = []
+    const abjArr = Object.entries(data).forEach(([key, value]) => {
+      arrList.push(value)
+    })
+    return arrList
+  }
+
+  const getCourses = () => {
+    const db = getDatabase()
+    const starCountRef = ref(db, '/courses')
+    onValue(starCountRef, (snapshot) => {
+      const coursesList = objArrList(snapshot.val())
+      dispatch(
+        setCourses({
+          courses: coursesList,
+        }),
+      )
+    })
+  }
+
+  useEffect(() => {
+    getCourses()
+  }, [])
+
+  // формируем список курсов
+  const mapCoursesList = courses?.map((courseCard, index) => (
+    <Card
+      key={courseCard._id}
+      name={courseCard.name}
+      position={index + 1}
+    ></Card>
+  ))
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
+
   return (
     <>
       <DarkBG>
@@ -41,13 +74,12 @@ export const Main = () => {
             </S.SaleSticker>
           </S.TitleBlock>
           <S.MainList>
-            <Card name={'Йога'} position={1}></Card>
+            {mapCoursesList}
+            {/* <Card name={'Йога'} position={1}></Card>
             <Card name={'Стретчинг'} position={2}></Card>
             <Card name={'Танцевальный фитнес'} position={3}></Card>
             <Card name={'Степ-аэробика'} position={4}></Card>
-            <Card name={'Бодифлекс'} position={5}></Card>
-            <Card name={'Йога'} position={1}></Card>
-            <Card name={'Стретчинг'} position={2}></Card>
+            <Card name={'Бодифлекс'} position={5}></Card> */}
           </S.MainList>
           {offSet && (
             <S.MainFooter>
