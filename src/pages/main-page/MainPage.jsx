@@ -10,6 +10,7 @@ import { setCourses } from 'store/slices/coursesSlice'
 
 export const Main = () => {
   const { courses } = useSelector((state) => state.courses)
+  const { user } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const [dataBaseError, setDataBaseError] = useState(null)
 
@@ -42,10 +43,13 @@ export const Main = () => {
       setDataBaseError(null)
     })
   }
-
   useEffect(() => {
     getCourses()
-  }, [])
+  }, [user])
+
+  //   useEffect(() => {
+  //     getCourses()
+  //   }, [])
 
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard, index) => (
