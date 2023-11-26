@@ -55,6 +55,10 @@ export const MainFooter = styled.div`
   display: flex;
   justify-content: center;
 `
+export const BlockError = styled.div`
+  color: var(--orange-90);
+  font-size: 30px;
+`
 export const MainButton = styled(ButtonPurple)`
   width: 147px;
   height: 48px;

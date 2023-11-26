@@ -11,6 +11,7 @@ import { setCourses } from 'store/slices/coursesSlice'
 export const Main = () => {
   const { courses } = useSelector((state) => state.courses)
   const dispatch = useDispatch()
+  const [dataBaseError, setDataBaseError] = useState(null)
 
   // преобразуем объект в массив
   const objArrList = (data) => {
@@ -25,12 +26,20 @@ export const Main = () => {
     const db = getDatabase()
     const starCountRef = ref(db, '/courses')
     onValue(starCountRef, (snapshot) => {
-      const coursesList = objArrList(snapshot.val())
+      const data = snapshot.val()
+      if (!data) {
+        setDataBaseError(
+          'Извините, курсы не найдены, либо нет подключения к интернету',
+        )
+        return
+      }
+      const coursesList = objArrList(data)
       dispatch(
         setCourses({
           courses: coursesList,
         }),
       )
+      setDataBaseError(null)
     })
   }
 
@@ -46,6 +55,7 @@ export const Main = () => {
       position={index + 1}
     ></Card>
   ))
+
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {
@@ -72,7 +82,8 @@ export const Main = () => {
               </S.SaleStickerText>
             </S.SaleSticker>
           </S.TitleBlock>
-          {!courses ? (
+          {dataBaseError && <S.BlockError>{dataBaseError}</S.BlockError>}
+          {!courses && !dataBaseError ? (
             <S.Loader></S.Loader>
           ) : (
             <S.MainList>
@@ -84,7 +95,6 @@ export const Main = () => {
             <Card name={'Бодифлекс'} position={5}></Card> */}
             </S.MainList>
           )}
-
           {offSet && (
             <S.MainFooter>
               <S.MainButton
