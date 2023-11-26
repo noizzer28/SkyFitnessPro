@@ -2,15 +2,20 @@ import { Header } from '../../components/header/header'
 import * as S from './workout.styles'
 import { useState } from 'react'
 import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 export const Workout = () => {
+  const { id } = useParams()
+  const { courses } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
   const [progressValue, setProgressValue] = useState([
     { id: 1, userInput: 0, percentProgress: 0, totalValue: 10 },
     { id: 2, userInput: 0, percentProgress: 0, totalValue: 10 },
     { id: 3, userInput: 0, percentProgress: 0, totalValue: 5 },
   ])
-
+  console.log(courses)
+  console.log(id)
   const [isSuccessModal, setSuccessModal] = useState(false)
 
   const toggleModal = () => {
@@ -95,8 +100,6 @@ export const Workout = () => {
         <S.CenterHeader>Йога</S.CenterHeader>
         <S.BreadCrumps>
           <S.BreadCrumpsItem>Красота и здоровье</S.BreadCrumpsItem>
-          <S.BreadCrumpsItem>Йога на каждый день</S.BreadCrumpsItem>
-          <S.BreadCrumpsItem>2 день</S.BreadCrumpsItem>
         </S.BreadCrumps>
         <S.Video>
           <iframe
