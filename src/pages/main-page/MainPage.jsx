@@ -7,7 +7,7 @@ import * as S from './MainPage.styles'
 
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
-
+  console.log(courses)
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard, index) => (
     <Card
@@ -15,6 +15,7 @@ export const Main = ({ error }) => {
       name={courseCard.name}
       position={index + 1}
       id={courseCard._id}
+      typeMain={true}
     ></Card>
   ))
 
