@@ -1,9 +1,10 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container, Loader } from '../../App.styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import * as S from './MainPage.styles'
+import { getUserProfile } from 'api'
 
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
@@ -23,6 +24,12 @@ export const Main = ({ error }) => {
   window.addEventListener('scroll', () => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
+
+  useEffect (() => {
+    getUserProfile()
+    console.log('worked');
+  }, [])
+
   return (
     <>
       <DarkBG>
