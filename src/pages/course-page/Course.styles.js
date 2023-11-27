@@ -1,18 +1,16 @@
 import styled from 'styled-components'
 import { ButtonPurple } from '../../App.styles'
 
-export const CourseInfoPage = styled.main`
-  margin-left: calc(50% - 580px);
-  margin-right: calc(50% - 580px);
-`
 export const CourseTop = styled.div`
   position: relative;
-  margin-top: 75px;
+  width: 100%;
+  height: 310px;
+  overflow: hidden;
+  border-radius: 30px;
 `
 
 export const CourseImg = styled.img`
   width: 1160px;
-  height: 310px;
 `
 export const CourseTitle = styled.h1`
   position: absolute;

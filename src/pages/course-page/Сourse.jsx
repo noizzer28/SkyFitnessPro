@@ -31,52 +31,51 @@ const CourseBlock = ({ course }) => {
 
   return (
     <>
-      <S.CourseInfoPage>
-        <S.CourseTop>
-          <S.CourseImg src="/img/yoga.png" alt="yoga" />
-          <S.CourseTitle>{course.name}</S.CourseTitle>
-        </S.CourseTop>
-        <S.CourseAdvantages>
-          <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
-          <S.ListAdvantages>
-            {course.advantages.map((el, index) => {
-              return (
-                <S.ItemAdvantages key={index}>
-                  <div>
-                    <S.ItemCircle>{index}</S.ItemCircle>
-                  </div>
-                  <S.ItemText>{el}</S.ItemText>
-                </S.ItemAdvantages>
-              )
+      <S.CourseTop>
+        <S.CourseImg src="/img/yoga.png" alt="yoga" />
+        <S.CourseTitle>{course.name}</S.CourseTitle>
+      </S.CourseTop>
+      <S.CourseAdvantages>
+        <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
+        <S.ListAdvantages>
+          {course.advantages.map((el, index) => {
+            return (
+              <S.ItemAdvantages key={index}>
+                <div>
+                  <S.ItemCircle>{index}</S.ItemCircle>
+                </div>
+                <S.ItemText>{el}</S.ItemText>
+              </S.ItemAdvantages>
+            )
+          })}
+        </S.ListAdvantages>
+      </S.CourseAdvantages>
+      <S.CourseDirections>
+        <S.CourseHeaders>Направления:</S.CourseHeaders>
+        <S.ListDirections>
+          {course.directions
+            .slice(1, -1)
+            .split(', ')
+            .map((el) => {
+              return <S.ItemDirections key={el}>{el}</S.ItemDirections>
             })}
-          </S.ListAdvantages>
-        </S.CourseAdvantages>
-        <S.CourseDirections>
-          <S.CourseHeaders>Направления:</S.CourseHeaders>
-          <S.ListDirections>
-            {course.directions
-              .slice(1, -1)
-              .split(', ')
-              .map((el) => {
-                return <S.ItemDirections key={el}>{el}</S.ItemDirections>
-              })}
-          </S.ListDirections>
-        </S.CourseDirections>
-        <S.CourseDescription>{course.description}</S.CourseDescription>
-        <S.Footer>
-          <S.FooterLeft>
-            <S.FooterText>
-              Оставьте заявку на пробное занятие, мы свяжемся с вами, поможем с
-              выбором направления и тренера, с которым тренировки принесут
-              здоровье и радость!
-            </S.FooterText>
-            <S.FooterButton onClick={toggleModeWindow}>
-              Записаться на тренировку
-            </S.FooterButton>
-          </S.FooterLeft>
-          <S.FooterImg src="/img/handset.png" alt="handset" />
-        </S.Footer>
-      </S.CourseInfoPage>
+        </S.ListDirections>
+      </S.CourseDirections>
+      <S.CourseDescription>{course.description}</S.CourseDescription>
+      <S.Footer>
+        <S.FooterLeft>
+          <S.FooterText>
+            Оставьте заявку на пробное занятие, мы свяжемся с вами, поможем с
+            выбором направления и тренера, с которым тренировки принесут
+            здоровье и радость!
+          </S.FooterText>
+          <S.FooterButton onClick={toggleModeWindow}>
+            Записаться на тренировку
+          </S.FooterButton>
+        </S.FooterLeft>
+        <S.FooterImg src="/img/handset.png" alt="handset" />
+      </S.Footer>
+
       {isSuccessWindow ? (
         <S.ModalBackground>
           <ModalSuccess

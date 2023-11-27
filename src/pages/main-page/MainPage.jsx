@@ -3,8 +3,8 @@ import { Header } from '../../components/header/header'
 import { DarkBG, Container, Loader } from '../../App.styles'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import * as S from './MainPage.styles'
 import { getUserProfile } from 'api'
+import * as S from './MainPage.styles'
 
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
@@ -25,9 +25,9 @@ export const Main = ({ error }) => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
 
-  useEffect (() => {
+  useEffect(() => {
     getUserProfile()
-    console.log('worked');
+    console.log('worked')
   }, [])
 
   return (
