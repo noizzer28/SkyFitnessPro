@@ -1,12 +1,12 @@
 import { AppRoutes } from './routes'
-import { getDatabase, ref, onValue, child, get } from 'firebase/database'
+import { getDatabase, ref, onValue } from 'firebase/database'
 import { useEffect, useState } from 'react'
 import { setCourses } from 'store/slices/coursesSlice'
 import { useDispatch } from 'react-redux'
 import * as S from './App.styles'
 
 // функция преобразования объекта в массив
-const objArrList = (data) => {
+export const objArrList = (data) => {
   let arrList = []
   Object.entries(data).forEach(([key, value]) => {
     arrList.push(value)

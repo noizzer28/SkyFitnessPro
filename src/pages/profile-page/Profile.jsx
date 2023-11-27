@@ -1,15 +1,10 @@
 import { Header } from '../../components/header/header'
-import * as S from './Profile.styles'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { useState } from 'react'
-import { useAuth } from 'hooks/use-auth'
-import { changeLogin } from 'api'
 
 export const Profile = () => {
-  const { isAuth, email } = useAuth()
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
-  const [loginValue, setLoginValue] = useState('')
 
   return (
     <S.Container>
@@ -17,7 +12,7 @@ export const Profile = () => {
       <S.ProfileInfo>
         <S.Title>Мой профиль</S.Title>
         <S.AllLines>
-          <S.Line>Логин: {email}</S.Line>
+          <S.Line>Логин: sergey.petrov96</S.Line>
           <S.Line>Пароль: 4fkhdj880d</S.Line>
         </S.AllLines>
         <S.AllButtons>
@@ -51,12 +46,8 @@ export const Profile = () => {
       </S.CardPart>
       {loginChange ? (
         <S.ModalBackground>
-          <ModalProfileChange onSubmit={(event) => {
-            event.preventDefault()
-            changeLogin(loginValue)}} 
-            toggleOpen={setLoginChange} 
-            text={'Новый логин:'}>
-            <S.inputChange onChange={(event) => setLoginValue(event.target.value)} value={loginValue} placeholder="Логин"></S.inputChange>
+          <ModalProfileChange toggleOpen={setLoginChange} text={'Новый логин:'}>
+            <S.inputChange placeholder="Логин"></S.inputChange>
           </ModalProfileChange>
         </S.ModalBackground>
       ) : (
