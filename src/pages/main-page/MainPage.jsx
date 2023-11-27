@@ -1,8 +1,7 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
-import { DarkBG, Container } from '../../App.styles'
+import { DarkBG, Container, Loader } from '../../App.styles'
 import { useState } from 'react'
-// import { getCoursesApi } from 'api'
 import { useSelector } from 'react-redux'
 import * as S from './MainPage.styles'
 
@@ -15,6 +14,7 @@ export const Main = ({ error }) => {
       key={courseCard._id}
       name={courseCard.name}
       position={index + 1}
+      id={courseCard._id}
     ></Card>
   ))
 
@@ -46,16 +46,9 @@ export const Main = ({ error }) => {
           </S.TitleBlock>
           {error && <S.BlockError>{error}</S.BlockError>}
           {!courses && !error ? (
-            <S.Loader></S.Loader>
+            <Loader></Loader>
           ) : (
-            <S.MainList>
-              {mapCoursesList}
-              {/* <Card name={'Йога'} position={1}></Card>
-            <Card name={'Стретчинг'} position={2}></Card>
-            <Card name={'Танцевальный фитнес'} position={3}></Card>
-            <Card name={'Степ-аэробика'} position={4}></Card>
-            <Card name={'Бодифлекс'} position={5}></Card> */}
-            </S.MainList>
+            <S.MainList>{mapCoursesList}</S.MainList>
           )}
           {offSet && (
             <S.MainFooter>

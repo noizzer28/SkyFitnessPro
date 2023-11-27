@@ -34,6 +34,7 @@ export const App = () => {
       dispatch(
         setCourses({
           courses: coursesList,
+          coursesObj: data,
         }),
       )
       setDataBaseError(null)

@@ -127,6 +127,7 @@ export const Header = () => {
                 </Link>
                 <S.DropdownMenuItem
                   onClick={() => {
+                    navigate('/')
                     localStorage.removeItem('userSkyFitnesPro')
                     dispatch(removeUser())
                   }}

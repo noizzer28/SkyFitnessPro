@@ -3,36 +3,49 @@ import { useParams } from 'react-router-dom'
 import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
 import { Header } from '../../components/header/header'
 import { useSelector } from 'react-redux'
-import { Cources } from '../../utils/mock-course-page'
+import { Loader } from '../../App.styles'
 import * as S from './Course.styles'
 
 export const Сourse = () => {
   const { id } = useParams()
-  const [isSuccessWindow, setSuccessWindow] = useState(false)
-  const { courses } = useSelector((state) => state.courses)
+  const { coursesObj } = useSelector((state) => state.courses)
 
-  const toggleModeWindow = () => {
-    setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
-  }
-  const pageCourseObject = Cources[Number(id - 1)]
   return (
     <>
       <Header />
+      {!coursesObj ? (
+        <Loader></Loader>
+      ) : (
+        <CourseBlock course={coursesObj[id]}></CourseBlock>
+      )}
+    </>
+  )
+}
+
+// формируем блок курса
+const CourseBlock = ({ course }) => {
+  const [isSuccessWindow, setSuccessWindow] = useState(false)
+  const toggleModeWindow = () => {
+    setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
+  }
+
+  return (
+    <>
       <S.CourseInfoPage>
         <S.CourseTop>
           <S.CourseImg src="/img/yoga.png" alt="yoga" />
-          <S.CourseTitle>{pageCourseObject.title}</S.CourseTitle>
+          <S.CourseTitle>{course.name}</S.CourseTitle>
         </S.CourseTop>
         <S.CourseAdvantages>
           <S.CourseHeaders>Подойдет для вас, если:</S.CourseHeaders>
           <S.ListAdvantages>
-            {pageCourseObject.advantages.map((el) => {
+            {course.advantages.map((el, index) => {
               return (
-                <S.ItemAdvantages key={el.num}>
+                <S.ItemAdvantages key={index}>
                   <div>
-                    <S.ItemCircle>{el.num}</S.ItemCircle>
+                    <S.ItemCircle>{index}</S.ItemCircle>
                   </div>
-                  <S.ItemText>{el.text}</S.ItemText>
+                  <S.ItemText>{el}</S.ItemText>
                 </S.ItemAdvantages>
               )
             })}
@@ -41,16 +54,15 @@ export const Сourse = () => {
         <S.CourseDirections>
           <S.CourseHeaders>Направления:</S.CourseHeaders>
           <S.ListDirections>
-            {pageCourseObject.directions.map((el) => {
-              return (
-                <S.ItemDirections key={el.list}>{el.text}</S.ItemDirections>
-              )
-            })}
+            {course.directions
+              .slice(1, -1)
+              .split(', ')
+              .map((el) => {
+                return <S.ItemDirections key={el}>{el}</S.ItemDirections>
+              })}
           </S.ListDirections>
         </S.CourseDirections>
-        <S.CourseDescription>
-          {pageCourseObject.description}
-        </S.CourseDescription>
+        <S.CourseDescription>{course.description}</S.CourseDescription>
         <S.Footer>
           <S.FooterLeft>
             <S.FooterText>

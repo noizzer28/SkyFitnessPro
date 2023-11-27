@@ -10,6 +10,7 @@ const coursesSlice = createSlice({
   reducers: {
     setCourses(state, action) {
       state.courses = action.payload.courses
+      state.coursesObj = action.payload.coursesObj
     },
   },
 })
