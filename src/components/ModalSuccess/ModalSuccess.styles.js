@@ -32,14 +32,14 @@ export const ModalSuccessButton = styled.button`
   position: absolute;
   border: none;
   background: none;
-  color:#909090;
+  color: #909090;
   top: 15px;
   right: 15px;
   font-size: 30px;
   line-height: 40px;
-
+  cursor: pointer;
   &:hover {
-    color:#606060;
+    color: #606060;
     background: none;
   }
 `

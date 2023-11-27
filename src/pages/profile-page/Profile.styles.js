@@ -52,51 +52,6 @@ export const CardList = styled.ul`
   margin-top: 20px;
 `
 
-// export const Card = styled.div`
-//   position: relative;
-//   width: 360px;
-//   height: 480px;
-//   border-radius: 30px;
-//   background: #fff;
-//   box-shadow:
-//     -10px 10px 15.99882px 0px rgba(0, 0, 0, 0.1),
-//     10px -10px 16px 0px rgba(0, 0, 0, 0.1);
-//   overflow: hidden;
-// `
-
-// export const Image = styled.img``
-
-// export const RedirectButton = styled(ButtonPurple)`
-//   border-radius: 80px;
-//   background: #c7e957;
-//   color: #000;
-//   font-size: 20px;
-//   line-height: 115%;
-//   height: 43px;
-//   width: 136px;
-//   position: absolute;
-//   left: 30px;
-//   bottom: 27px;
-//   &:hover {
-//     background: #daf289;
-//   }
-//   & active {
-//     background: #ebffab;
-//   }
-// `
-
-// export const TitleCard = styled.p`
-//   position: absolute;
-//   left: 50px;
-//   top: 50px;
-//   color: #000;
-//   font-size: 36px;
-//   font-style: normal;
-//   font-weight: 800;
-//   line-height: 110%;
-//   letter-spacing: -0.5px;
-// `
-
 export const ModalBackground = styled.div`
   position: fixed;
   width: 100%;

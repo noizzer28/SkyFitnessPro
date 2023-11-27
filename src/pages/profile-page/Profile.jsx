@@ -1,55 +1,100 @@
 import { Header } from '../../components/header/header'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
-import { getDatabase, ref, onValue, child, get } from 'firebase/database'
+import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
 import { setUserCourses } from 'store/slices/userSlice'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
   const dispatch = useDispatch()
+  const [loginChange, setLoginChange] = useState(false)
+  const [passwordChange, setPasswordChange] = useState(false)
+  const [laoading, setLaoading] = useState(false)
   const { id } = useSelector((state) => state.user)
   const { userCourses } = useSelector((state) => state.user)
+  const { email } = useSelector((state) => state.user)
 
   // запрос на курсы в fireбазе
-  const dbRef = ref(getDatabase())
-  get(child(dbRef, `/users/${id}`))
-    .then((snapshot) => {
-      const data = snapshot.val()
-      if (!userCourses && snapshot.exists()) {
-        dispatch(
-          setUserCourses({
-            userCourses: data,
-          }),
-        )
-      } else {
-        // console.log('No data available')
-        return
-      }
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+  const getCourses = () => {
+    const dbRef = ref(getDatabase())
+    get(child(dbRef, `/users/${id}`))
+      .then((snapshot) => {
+        const data = snapshot.val()
+        if (!userCourses && snapshot.exists()) {
+          setLaoading(true)
+          dispatch(
+            setUserCourses({
+              userCourses: data,
+            }),
+          )
+        } else {
+          setLaoading(false)
+          //  console.log('No data available')
+          return
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  getCourses()
+  useEffect(() => {
+    setLaoading(true)
+  }, [])
 
   return (
     <>
       <Header />
-      {!userCourses ? (
-        <Loader></Loader>
-      ) : (
-        <ProfileBlock courses={userCourses}></ProfileBlock>
-      )}
+
+      <>
+        <S.ProfileInfo>
+          <S.Title>Мой профиль</S.Title>
+          <S.AllLines>
+            <S.Line>Логин: {email}</S.Line>
+            {/* <S.Line>Пароль: 4fkhdj880d</S.Line> */}
+          </S.AllLines>
+          <S.AllButtons>
+            <S.ProfileButton onClick={() => setLoginChange(true)}>
+              Редактировать логин
+            </S.ProfileButton>
+            <S.ProfileButton onClick={() => setPasswordChange(true)}>
+              Редактировать пароль
+            </S.ProfileButton>
+          </S.AllButtons>
+        </S.ProfileInfo>
+        {laoading && !userCourses && <Loader></Loader>}
+        {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
+        {loginChange && (
+          <S.ModalBackground>
+            <ModalProfileChange
+              toggleOpen={setLoginChange}
+              text={'Новый логин:'}
+            >
+              <S.inputChange placeholder="Логин"></S.inputChange>
+            </ModalProfileChange>
+          </S.ModalBackground>
+        )}
+        {passwordChange && (
+          <S.ModalBackground>
+            <ModalProfileChange
+              toggleOpen={setPasswordChange}
+              text={'Новый пароль:'}
+            >
+              <S.inputChange placeholder="Пароль"></S.inputChange>
+              <S.inputChange placeholder="Повторите пароль"></S.inputChange>
+            </ModalProfileChange>
+          </S.ModalBackground>
+        )}
+      </>
     </>
   )
 }
 
 export const ProfileBlock = ({ courses }) => {
-  const [loginChange, setLoginChange] = useState(false)
-  const [passwordChange, setPasswordChange] = useState(false)
-  const { email } = useSelector((state) => state.user)
-
   // функция преобразования объекта в массив
   const objArrList2 = (data) => {
     let arrList = []
@@ -73,64 +118,10 @@ export const ProfileBlock = ({ courses }) => {
 
   return (
     <>
-      <S.ProfileInfo>
-        <S.Title>Мой профиль</S.Title>
-        <S.AllLines>
-          <S.Line>Логин: {email}</S.Line>
-          {/* <S.Line>Пароль: 4fkhdj880d</S.Line> */}
-        </S.AllLines>
-        <S.AllButtons>
-          <S.ProfileButton onClick={() => setLoginChange(true)}>
-            Редактировать логин
-          </S.ProfileButton>
-          <S.ProfileButton onClick={() => setPasswordChange(true)}>
-            Редактировать пароль
-          </S.ProfileButton>
-        </S.AllButtons>
-      </S.ProfileInfo>
       <S.CardPart>
         <S.Title>Мои курсы</S.Title>
-        <S.CardList>
-          {mapCoursesList}
-          {/* <S.Card>
-            <S.Image src="/img/cardBG_1.png"></S.Image>
-            <S.RedirectButton>Перейти →</S.RedirectButton>
-            <S.TitleCard>Йога</S.TitleCard>
-          </S.Card>
-          <S.Card>
-            <S.Image src="/img/cardBG_2.png"></S.Image>
-            <S.RedirectButton>Перейти →</S.RedirectButton>
-            <S.TitleCard>Стречинг</S.TitleCard>
-          </S.Card>
-          <S.Card>
-            <S.Image src="/img/cardBG_5.png"></S.Image>
-            <S.RedirectButton>Перейти →</S.RedirectButton>
-            <S.TitleCard>Бодифлекс</S.TitleCard>
-          </S.Card> */}
-        </S.CardList>
+        <S.CardList>{mapCoursesList}</S.CardList>
       </S.CardPart>
-      {loginChange ? (
-        <S.ModalBackground>
-          <ModalProfileChange toggleOpen={setLoginChange} text={'Новый логин:'}>
-            <S.inputChange placeholder="Логин"></S.inputChange>
-          </ModalProfileChange>
-        </S.ModalBackground>
-      ) : (
-        ''
-      )}
-      {passwordChange ? (
-        <S.ModalBackground>
-          <ModalProfileChange
-            toggleOpen={setPasswordChange}
-            text={'Новый пароль:'}
-          >
-            <S.inputChange placeholder="Пароль"></S.inputChange>
-            <S.inputChange placeholder="Повторите пароль"></S.inputChange>
-          </ModalProfileChange>
-        </S.ModalBackground>
-      ) : (
-        ''
-      )}
     </>
   )
 }
