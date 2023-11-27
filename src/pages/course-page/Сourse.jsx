@@ -9,7 +9,6 @@ import * as S from './Course.styles'
 export const Сourse = () => {
   const { id } = useParams()
   const { coursesObj } = useSelector((state) => state.courses)
-
   return (
     <>
       <Header />

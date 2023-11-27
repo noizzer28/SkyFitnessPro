@@ -49,47 +49,41 @@ export const Profile = () => {
   return (
     <>
       <Header />
-
-      <>
-        <S.ProfileInfo>
-          <S.Title>Мой профиль</S.Title>
-          <S.AllLines>
-            <S.Line>Логин: {email}</S.Line>
-            {/* <S.Line>Пароль: 4fkhdj880d</S.Line> */}
-          </S.AllLines>
-          <S.AllButtons>
-            <S.ProfileButton onClick={() => setLoginChange(true)}>
-              Редактировать логин
-            </S.ProfileButton>
-            <S.ProfileButton onClick={() => setPasswordChange(true)}>
-              Редактировать пароль
-            </S.ProfileButton>
-          </S.AllButtons>
-        </S.ProfileInfo>
-        {laoading && !userCourses && <Loader></Loader>}
-        {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
-        {loginChange && (
-          <S.ModalBackground>
-            <ModalProfileChange
-              toggleOpen={setLoginChange}
-              text={'Новый логин:'}
-            >
-              <S.inputChange placeholder="Логин"></S.inputChange>
-            </ModalProfileChange>
-          </S.ModalBackground>
-        )}
-        {passwordChange && (
-          <S.ModalBackground>
-            <ModalProfileChange
-              toggleOpen={setPasswordChange}
-              text={'Новый пароль:'}
-            >
-              <S.inputChange placeholder="Пароль"></S.inputChange>
-              <S.inputChange placeholder="Повторите пароль"></S.inputChange>
-            </ModalProfileChange>
-          </S.ModalBackground>
-        )}
-      </>
+      <S.ProfileInfo>
+        <S.Title>Мой профиль</S.Title>
+        <S.AllLines>
+          <S.Line>Логин: {email}</S.Line>
+          {/* <S.Line>Пароль: 4fkhdj880d</S.Line> */}
+        </S.AllLines>
+        <S.AllButtons>
+          <S.ProfileButton onClick={() => setLoginChange(true)}>
+            Редактировать логин
+          </S.ProfileButton>
+          <S.ProfileButton onClick={() => setPasswordChange(true)}>
+            Редактировать пароль
+          </S.ProfileButton>
+        </S.AllButtons>
+      </S.ProfileInfo>
+      {laoading && !userCourses && <Loader></Loader>}
+      {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
+      {loginChange && (
+        <S.ModalBackground>
+          <ModalProfileChange toggleOpen={setLoginChange} text={'Новый логин:'}>
+            <S.inputChange placeholder="Логин"></S.inputChange>
+          </ModalProfileChange>
+        </S.ModalBackground>
+      )}
+      {passwordChange && (
+        <S.ModalBackground>
+          <ModalProfileChange
+            toggleOpen={setPasswordChange}
+            text={'Новый пароль:'}
+          >
+            <S.inputChange placeholder="Пароль"></S.inputChange>
+            <S.inputChange placeholder="Повторите пароль"></S.inputChange>
+          </ModalProfileChange>
+        </S.ModalBackground>
+      )}
     </>
   )
 }

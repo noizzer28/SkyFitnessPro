@@ -62,6 +62,7 @@ export const ModalBackground = styled.div`
   justify-content: center;
   top: 0;
   left: 0;
+  z-index: 3;
 `
 
 export const inputChange = styled.input`
@@ -69,4 +70,8 @@ export const inputChange = styled.input`
   height: 35px;
   border: none;
   border-bottom: 1px solid #d0cece;
+  fill: none;
+  outline: none;
+  background: transparent;
+  font-size: 18px;
 `

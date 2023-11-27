@@ -29,20 +29,20 @@ export const ModalLines = styled.div`
 `
 
 export const ModalImg = styled.img`
-  width: 220px;
-  height: 35px;
-  margin-bottom: 38px;
+  //   width: 220px;
+  //   height: 35px;
+  //   margin-bottom: 38px;
 `
 export const ModalButton = styled.button`
   position: absolute;
   border: none;
   background: none;
   color: #909090;
-  top: 15px;
-  right: 15px;
+  top: 13px;
+  right: 20px;
   font-size: 30px;
   line-height: 40px;
-
+  cursor: pointer;
   &:hover {
     color: #606060;
     background: none;
@@ -51,4 +51,16 @@ export const ModalButton = styled.button`
 
 export const SendButton = styled(ButtonPurple)`
   margin-top: 50px;
+`
+export const LogoText = styled.p`
+  color: #000;
+  font-size: 30px;
+  font-weight: 600;
+`
+export const ModalLogo = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 38px;
+  background-color: transparent;
 `
