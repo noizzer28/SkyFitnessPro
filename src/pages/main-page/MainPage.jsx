@@ -1,55 +1,13 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container } from '../../App.styles'
-import { useEffect, useState } from 'react'
-import { getDatabase, ref, onValue, child, get } from 'firebase/database'
-// import { getCourses } from 'api'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+// import { getCoursesApi } from 'api'
+import { useSelector } from 'react-redux'
 import * as S from './MainPage.styles'
-import { setCourses } from 'store/slices/coursesSlice'
 
-export const Main = () => {
+export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
-  const { user } = useSelector((state) => state.user)
-  const dispatch = useDispatch()
-  const [dataBaseError, setDataBaseError] = useState(null)
-
-  // преобразуем объект в массив
-  const objArrList = (data) => {
-    let arrList = []
-    const abjArr = Object.entries(data).forEach(([key, value]) => {
-      arrList.push(value)
-    })
-    return arrList
-  }
-
-  const getCourses = () => {
-    const db = getDatabase()
-    const starCountRef = ref(db, '/courses')
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val()
-      if (!data) {
-        setDataBaseError(
-          'Извините, курсы не найдены, либо нет подключения к интернету',
-        )
-        return
-      }
-      const coursesList = objArrList(data)
-      dispatch(
-        setCourses({
-          courses: coursesList,
-        }),
-      )
-      setDataBaseError(null)
-    })
-  }
-  useEffect(() => {
-    getCourses()
-  }, [user])
-
-  //   useEffect(() => {
-  //     getCourses()
-  //   }, [])
 
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard, index) => (
@@ -86,8 +44,8 @@ export const Main = () => {
               </S.SaleStickerText>
             </S.SaleSticker>
           </S.TitleBlock>
-          {dataBaseError && <S.BlockError>{dataBaseError}</S.BlockError>}
-          {!courses && !dataBaseError ? (
+          {error && <S.BlockError>{error}</S.BlockError>}
+          {!courses && !error ? (
             <S.Loader></S.Loader>
           ) : (
             <S.MainList>

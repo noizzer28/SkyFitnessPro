@@ -127,7 +127,7 @@ export const Header = () => {
                 </Link>
                 <S.DropdownMenuItem
                   onClick={() => {
-                    localStorage.clear()
+                    localStorage.removeItem('userSkyFitnesPro')
                     dispatch(removeUser())
                   }}
                   style={{ color: colorTextBlack ? '' : '#FFF' }}

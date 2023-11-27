@@ -5,6 +5,15 @@ import { useDispatch } from 'react-redux'
 import { setUser } from 'store/slices/userSlice'
 import * as S from './FormAuth.styles'
 
+export const saveUserInfoInLocalStorage = (loginData) => {
+  const userInfo = JSON.stringify({
+    email: loginData.email,
+    id: loginData.uid,
+    access: loginData.accessToken,
+  })
+  localStorage.setItem('userSkyFitnesPro', userInfo)
+}
+
 export const FormAuth = ({ title, typeLogin }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -40,7 +49,6 @@ export const FormAuth = ({ title, typeLogin }) => {
         user = await registration({ email, pass })
       }
       if (user) {
-        localStorage.setItem('user', JSON.stringify(user))
         dispatch(
           setUser({
             email: user.email,
@@ -48,6 +56,7 @@ export const FormAuth = ({ title, typeLogin }) => {
             token: user.accessToken,
           }),
         )
+        saveUserInfoInLocalStorage(user)
         navigate('/')
       }
     } catch (error) {

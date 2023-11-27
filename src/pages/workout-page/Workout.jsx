@@ -13,7 +13,6 @@ export const Workout = () => {
   const { courses } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
-
   //Здесть будет какой нибудь айдишник курса полученный из модалки профиля
   const programm = courses[Number(id - 1)]
 

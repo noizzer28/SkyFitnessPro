@@ -1,9 +1,8 @@
 import { Navigate } from 'react-router-dom'
-import { useAuth } from 'hooks/use-auth'
 
 export const ProtectedRoute = ({ children, redirectPath = '/login' }) => {
-  const { isAuth } = useAuth()
-  if (!isAuth) {
+  const userData = JSON.parse(localStorage.getItem('userSkyFitnesPro'))
+  if (!userData) {
     return <Navigate to={redirectPath} replace />
   }
   return children

@@ -3,7 +3,8 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from 'firebase/auth'
-// import { getDatabase, ref, onValue } from 'firebase/database'
+import { getDatabase, ref, onValue } from 'firebase/database'
+// import { redisp } from 'pages/main-page/MainPage'
 
 const auth = getAuth()
 // авторизация пользователя
@@ -21,10 +22,13 @@ export async function registration({ email, pass }) {
 // получаем список курсов
 // const db = getDatabase()
 // let data = {}
-// export async function getCourses() {
+// export function getCoursesApi() {
+//   console.log('getCourses')
 //   const starCountRef = ref(db, '/courses')
-//   await onValue(starCountRef, (snapshot) => {
+//   onValue(starCountRef, (snapshot) => {
 //     data = snapshot.val()
+//     console.log('хоп!')
+//     redisp(data)
 //   })
 //   return data
 // }

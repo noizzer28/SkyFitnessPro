@@ -8,10 +8,10 @@ import { Workout } from './pages/workout-page/Workout'
 import { Login } from './pages/login-page/Login'
 import { Register } from './pages/login-page/Registration'
 
-export const AppRoutes = () => {
+export const AppRoutes = ({ err }) => {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/" element={<Main error={err} />} />
       <Route path="course/:id" element={<Сourse />} />
       <Route
         path="profile"

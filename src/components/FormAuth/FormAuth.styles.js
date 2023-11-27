@@ -37,10 +37,12 @@ export const Inputs = styled.div`
 export const ModalInput = styled.input`
   width: 100%;
   border: none;
+  fill: none;
+  outline: none;
+  background: transparent;
   border-bottom: 1px solid #d0cece;
-  padding: 8px 1px;
+  padding: 8px 8px;
   font-size: 22px;
-
   &::placeholder {
     font-style: normal;
     font-weight: 400;

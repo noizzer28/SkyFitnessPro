@@ -6,14 +6,14 @@ export function useAuth() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'))
+    const userData = JSON.parse(localStorage.getItem('userSkyFitnesPro'))
 
     if (userData) {
       dispatch(
         setUser({
           email: userData.email,
-          id: userData.uid,
-          token: userData.accessToken,
+          id: userData.id,
+          token: userData.access,
         }),
       )
     }

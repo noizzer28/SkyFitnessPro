@@ -10,7 +10,6 @@ export const Сourse = () => {
   const { id } = useParams()
   const [isSuccessWindow, setSuccessWindow] = useState(false)
   const { courses } = useSelector((state) => state.courses)
-  console.log(courses)
 
   const toggleModeWindow = () => {
     setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
