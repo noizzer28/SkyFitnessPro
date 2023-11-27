@@ -3,13 +3,25 @@ import * as S from './workout.styles'
 import { useState } from 'react'
 import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
 import { useDispatch, useSelector } from 'react-redux'
+import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
 
 export const Workout = () => {
+  const { id } = useParams()
+  const { coursesObj } = useSelector((state) => state.courses)
+
+  return (
+    <>
+      <Header />
+      {!coursesObj ? <Loader></Loader> : <WorkoutBlock id={id}></WorkoutBlock>}
+    </>
+  )
+}
+
+export const WorkoutBlock = ({ id }) => {
   // Здесь будет два useparams, один с id, второй с courses например, предполагаю что ссылка должна выглядеть как
   // workout/:course/:id
 
-  const { id } = useParams()
   const { courses } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
@@ -89,7 +101,7 @@ export const Workout = () => {
   }
 
   return (
-    <div>
+    <>
       {isModal && (
         <S.ModalBackground onClick={toggleModal}>
           {!isSuccessModal ? (
@@ -127,7 +139,6 @@ export const Workout = () => {
         </S.ModalBackground>
       )}
 
-      <Header></Header>
       <S.Center>
         <S.CenterHeader>{programm.name}</S.CenterHeader>
         <S.BreadCrumps>
@@ -197,6 +208,6 @@ export const Workout = () => {
           </S.Progress>
         </S.CenterBottom>
       </S.Center>
-    </div>
+    </>
   )
 }
