@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { removeUser } from 'store/slices/userSlice'
 import { useAuth } from 'hooks/use-auth'
 import * as S from './header.styles'
@@ -118,7 +118,7 @@ export const Header = () => {
                     Мой профиль
                   </S.DropdownMenuItem>
                 </Link>
-                <Link to={`/workout`}>
+                <Link to={`/workout/1`}>
                   <S.DropdownMenuItem
                     style={{ color: colorTextBlack ? '' : '#FFF' }}
                   >
@@ -126,7 +126,10 @@ export const Header = () => {
                   </S.DropdownMenuItem>
                 </Link>
                 <S.DropdownMenuItem
-                  onClick={() => dispatch(removeUser())}
+                  onClick={() => {
+                    localStorage.clear()
+                    dispatch(removeUser())
+                  }}
                   style={{ color: colorTextBlack ? '' : '#FFF' }}
                 >
                   Выйти

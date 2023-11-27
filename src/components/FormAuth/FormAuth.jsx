@@ -40,6 +40,7 @@ export const FormAuth = ({ title, typeLogin }) => {
         user = await registration({ email, pass })
       }
       if (user) {
+        localStorage.setItem('user', JSON.stringify(user))
         dispatch(
           setUser({
             email: user.email,

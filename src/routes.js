@@ -22,7 +22,7 @@ export const AppRoutes = () => {
         }
       />
       <Route
-        path="workout"
+        path="workout/:id"
         element={
           <ProtectedRoute>
             <Workout />
