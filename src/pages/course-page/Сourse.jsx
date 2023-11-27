@@ -16,8 +16,6 @@ export const Сourse = () => {
     setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
   }
   const pageCourseObject = Cources[Number(id - 1)]
-  console.log(id)
-  console.log(pageCourseObject)
   return (
     <>
       <Header />

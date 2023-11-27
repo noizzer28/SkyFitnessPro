@@ -6,17 +6,42 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 export const Workout = () => {
+  // Здесь будет два useparams, один с id, второй с courses например, предполагаю что ссылка должна выглядеть как
+  // workout/:course/:id
+
   const { id } = useParams()
   const { courses } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
-  const [progressValue, setProgressValue] = useState([
-    { id: 1, userInput: 0, percentProgress: 0, totalValue: 10 },
-    { id: 2, userInput: 0, percentProgress: 0, totalValue: 10 },
-    { id: 3, userInput: 0, percentProgress: 0, totalValue: 5 },
-  ])
-  console.log(courses)
-  console.log(id)
   const [isSuccessModal, setSuccessModal] = useState(false)
+
+  //Здесть будет какой нибудь айдишник курса полученный из модалки профиля
+  const programm = courses[Number(id - 1)]
+
+  //вместо йога2 -  айди тренировки из useparams, пока хардкод
+  const workout = programm.workout.yoga2
+  console.log(workout)
+  // Данные из firebase приходят с пустыми ячейками, приходится фильтровать, иначе приходят пустые индексы
+  const exercises = workout.exercises.filter(
+    (item) => item !== null && item !== undefined && item !== '',
+  )
+  console.log(exercises)
+
+  const progressBarStyles = [
+    { base: '#EDECFF', top: '#565EEF' },
+    { base: '#FFF2E0', top: '#FF6D00' },
+    { base: '#F9EBFF', top: '#9A48F1' },
+  ]
+
+  const progressState = exercises.map((item, index) => {
+    return {
+      id: index,
+      userInput: 0,
+      percentProgress: 0,
+      totalValue: item.repeat,
+    }
+  })
+
+  const [progressValue, setProgressValue] = useState(progressState)
 
   const toggleModal = () => {
     setModal((prevValue) => (prevValue = !prevValue))
@@ -51,6 +76,18 @@ export const Workout = () => {
       ),
     )
   }
+  //В документе представлены прямые ссылки на ютуб, которые не будут работать без преобразования
+  function convertYouTubeLink(link) {
+    const regex =
+      /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?feature=player_embedded&v=|watch\?v=))([^"&?\/\s]{11})/
+    const match = link.match(regex)
+    if (match && match[1]) {
+      const embedLink = `https://www.youtube.com/embed/${match[1]}`
+      return embedLink
+    } else {
+      return link
+    }
+  }
 
   return (
     <div>
@@ -59,53 +96,49 @@ export const Workout = () => {
           {!isSuccessModal ? (
             <S.ModalProgress onClick={(e) => e.stopPropagation()}>
               <S.ModalHeader>Мой прогресс</S.ModalHeader>
-              <S.ModalBlock>
-                <S.Modaltext>
-                  Сколько раз вы сделали наклоны вперед?
-                </S.Modaltext>
-                <S.ModalInput
-                  type="number"
-                  placeholder="Введите числовое значение"
-                  onChange={(e) => updateProgressValue(1, e.target.value)}
-                ></S.ModalInput>
-              </S.ModalBlock>
-              <S.ModalBlock>
-                <S.Modaltext>Сколько раз вы сделали наклоны назад?</S.Modaltext>
-                <S.ModalInput
-                  type="number"
-                  placeholder="Введите числовое значение"
-                  onChange={(e) => updateProgressValue(2, e.target.value)}
-                ></S.ModalInput>
-              </S.ModalBlock>
-              <S.ModalBlock>
-                <S.Modaltext>
-                  Сколько раз вы сделали поднятие ног, согнутых в коленях?
-                </S.Modaltext>
-                <S.ModalInput
-                  type="number"
-                  placeholder="Введите числовое значение"
-                  onChange={(e) => updateProgressValue(3, e.target.value)}
-                ></S.ModalInput>
-              </S.ModalBlock>
+              {exercises.map((item, index) => {
+                return (
+                  <S.ModalBlock key={index}>
+                    <S.Modaltext>
+                      Сколько раз вы сделали{' '}
+                      {item.name
+                        .replace(/\(\d+ повторений\)/, '')
+                        .trim()
+                        .toLowerCase()}
+                      ?
+                    </S.Modaltext>
+                    <S.ModalInput
+                      type="number"
+                      placeholder="Введите числовое значение"
+                      onChange={(e) =>
+                        updateProgressValue(index, e.target.value)
+                      }
+                    ></S.ModalInput>
+                  </S.ModalBlock>
+                )
+              })}
               <S.ModalButton onClick={handleProgress}>Отправить</S.ModalButton>
             </S.ModalProgress>
           ) : (
-            <ModalSuccess text={'Ваш прогресс засчитан!'} />
+            <ModalSuccess
+              text={'Ваш прогресс засчитан!'}
+              setSuccessWindow={toggleModal}
+            />
           )}
         </S.ModalBackground>
       )}
 
       <Header></Header>
       <S.Center>
-        <S.CenterHeader>Йога</S.CenterHeader>
+        <S.CenterHeader>{programm.name}</S.CenterHeader>
         <S.BreadCrumps>
-          <S.BreadCrumpsItem>Красота и здоровье</S.BreadCrumpsItem>
+          <S.BreadCrumpsItem>{workout.name}</S.BreadCrumpsItem>
         </S.BreadCrumps>
         <S.Video>
           <iframe
             width="1160"
             height="639"
-            src="https://www.youtube.com/embed/v-xTLFDhoD0"
+            src={convertYouTubeLink(workout.url)}
             title="Красота и здоровье / Йога на каждый день / 2 день / Алексей Казубский"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
@@ -115,54 +148,52 @@ export const Workout = () => {
           <S.Exercises>
             <S.ExercisesHeader>Упражнения</S.ExercisesHeader>
             <S.ExercisesList>
-              <S.ExercisesListItem>
-                Наклон вперед (10 повторений)
-              </S.ExercisesListItem>
-              <S.ExercisesListItem>
-                Наклон назад (10 повторений)
-              </S.ExercisesListItem>
-              <S.ExercisesListItem>
-                Поднятие ног, согнутых в коленях (5 повторений)
-              </S.ExercisesListItem>
+              {exercises.map((item, index) => {
+                return (
+                  <S.ExercisesListItem key={index}>
+                    {item.name}
+                  </S.ExercisesListItem>
+                )
+              })}
             </S.ExercisesList>
             <S.ProgressButton onClick={toggleModal}>
               Заполнить свой прогресс
             </S.ProgressButton>
           </S.Exercises>
           <S.Progress>
-            <S.ProgressHeader>Мой прогресс по тренировке 2:</S.ProgressHeader>
+            <S.ProgressHeader>Мой прогресс по тренировке:</S.ProgressHeader>
             <S.ProgressCenter>
-              <S.ProgressFlex>
-                <S.ProgressText>Наклоны вперед</S.ProgressText>
-                <S.ProgressBarOne>
-                  <S.ProgressBarTopOne width={progressValue[0].percentProgress}>
-                    {progressValue[0].percentProgress > 20 &&
-                      `${progressValue[0].percentProgress}%`}
-                  </S.ProgressBarTopOne>
-                </S.ProgressBarOne>
-              </S.ProgressFlex>
-              <S.ProgressFlex>
-                <S.ProgressText>Наклоны назад</S.ProgressText>
-                <S.ProgressBarTwo>
-                  <S.ProgressBarTopTwo width={progressValue[1].percentProgress}>
-                    {progressValue[1].percentProgress > 20 &&
-                      `${progressValue[1].percentProgress}%`}
-                  </S.ProgressBarTopTwo>
-                </S.ProgressBarTwo>
-              </S.ProgressFlex>
-              <S.ProgressFlex>
-                <S.ProgressText>
-                  Поднятие ног, согнутых в коленях
-                </S.ProgressText>
-                <S.ProgressBarThree>
-                  <S.ProgressBarTopThree
-                    width={progressValue[2].percentProgress}
-                  >
-                    {progressValue[2].percentProgress > 20 &&
-                      `${progressValue[2].percentProgress}%`}
-                  </S.ProgressBarTopThree>
-                </S.ProgressBarThree>
-              </S.ProgressFlex>
+              {exercises.map((item, index) => {
+                const { base, top } =
+                  progressBarStyles[index % progressBarStyles.length]
+                return (
+                  <S.ProgressFlex key={index}>
+                    <S.ProgressText>
+                      {item.name.replace(/\(\d+ повторений\)/, '').trim()}
+                    </S.ProgressText>
+                    <S.ProgressBar
+                      style={{ backgroundColor: base, borderColor: top }}
+                    >
+                      <S.ProgressBarTop
+                        style={{ backgroundColor: top }}
+                        width={progressValue[index].percentProgress}
+                      >
+                        {progressValue[index].percentProgress > 20 ? (
+                          <S.ProgressPercentage>
+                            {`${progressValue[index].percentProgress}%`}
+                          </S.ProgressPercentage>
+                        ) : (
+                          <S.ProgressPercentage
+                            style={{ right: '-55px', color: '#3f007d' }}
+                          >
+                            {`${progressValue[index].percentProgress}%`}
+                          </S.ProgressPercentage>
+                        )}
+                      </S.ProgressBarTop>
+                    </S.ProgressBar>
+                  </S.ProgressFlex>
+                )
+              })}
             </S.ProgressCenter>
           </S.Progress>
         </S.CenterBottom>

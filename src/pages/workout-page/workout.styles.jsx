@@ -86,18 +86,7 @@ export const ProgressBar = styled.div`
   border: 2px solid #565eef;
   background: #edecff;
   overflow: hidden;
-`
-export const ProgressBarOne = styled(ProgressBar)`
   border: 2px solid #565eef;
-  background: #edecff;
-`
-export const ProgressBarTwo = styled(ProgressBar)`
-  border: 2px solid var(--orange-90);
-  background: var(--orange-10);
-`
-export const ProgressBarThree = styled(ProgressBar)`
-  border: 2px solid var(--palette-purple-80);
-  background: var(--violet-10);
 `
 export const ProgressBarTop = styled.div`
   height: 36px;
@@ -105,23 +94,17 @@ export const ProgressBarTop = styled.div`
   font-size: 24px;
   line-height: 32px;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   padding-right: 10px;
+  background-color: #565eef;
+  width: ${(props) => props.width || '0'}%;
+  position: relative;
+`
+export const ProgressPercentage = styled.div`
+  position: absolute;
+  right: 10px;
 `
 
-export const ProgressBarTopOne = styled(ProgressBarTop)`
-  width: ${(props) => props.width || '0'}%;
-  background-color: #565eef;
-`
-export const ProgressBarTopTwo = styled(ProgressBarTop)`
-  width: ${(props) => props.width || '0'}%;
-  background-color: #ff6d00;
-`
-export const ProgressBarTopThree = styled(ProgressBarTop)`
-  width: ${(props) => props.width || '0'}%;
-  background-color: #9a48f1;
-`
 export const ModalBackground = styled.div`
   position: fixed;
   width: 100%;
