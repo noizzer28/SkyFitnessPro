@@ -8,9 +8,9 @@ const useDropdownClose = (ref, handler) => {
       }
       handler(event)
     }
-    document.addEventListener('mouseleave', listener)
+    document.addEventListener('mouseout', listener)
     return () => {
-      document.removeEventListener('mouseleave', listener)
+      document.removeEventListener('mouseout', listener)
     }
   }, [ref, handler])
 }

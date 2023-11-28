@@ -21,12 +21,12 @@ export const Header = () => {
   const node = useRef()
   useDropdownClose(node, () => {
     if (isProfileMenu) {
-      setProfileMenu((prev) => !prev)
+      setProfileMenu()
     }
   })
 
   return (
-    <S.Header>
+    <S.Header ref={node}>
       <S.HeaderLogo onClick={() => navigate('/')}>
         <svg
           width="40"
@@ -116,7 +116,7 @@ export const Header = () => {
               />
             </svg>
           </S.HeaderButton>
-          <S.Dropdown>
+          <S.Dropdown ref={node}>
             <S.DropdownMenu open={isProfileMenu}>
               <Link to={`/profile`}>
                 <S.DropdownMenuItem
