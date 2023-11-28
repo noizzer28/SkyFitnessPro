@@ -121,14 +121,19 @@ export const FooterButton = styled(ButtonPurple)`
 `
 export const FooterImg = styled.img``
 
-export const ModalBackground = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.55);
+export const ModalSuccessHeader = styled.h2`
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  margin-top: 41px;
+`
+export const ModalSuccessPicture = styled.div`
+  max-width: 200px;
+  height: 254px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
+`
+export const ModalSuccessImg = styled.img`
+  width: 100%;
+  height: auto;
+  justify-self: flex-end;
 `

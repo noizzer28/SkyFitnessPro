@@ -1,7 +1,10 @@
 import { Header } from '../../components/header/header'
 import * as S from './workout.styles'
 import { useState } from 'react'
-import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
+import {
+  ModalWindow,
+  ModalSuccess,
+} from '../../components/ModalWindow/ModalWindow'
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
@@ -30,12 +33,12 @@ export const WorkoutBlock = ({ id }) => {
 
   //вместо йога2 -  айди тренировки из useparams, пока хардкод
   const workout = programm.workout.yoga2
-  console.log(workout)
+  //   console.log(workout)
   // Данные из firebase приходят с пустыми ячейками, приходится фильтровать, иначе приходят пустые индексы
   const exercises = workout.exercises.filter(
     (item) => item !== null && item !== undefined && item !== '',
   )
-  console.log(exercises)
+  //   console.log(exercises)
 
   const progressBarStyles = [
     { base: '#EDECFF', top: '#565EEF' },
@@ -131,9 +134,9 @@ export const WorkoutBlock = ({ id }) => {
               <S.ModalButton onClick={handleProgress}>Отправить</S.ModalButton>
             </S.ModalProgress>
           ) : (
-            <ModalSuccess
-              text={'Ваш прогресс засчитан!'}
+            <ModalWindow
               setSuccessWindow={toggleModal}
+              childComponent={<ModalSuccess text={'Ваш прогресс засчитан!'} />}
             />
           )}
         </S.ModalBackground>

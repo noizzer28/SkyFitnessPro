@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ModalSuccess } from '../../components/ModalSuccess/ModalSuccess'
+import {
+  ModalWindow,
+  ModalSuccess,
+} from '../../components/ModalWindow/ModalWindow'
 import { Header } from '../../components/header/header'
 import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
@@ -77,15 +80,11 @@ const CourseBlock = ({ course, idImg }) => {
         <S.FooterImg src="/img/handset.png" alt="handset" />
       </S.Footer>
 
-      {isSuccessWindow ? (
-        <S.ModalBackground>
-          <ModalSuccess
-            setSuccessWindow={setSuccessWindow}
-            text={'Вы успешно записались!'}
-          />
-        </S.ModalBackground>
-      ) : (
-        ''
+      {isSuccessWindow && (
+        <ModalWindow
+          setSuccessWindow={setSuccessWindow}
+          childComponent={<ModalSuccess text={'Вы успешно записались!'} />}
+        />
       )}
     </>
   )
