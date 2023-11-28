@@ -95,7 +95,7 @@ export const DarkBG = styled.div`
   top: 0px;
   width: 100%;
   min-height: 100vh;
-  background-color: #271a58;
+  background-color: var(--palette-purple-100);
   overflow: hidden;
 `
 const moveY = keyframes`

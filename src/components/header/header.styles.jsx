@@ -41,7 +41,6 @@ export const HeaderName = styled.p`
 export const HeaderButton = styled.div`
   position: relative;
 `
-
 export const EnterButton = styled(ButtonPurple)`
   width: 77px;
   height: 36px;
@@ -59,14 +58,15 @@ export const Dropdown = styled.nav`
 `
 export const DropdownMenu = styled.ul`
   position: relative;
+  padding: 0 30px 20px;
+  margin-top: 30px;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   width: 200px;
-  right: -50px;
+  right: -80px;
   top: 80px;
   z-index: 3;
-
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -75,10 +75,10 @@ export const DropdownMenu = styled.ul`
   ${(props) =>
     props.open &&
     `
-     opacity: 1;
+	   opacity: 1;
       visibility: visible;
       transform: translateY(0px);
-    `}
+    `};
 `
 export const DropdownMenuItem = styled.li`
   padding-bottom: 10px;

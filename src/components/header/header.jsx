@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { removeUser } from 'store/slices/userSlice'
 import { useAuth } from 'hooks/use-auth'
-import * as S from './header.styles'
 import useDropdownClose from 'hooks/use-dropdown-close'
+import * as S from './header.styles'
 
 export const Header = () => {
   const dispatch = useDispatch()
