@@ -54,20 +54,33 @@ export const EnterButton = styled(ButtonPurple)`
     background: #3b29a1;
   }
 `
-export const Dropdown = styled.div`
-  position: relative;
-`
-export const DropdownMenu = styled.div`
+export const Dropdown = styled.nav`
   position: absolute;
-  width: 200px;
-  right: 0px;
-  top: 50px;
+`
+export const DropdownMenu = styled.ul`
+  position: relative;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  width: 200px;
+  right: -50px;
+  top: 80px;
   z-index: 3;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: 0.5s;
+
+  ${(props) =>
+    props.open &&
+    `
+     opacity: 1;
+      visibility: visible;
+      transform: translateY(0px);
+    `}
 `
-export const DropdownMenuItem = styled.p`
+export const DropdownMenuItem = styled.li`
   padding-bottom: 10px;
   &:hover {
     text-decoration: underline;

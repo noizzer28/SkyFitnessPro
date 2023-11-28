@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeUser } from 'store/slices/userSlice'
 import { useAuth } from 'hooks/use-auth'
 import * as S from './header.styles'
+import useDropdownClose from 'hooks/use-dropdown-close'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -17,8 +18,15 @@ export const Header = () => {
     colorTextBlack = false
   }
 
+  const node = useRef()
+  useDropdownClose(node, () => {
+    if (isProfileMenu) {
+      setProfileMenu()
+    }
+  })
+
   return (
-    <S.Header>
+    <S.Header ref={node}>
       <S.HeaderLogo onClick={() => navigate('/')}>
         <svg
           width="40"
@@ -92,51 +100,49 @@ export const Header = () => {
           <S.HeaderName style={{ color: colorTextBlack ? '' : '#FFF' }}>
             {email}
           </S.HeaderName>
-          <S.Dropdown>
-            <S.HeaderButton className="_btn">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="9"
-                viewBox="0 0 14 9"
-                fill="none"
-                style={isProfileMenu ? { transform: 'scaleY(-1)' } : {}}
-              >
-                <path
-                  d="M12.3553 1.03308L6.67773 6.7107L1.00012 1.03308"
-                  stroke={colorTextBlack ? '#000' : '#FFF'}
-                  strokeWidth="2"
-                />
-              </svg>
-            </S.HeaderButton>
-            {isProfileMenu && (
-              <S.DropdownMenu>
-                <Link to={`/profile`}>
-                  <S.DropdownMenuItem
-                    style={{ color: colorTextBlack ? '' : '#FFF' }}
-                  >
-                    Мой профиль
-                  </S.DropdownMenuItem>
-                </Link>
-                <Link to={`/workout/1`}>
-                  <S.DropdownMenuItem
-                    style={{ color: colorTextBlack ? '' : '#FFF' }}
-                  >
-                    Тренировки
-                  </S.DropdownMenuItem>
-                </Link>
+          <S.HeaderButton className="_btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="9"
+              viewBox="0 0 14 9"
+              fill="none"
+              style={isProfileMenu ? { transform: 'scaleY(-1)' } : {}}
+            >
+              <path
+                d="M12.3553 1.03308L6.67773 6.7107L1.00012 1.03308"
+                stroke={colorTextBlack ? '#000' : '#FFF'}
+                strokeWidth="2"
+              />
+            </svg>
+          </S.HeaderButton>
+          <S.Dropdown ref={node}>
+            <S.DropdownMenu open={isProfileMenu}>
+              <Link to={`/profile`}>
                 <S.DropdownMenuItem
-                  onClick={() => {
-                    navigate('/')
-                    localStorage.removeItem('userSkyFitnesPro')
-                    dispatch(removeUser())
-                  }}
                   style={{ color: colorTextBlack ? '' : '#FFF' }}
                 >
-                  Выйти
+                  Мой профиль
                 </S.DropdownMenuItem>
-              </S.DropdownMenu>
-            )}
+              </Link>
+              <Link to={`/workout/1`}>
+                <S.DropdownMenuItem
+                  style={{ color: colorTextBlack ? '' : '#FFF' }}
+                >
+                  Тренировки
+                </S.DropdownMenuItem>
+              </Link>
+              <S.DropdownMenuItem
+                onClick={() => {
+                  navigate('/')
+                  localStorage.removeItem('userSkyFitnesPro')
+                  dispatch(removeUser())
+                }}
+                style={{ color: colorTextBlack ? '' : '#FFF' }}
+              >
+                Выйти
+              </S.DropdownMenuItem>
+            </S.DropdownMenu>
           </S.Dropdown>
         </S.HeaderFlex>
       ) : (
