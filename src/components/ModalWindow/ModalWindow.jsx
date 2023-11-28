@@ -1,6 +1,6 @@
 import * as S from './ModalWindow.styles'
 
-export const ModalWindow = ({ setSuccessWindow, childComponent }) => {
+export const ModalWindow = ({ setSuccessWindow, idCourse, childComponent }) => {
   const handleChangeOpen = () => {
     setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
   }

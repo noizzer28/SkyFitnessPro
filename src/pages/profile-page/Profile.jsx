@@ -120,7 +120,12 @@ export const ProfileBlock = ({ courses }) => {
   )
 }
 
-export const WorkoutSelectionWindow = () => {
+export const WorkoutSelectionWindow = ({ idCourse }) => {
+  const { courses } = useSelector((state) => state.courses)
+  //   const { userCourses } = useSelector((state) => state.user)
+
+  // это id выбранного курса
+  console.log(idCourse)
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>

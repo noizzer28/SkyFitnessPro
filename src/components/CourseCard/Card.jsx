@@ -9,6 +9,7 @@ export const Card = ({ id, name, position, typeMain }) => {
   const toggleModalWindow = () => {
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
+  //   console.log(id)
   return (
     <S.Card style={{ transform: typeMain ? '' : 'none' }}>
       <S.CardImg src={`/img/cardBG_${position}.png`}></S.CardImg>
@@ -26,7 +27,7 @@ export const Card = ({ id, name, position, typeMain }) => {
             <>
               <ModalWindow
                 setSuccessWindow={toggleModalWindow}
-                childComponent={<WorkoutSelectionWindow />}
+                childComponent={<WorkoutSelectionWindow idCourse={id} />}
               />
             </>
           )}
