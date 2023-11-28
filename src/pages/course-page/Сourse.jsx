@@ -29,7 +29,7 @@ export const Сourse = () => {
 // формируем блок курса
 const CourseBlock = ({ course, idImg }) => {
   const [isSuccessWindow, setSuccessWindow] = useState(false)
-  const toggleModeWindow = () => {
+  const toggleModalWindow = () => {
     setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
   }
 
@@ -73,7 +73,7 @@ const CourseBlock = ({ course, idImg }) => {
             выбором направления и тренера, с которым тренировки принесут
             здоровье и радость!
           </S.FooterText>
-          <S.FooterButton onClick={toggleModeWindow}>
+          <S.FooterButton onClick={toggleModalWindow}>
             Записаться на тренировку
           </S.FooterButton>
         </S.FooterLeft>

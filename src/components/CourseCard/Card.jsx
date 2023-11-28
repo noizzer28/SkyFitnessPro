@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
-import * as S from './Card.styles'
 import { useState } from 'react'
+import { ModalWindow } from 'components/ModalWindow/ModalWindow'
+import { WorkoutSelectionWindow } from 'pages/profile-page/Profile'
+import * as S from './Card.styles'
 
 export const Card = ({ id, name, position, typeMain }) => {
-  const [chooseWorkout, setChooseWorkout] = useState(false)
-
+  const [isOpenModalWindow, setOpenModalWindow] = useState(false)
+  const toggleModalWindow = () => {
+    setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
+  }
   return (
     <S.Card style={{ transform: typeMain ? '' : 'none' }}>
       <S.CardImg src={`/img/cardBG_${position}.png`}></S.CardImg>
@@ -15,21 +19,16 @@ export const Card = ({ id, name, position, typeMain }) => {
       ) : (
         <>
           <S.CardLink style={{ cursor: 'auto' }}>{name}</S.CardLink>
-          {/* <Link to={`/workout/1`}> */}
-
-          <S.RedirectButton>Перейти →</S.RedirectButton>
-          {/* </Link> */}
-          {chooseWorkout && (
-            <S.RedirectButton>Перейти →</S.RedirectButton>
-            // <S.ModalBackground>
-            //   {/* <ModalProfileChange
-            //     toggleOpen={setPasswordChange}
-            //     text={'Новый пароль:'}
-            //   >
-            //     <S.inputChange placeholder="Пароль"></S.inputChange>
-            //     <S.inputChange placeholder="Повторите пароль"></S.inputChange>
-            //   </ModalProfileChange> */}
-            // </S.ModalBackground>
+          <S.RedirectButton onClick={toggleModalWindow}>
+            Перейти →
+          </S.RedirectButton>
+          {isOpenModalWindow && (
+            <>
+              <ModalWindow
+                setSuccessWindow={toggleModalWindow}
+                childComponent={<WorkoutSelectionWindow />}
+              />
+            </>
           )}
         </>
       )}

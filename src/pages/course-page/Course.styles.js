@@ -120,20 +120,3 @@ export const FooterButton = styled(ButtonPurple)`
   width: 275px;
 `
 export const FooterImg = styled.img``
-
-export const ModalSuccessHeader = styled.h2`
-  font-size: 40px;
-  line-height: 48px;
-  text-align: center;
-  margin-top: 41px;
-`
-export const ModalSuccessPicture = styled.div`
-  max-width: 200px;
-  height: 254px;
-  display: flex;
-`
-export const ModalSuccessImg = styled.img`
-  width: 100%;
-  height: auto;
-  justify-self: flex-end;
-`

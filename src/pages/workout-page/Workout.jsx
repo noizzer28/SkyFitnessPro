@@ -1,5 +1,4 @@
 import { Header } from '../../components/header/header'
-import * as S from './workout.styles'
 import { useState } from 'react'
 import {
   ModalWindow,
@@ -8,6 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
+import * as S from './workout.styles'
 
 export const Workout = () => {
   const { id } = useParams()

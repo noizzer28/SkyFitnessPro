@@ -75,3 +75,47 @@ export const inputChange = styled.input`
   background: transparent;
   font-size: 18px;
 `
+export const ModalTitle = styled.h3`
+  color: #000;
+  font-size: 32px;
+  line-height: 125%;
+  margin-bottom: 40px;
+`
+
+export const ModalList = styled.ul`
+  width: 278px;
+`
+export const ModalListItem = styled.li`
+  position: relative;
+
+  width: 100%;
+  height: 76px;
+  padding: 11px;
+  border-radius: 26px;
+  border: 1px solid #000;
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+`
+export const TrainingItem = styled.h5`
+  color: #000;
+  text-align: center;
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: -0.05px;
+  margin-bottom: 6px;
+`
+export const TrainingName = styled.p`
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  line-height: 112.5%;
+  letter-spacing: 0.016px;
+`
+export const TrainingDone = styled.div`
+  width: 27px;
+  height: 25px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+`
