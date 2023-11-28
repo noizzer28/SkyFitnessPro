@@ -6,7 +6,7 @@ export const Card = ({ id, name, position, typeMain }) => {
     <S.Card style={{ transform: typeMain ? '' : 'none' }}>
       <S.CardImg src={`/img/cardBG_${position}.png`}></S.CardImg>
       {typeMain ? (
-        <Link to={`/course/${id}`}>
+        <Link to={`/course/${id}${position}`}>
           <S.CardLink>{name}</S.CardLink>
         </Link>
       ) : (

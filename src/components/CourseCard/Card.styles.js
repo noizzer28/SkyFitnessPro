@@ -17,8 +17,6 @@ export const Card = styled.li`
 `
 export const CardImg = styled.img``
 export const CardLink = styled.div`
-  cursor: pointer;
-  display: block;
   width: 100%;
   height: 100%;
   padding: 30px;

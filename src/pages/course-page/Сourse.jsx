@@ -7,22 +7,24 @@ import { Loader } from '../../App.styles'
 import * as S from './Course.styles'
 
 export const Сourse = () => {
-  const { id } = useParams()
   const { coursesObj } = useSelector((state) => state.courses)
+  const { id } = useParams()
+  const idCourse = id.slice(0, -1)
+  const idImg = id.slice(-1)
   return (
     <>
       <Header />
       {!coursesObj ? (
         <Loader></Loader>
       ) : (
-        <CourseBlock course={coursesObj[id]}></CourseBlock>
+        <CourseBlock course={coursesObj[idCourse]} idImg={idImg}></CourseBlock>
       )}
     </>
   )
 }
 
 // формируем блок курса
-const CourseBlock = ({ course }) => {
+const CourseBlock = ({ course, idImg }) => {
   const [isSuccessWindow, setSuccessWindow] = useState(false)
   const toggleModeWindow = () => {
     setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
@@ -31,7 +33,7 @@ const CourseBlock = ({ course }) => {
   return (
     <>
       <S.CourseTop>
-        <S.CourseImg src="/img/yoga.png" alt="yoga" />
+        <S.CourseImg src={`/img/cardBG_${idImg}.png`} />
         <S.CourseTitle>{course.name}</S.CourseTitle>
       </S.CourseTop>
       <S.CourseAdvantages>

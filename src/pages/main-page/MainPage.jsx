@@ -6,6 +6,18 @@ import { useSelector } from 'react-redux'
 import { getUserProfile } from 'api'
 import * as S from './MainPage.styles'
 
+function counter(i) {
+  if (i <= 5) {
+    return i
+  } else {
+    if (i % 5 === 0) {
+      return 5
+    } else {
+      return i % 5
+    }
+  }
+}
+
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
   // формируем список курсов
@@ -13,7 +25,7 @@ export const Main = ({ error }) => {
     <Card
       key={courseCard._id}
       name={courseCard.name}
-      position={index + 1}
+      position={counter(index + 1)}
       id={courseCard._id}
       typeMain={true}
     ></Card>
@@ -27,7 +39,7 @@ export const Main = ({ error }) => {
 
   useEffect(() => {
     getUserProfile()
-    console.log('worked')
+    //  console.log('worked')
   }, [])
 
   return (
@@ -55,7 +67,9 @@ export const Main = ({ error }) => {
           {!courses && !error ? (
             <Loader></Loader>
           ) : (
-            <S.MainList>{mapCoursesList}</S.MainList>
+            <>
+              <S.MainList>{mapCoursesList}</S.MainList>
+            </>
           )}
           {offSet && (
             <S.MainFooter>

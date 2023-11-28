@@ -7,11 +7,21 @@ export const CourseTop = styled.div`
   height: 310px;
   overflow: hidden;
   border-radius: 30px;
+  background: rgba(205, 205, 205, 0.1);
+  backdrop-filter: blur(14.51865291595459px);
 `
 
 export const CourseImg = styled.img`
-  width: 1160px;
+  position: absolute;
+  top: -140px;
+  right: 90px;
+  width: 360px;
+  height: 480px;
+  object-fit: cover;
+  margin: 0;
+  background: rgba(255, 254, 254, 0);
 `
+
 export const CourseTitle = styled.h1`
   position: absolute;
   color: #000;
