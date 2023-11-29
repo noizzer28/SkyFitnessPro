@@ -22,7 +22,7 @@ export const AppRoutes = ({ err }) => {
         }
       />
       <Route
-        path="workout/:id"
+        path="workout/:course/:id"
         element={
           <ProtectedRoute>
             <Workout />
