@@ -126,8 +126,8 @@ export const WorkoutSelectionWindow = ({ idCourse }) => {
   const workoutListObj = coursesObj[idCourse].workout
 
   const workoutListArr = objArrList(workoutListObj)
-  //el.id - это айдишник тренировки, передается на страницу воркаута ниже в рендере
-  // idCourse - это айдишник курса, если нужен для воркаута, вставить в Link
+  //el.id - это айдишник тренировки
+  // idCourse - это айдишник курса
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>
