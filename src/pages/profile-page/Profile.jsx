@@ -6,7 +6,9 @@ import { Loader } from '../../App.styles'
 import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
 import { setUserCourses } from 'store/slices/userSlice'
+
 import * as S from './Profile.styles'
+import { Link } from 'react-router-dom'
 
 export const Profile = () => {
   const dispatch = useDispatch()
@@ -121,16 +123,38 @@ export const ProfileBlock = ({ courses }) => {
 }
 
 export const WorkoutSelectionWindow = ({ idCourse }) => {
-  const { courses } = useSelector((state) => state.courses)
-  //   const { userCourses } = useSelector((state) => state.user)
+  const { coursesObj } = useSelector((state) => state.courses)
+  const workoutListObj = coursesObj[idCourse].workout
 
-  // это id выбранного курса
-  console.log(idCourse)
+  // функция преобразования объекта в массив БЕЗ ключа
+
+  const objArrList = (data) => {
+    let arrList = []
+    Object.entries(data).forEach(([key, value]) => {
+      arrList.push(value)
+    })
+    return arrList
+  }
+
+  const workoutListArr = objArrList(workoutListObj)
+
+//el.id - это айдишник тренировки, передается на страницу воркаута ниже в рендере
+// idCourse - это айдишник курса, если нужен для воркаута, вставить в Link
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>
       <S.ModalList>
-        <S.ModalListItem>
+        {workoutListArr.map((el, index) => {
+          return (
+            <S.ModalListItem key={index}>
+              <Link to={`/workout/${el.id}`}>
+                <S.TrainingItem>{el.name}</S.TrainingItem>
+                <S.TrainingDone></S.TrainingDone>
+              </Link>
+            </S.ModalListItem>
+          )
+        })}
+        {/* <S.ModalListItem>
           <S.TrainingItem>Утренняя практика</S.TrainingItem>
           <S.TrainingName>Йога на каждый день / 1 день</S.TrainingName>
           <S.TrainingDone></S.TrainingDone>
@@ -142,8 +166,8 @@ export const WorkoutSelectionWindow = ({ idCourse }) => {
         </S.ModalListItem>
         <S.ModalListItem>
           <S.TrainingItem>Асаны стоя</S.TrainingItem>
-          <S.TrainingName>Йога на каждый день / 3 день</S.TrainingName>
-          {/* <S.TrainingDone>
+          <S.TrainingName>Йога на каждый день / 3 день</S.TrainingName> */}
+        {/* <S.TrainingDone>
             <svg
               width="28"
               height="26"
@@ -155,7 +179,7 @@ export const WorkoutSelectionWindow = ({ idCourse }) => {
               <path d="M6 9.81034L11.775 15.5L27 0.5" stroke="#06B16E" />
             </svg>{' '}
           </S.TrainingDone> */}
-        </S.ModalListItem>
+        {/* </S.ModalListItem> */}
       </S.ModalList>
     </>
   )

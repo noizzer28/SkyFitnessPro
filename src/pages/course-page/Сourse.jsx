@@ -14,6 +14,8 @@ export const Сourse = () => {
   const { id } = useParams()
   const idCourse = id.slice(0, -1)
   const idImg = id.slice(-1)
+  console.log(coursesObj)
+
   return (
     <>
       <Header />
@@ -25,7 +27,6 @@ export const Сourse = () => {
     </>
   )
 }
-
 // формируем блок курса
 const CourseBlock = ({ course, idImg }) => {
   const [isSuccessWindow, setSuccessWindow] = useState(false)
@@ -58,7 +59,6 @@ const CourseBlock = ({ course, idImg }) => {
         <S.CourseHeaders>Направления:</S.CourseHeaders>
         <S.ListDirections>
           {course.directions
-            .slice(1, -1)
             .split(', ')
             .map((el) => {
               return <S.ItemDirections key={el}>{el}</S.ItemDirections>
