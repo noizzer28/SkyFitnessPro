@@ -10,35 +10,36 @@ import { useParams } from 'react-router-dom'
 import * as S from './workout.styles'
 
 export const Workout = () => {
+  const { course } = useParams()
   const { id } = useParams()
+
   const { coursesObj } = useSelector((state) => state.courses)
 
   return (
     <>
       <Header />
-      {!coursesObj ? <Loader></Loader> : <WorkoutBlock id={id}></WorkoutBlock>}
+      {!coursesObj ? (
+        <Loader></Loader>
+      ) : (
+        <WorkoutBlock idCourse={course} idWorkout={id}></WorkoutBlock>
+      )}
     </>
   )
 }
 
-export const WorkoutBlock = ({ id }) => {
-  // Здесь будет два useparams, один с id, второй с courses например, предполагаю что ссылка должна выглядеть как
-  // workout/:course/:id
-
-  const { courses } = useSelector((state) => state.courses)
+export const WorkoutBlock = ({ idWorkout, idCourse }) => {
+  const { coursesObj } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
-  //Здесть будет какой нибудь айдишник курса полученный из модалки профиля
-  const programm = courses[Number(id - 1)]
 
-  //вместо йога2 -  айди тренировки из useparams, пока хардкод
-  const workout = programm.workout.yoga2
-  //   console.log(workout)
+  const programm = coursesObj[idCourse]
+  const workout = programm.workout[idWorkout]
+
   // Данные из firebase приходят с пустыми ячейками, приходится фильтровать, иначе приходят пустые индексы
   const exercises = workout.exercises.filter(
     (item) => item !== null && item !== undefined && item !== '',
   )
-  //   console.log(exercises)
+  console.log(exercises)
 
   const progressBarStyles = [
     { base: '#EDECFF', top: '#565EEF' },
