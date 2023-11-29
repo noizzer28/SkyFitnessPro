@@ -4,7 +4,7 @@ import {
   ModalWindow,
   ModalSuccess,
 } from '../../components/ModalWindow/ModalWindow'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
 import * as S from './workout.styles'
@@ -31,15 +31,18 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
-
+  console.log('all', coursesObj)
   const programm = coursesObj[idCourse]
+  console.log('programm', programm)
   const workout = programm.workout[idWorkout]
+  console.log('workout', workout)
 
-  // Данные из firebase приходят с пустыми ячейками, приходится фильтровать, иначе приходят пустые индексы
-  const exercises = workout.exercises.filter(
-    (item) => item !== null && item !== undefined && item !== '',
-  )
-  console.log(exercises)
+  let exercises = []
+  if (!!workout.exercises) {
+    exercises = workout.exercises.filter(
+      (item) => item !== null && item !== undefined && item !== '',
+    )
+  }
 
   const progressBarStyles = [
     { base: '#EDECFF', top: '#565EEF' },
@@ -91,7 +94,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
       ),
     )
   }
-  //В документе представлены прямые ссылки на ютуб, которые не будут работать без преобразования
+
   function convertYouTubeLink(link) {
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?feature=player_embedded&v=|watch\?v=))([^"&?\/\s]{11})/
@@ -158,59 +161,61 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
             allowFullScreen
           ></iframe>
         </S.Video>
-        <S.CenterBottom>
-          <S.Exercises>
-            <S.ExercisesHeader>Упражнения</S.ExercisesHeader>
-            <S.ExercisesList>
-              {exercises.map((item, index) => {
-                return (
-                  <S.ExercisesListItem key={index}>
-                    {item.name}
-                  </S.ExercisesListItem>
-                )
-              })}
-            </S.ExercisesList>
-            <S.ProgressButton onClick={toggleModal}>
-              Заполнить свой прогресс
-            </S.ProgressButton>
-          </S.Exercises>
-          <S.Progress>
-            <S.ProgressHeader>Мой прогресс по тренировке:</S.ProgressHeader>
-            <S.ProgressCenter>
-              {exercises.map((item, index) => {
-                const { base, top } =
-                  progressBarStyles[index % progressBarStyles.length]
-                return (
-                  <S.ProgressFlex key={index}>
-                    <S.ProgressText>
-                      {item.name.replace(/\(\d+ повторений\)/, '').trim()}
-                    </S.ProgressText>
-                    <S.ProgressBar
-                      style={{ backgroundColor: base, borderColor: top }}
-                    >
-                      <S.ProgressBarTop
-                        style={{ backgroundColor: top }}
-                        width={progressValue[index].percentProgress}
+        {exercises.length > 0 && (
+          <S.CenterBottom>
+            <S.Exercises>
+              <S.ExercisesHeader>Упражнения</S.ExercisesHeader>
+              <S.ExercisesList>
+                {exercises.map((item, index) => {
+                  return (
+                    <S.ExercisesListItem key={index}>
+                      {item.name}
+                    </S.ExercisesListItem>
+                  )
+                })}
+              </S.ExercisesList>
+              <S.ProgressButton onClick={toggleModal}>
+                Заполнить свой прогресс
+              </S.ProgressButton>
+            </S.Exercises>
+            <S.Progress>
+              <S.ProgressHeader>Мой прогресс по тренировке:</S.ProgressHeader>
+              <S.ProgressCenter>
+                {exercises.map((item, index) => {
+                  const { base, top } =
+                    progressBarStyles[index % progressBarStyles.length]
+                  return (
+                    <S.ProgressFlex key={index}>
+                      <S.ProgressText>
+                        {item.name.replace(/\(\d+ повторений\)/, '').trim()}
+                      </S.ProgressText>
+                      <S.ProgressBar
+                        style={{ backgroundColor: base, borderColor: top }}
                       >
-                        {progressValue[index].percentProgress > 20 ? (
-                          <S.ProgressPercentage>
-                            {`${progressValue[index].percentProgress}%`}
-                          </S.ProgressPercentage>
-                        ) : (
-                          <S.ProgressPercentage
-                            style={{ right: '-55px', color: '#3f007d' }}
-                          >
-                            {`${progressValue[index].percentProgress}%`}
-                          </S.ProgressPercentage>
-                        )}
-                      </S.ProgressBarTop>
-                    </S.ProgressBar>
-                  </S.ProgressFlex>
-                )
-              })}
-            </S.ProgressCenter>
-          </S.Progress>
-        </S.CenterBottom>
+                        <S.ProgressBarTop
+                          style={{ backgroundColor: top }}
+                          width={progressValue[index].percentProgress}
+                        >
+                          {progressValue[index].percentProgress > 20 ? (
+                            <S.ProgressPercentage>
+                              {`${progressValue[index].percentProgress}%`}
+                            </S.ProgressPercentage>
+                          ) : (
+                            <S.ProgressPercentage
+                              style={{ right: '-55px', color: '#3f007d' }}
+                            >
+                              {`${progressValue[index].percentProgress}%`}
+                            </S.ProgressPercentage>
+                          )}
+                        </S.ProgressBarTop>
+                      </S.ProgressBar>
+                    </S.ProgressFlex>
+                  )
+                })}
+              </S.ProgressCenter>
+            </S.Progress>
+          </S.CenterBottom>
+        )}
       </S.Center>
     </>
   )
