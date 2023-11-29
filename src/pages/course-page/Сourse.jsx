@@ -58,11 +58,20 @@ const CourseBlock = ({ course, idImg }) => {
         <S.CourseHeaders>Направления:</S.CourseHeaders>
         <S.ListDirections>
           {course.directions.split(', ').map((el) => {
-            return <S.ItemDirections key={el}>{el}</S.ItemDirections>
+            return <S.Items key={el}>{el}</S.Items>
           })}
         </S.ListDirections>
       </S.CourseDirections>
-      <S.CourseDescription>{course.description}</S.CourseDescription>
+      <S.CourseDescription>{course.description1}</S.CourseDescription>
+      <br />
+      <S.CourseDescription>{course.description2}</S.CourseDescription>
+      {course.descriptionList && (
+        <S.ListDescription>
+          {course.descriptionList.split('; ').map((el) => {
+            return <S.Items key={el}>{el}</S.Items>
+          })}
+        </S.ListDescription>
+      )}
       <S.Footer>
         <S.FooterLeft>
           <S.FooterText>
