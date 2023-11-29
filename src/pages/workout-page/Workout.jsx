@@ -135,7 +135,7 @@ export const WorkoutBlock = ({ id }) => {
             </S.ModalProgress>
           ) : (
             <ModalWindow
-              setSuccessWindow={toggleModal}
+              setOpenModalWindow={toggleModal}
               childComponent={<ModalSuccess text={'Ваш прогресс засчитан!'} />}
             />
           )}

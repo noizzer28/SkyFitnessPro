@@ -7,9 +7,9 @@ import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
 import { setUserCourses } from 'store/slices/userSlice'
 import { objArrList } from 'App'
-
-import * as S from './Profile.styles'
 import { Link } from 'react-router-dom'
+import { ModalWindow } from 'components/ModalWindow/ModalWindow'
+import * as S from './Profile.styles'
 
 export const Profile = () => {
   const dispatch = useDispatch()
@@ -70,22 +70,20 @@ export const Profile = () => {
       {laoading && !userCourses && <Loader></Loader>}
       {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
       {loginChange && (
-        <S.ModalBackground>
-          <ModalProfileChange toggleOpen={setLoginChange} text={'Новый логин:'}>
-            <S.inputChange placeholder="Логин"></S.inputChange>
-          </ModalProfileChange>
-        </S.ModalBackground>
+        <ModalWindow
+          width={366}
+          setOpenModalWindow={setLoginChange}
+          childComponent={
+            <ModalProfileChange text="Новый логин:" type="логин" />
+          }
+        />
       )}
       {passwordChange && (
-        <S.ModalBackground>
-          <ModalProfileChange
-            toggleOpen={setPasswordChange}
-            text={'Новый пароль:'}
-          >
-            <S.inputChange placeholder="Пароль"></S.inputChange>
-            <S.inputChange placeholder="Повторите пароль"></S.inputChange>
-          </ModalProfileChange>
-        </S.ModalBackground>
+        <ModalWindow
+          width={366}
+          setOpenModalWindow={setPasswordChange}
+          childComponent={<ModalProfileChange text="пароль" type="пароль" />}
+        />
       )}
     </>
   )

@@ -1,12 +1,12 @@
 import * as S from './ModalWindow.styles'
 
-export const ModalWindow = ({ setSuccessWindow, idCourse, childComponent }) => {
+export const ModalWindow = ({ setOpenModalWindow, childComponent, width }) => {
   const handleChangeOpen = () => {
-    setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
+    setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
   return (
     <S.ModalBackground>
-      <S.ModalContent>
+      <S.ModalContent style={{ width: `${width}px` }}>
         {childComponent}
         <S.ModalCloseButton onClick={handleChangeOpen}>X</S.ModalCloseButton>
       </S.ModalContent>

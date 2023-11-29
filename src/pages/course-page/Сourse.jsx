@@ -14,7 +14,6 @@ export const Сourse = () => {
   const { id } = useParams()
   const idCourse = id.slice(0, -1)
   const idImg = id.slice(-1)
-  console.log(coursesObj)
 
   return (
     <>
@@ -29,9 +28,9 @@ export const Сourse = () => {
 }
 // формируем блок курса
 const CourseBlock = ({ course, idImg }) => {
-  const [isSuccessWindow, setSuccessWindow] = useState(false)
+  const [isOpenModalWindow, setOpenModalWindow] = useState(false)
   const toggleModalWindow = () => {
-    setSuccessWindow((isSuccessWindow) => !isSuccessWindow)
+    setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
 
   return (
@@ -58,11 +57,9 @@ const CourseBlock = ({ course, idImg }) => {
       <S.CourseDirections>
         <S.CourseHeaders>Направления:</S.CourseHeaders>
         <S.ListDirections>
-          {course.directions
-            .split(', ')
-            .map((el) => {
-              return <S.ItemDirections key={el}>{el}</S.ItemDirections>
-            })}
+          {course.directions.split(', ').map((el) => {
+            return <S.ItemDirections key={el}>{el}</S.ItemDirections>
+          })}
         </S.ListDirections>
       </S.CourseDirections>
       <S.CourseDescription>{course.description}</S.CourseDescription>
@@ -80,9 +77,9 @@ const CourseBlock = ({ course, idImg }) => {
         <S.FooterImg src="/img/handset.png" alt="handset" />
       </S.Footer>
 
-      {isSuccessWindow && (
+      {isOpenModalWindow && (
         <ModalWindow
-          setSuccessWindow={setSuccessWindow}
+          setOpenModalWindow={setOpenModalWindow}
           childComponent={<ModalSuccess text={'Вы успешно записались!'} />}
         />
       )}

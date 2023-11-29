@@ -26,7 +26,7 @@ export const Card = ({ id, name, position, typeMain }) => {
           {isOpenModalWindow && (
             <>
               <ModalWindow
-                setSuccessWindow={toggleModalWindow}
+                setOpenModalWindow={toggleModalWindow}
                 childComponent={<WorkoutSelectionWindow idCourse={id} />}
               />
             </>
