@@ -86,19 +86,20 @@ export const ModalList = styled.ul`
   width: 278px;
 `
 export const ModalListItem = styled.li`
-  position: relative;
-
-  width: 100%;
-  height: 76px;
-  padding: 11px;
+  overflow: hidden;
   border-radius: 26px;
   border: 1px solid #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   &:not(:last-child) {
     margin-bottom: 12px;
   }
+`
+export const ModalListLink = styled.div`
+  position: relative;
+  width: 100%;
+  //   height: 76px;
+  padding: 11px;
+  cursor: pointer;
+  border-radius: 26px;
 `
 export const TrainingItem = styled.h5`
   color: #000;
@@ -106,19 +107,19 @@ export const TrainingItem = styled.h5`
   font-size: 20px;
   line-height: 115%;
   letter-spacing: -0.05px;
-  margin-bottom: 6px;
+  margin: 0 27px 6px;
 `
-// export const TrainingName = styled.p`
-//   color: #000;
-//   text-align: center;
-//   font-size: 16px;
-//   line-height: 112.5%;
-//   letter-spacing: 0.016px;
-// `
+export const TrainingName = styled.p`
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  line-height: 112.5%;
+  letter-spacing: 0.016px;
+`
 export const TrainingDone = styled.div`
+  position: absolute;
   width: 27px;
   height: 25px;
-  position: absolute;
   top: 12px;
   right: 12px;
 `

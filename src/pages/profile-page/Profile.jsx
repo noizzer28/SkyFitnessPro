@@ -6,6 +6,7 @@ import { Loader } from '../../App.styles'
 import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
 import { setUserCourses } from 'store/slices/userSlice'
+import { objArrList } from 'App'
 
 import * as S from './Profile.styles'
 import { Link } from 'react-router-dom'
@@ -126,20 +127,9 @@ export const WorkoutSelectionWindow = ({ idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
   const workoutListObj = coursesObj[idCourse].workout
 
-  // функция преобразования объекта в массив БЕЗ ключа
-
-  const objArrList = (data) => {
-    let arrList = []
-    Object.entries(data).forEach(([key, value]) => {
-      arrList.push(value)
-    })
-    return arrList
-  }
-
   const workoutListArr = objArrList(workoutListObj)
-
-//el.id - это айдишник тренировки, передается на страницу воркаута ниже в рендере
-// idCourse - это айдишник курса, если нужен для воркаута, вставить в Link
+  //el.id - это айдишник тренировки, передается на страницу воркаута ниже в рендере
+  // idCourse - это айдишник курса, если нужен для воркаута, вставить в Link
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>
@@ -147,39 +137,32 @@ export const WorkoutSelectionWindow = ({ idCourse }) => {
         {workoutListArr.map((el, index) => {
           return (
             <S.ModalListItem key={index}>
-              <Link to={`/workout/${el.id}`}>
-                <S.TrainingItem>{el.name}</S.TrainingItem>
-                <S.TrainingDone></S.TrainingDone>
+              <Link to={`/workout/${idCourse}/${el.id}`}>
+                <S.ModalListLink>
+                  <S.TrainingItem>{el.name}</S.TrainingItem>
+                  {/* <S.TrainingName>
+                    Йога на каждый день / {index + 1} день
+                  </S.TrainingName> */}
+                  {/* <S.TrainingDone>
+                    <svg
+                      width="28"
+                      height="26"
+                      viewBox="0 0 28 26"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="12" cy="13.5" r="11.5" stroke="#06B16E" />
+                      <path
+                        d="M6 9.81034L11.775 15.5L27 0.5"
+                        stroke="#06B16E"
+                      />
+                    </svg>{' '}
+                  </S.TrainingDone> */}
+                </S.ModalListLink>
               </Link>
             </S.ModalListItem>
           )
         })}
-        {/* <S.ModalListItem>
-          <S.TrainingItem>Утренняя практика</S.TrainingItem>
-          <S.TrainingName>Йога на каждый день / 1 день</S.TrainingName>
-          <S.TrainingDone></S.TrainingDone>
-        </S.ModalListItem>
-        <S.ModalListItem>
-          <S.TrainingItem>Красота и здоровье</S.TrainingItem>
-          <S.TrainingName>Йога на каждый день / 2 день</S.TrainingName>
-          <S.TrainingDone></S.TrainingDone>
-        </S.ModalListItem>
-        <S.ModalListItem>
-          <S.TrainingItem>Асаны стоя</S.TrainingItem>
-          <S.TrainingName>Йога на каждый день / 3 день</S.TrainingName> */}
-        {/* <S.TrainingDone>
-            <svg
-              width="28"
-              height="26"
-              viewBox="0 0 28 26"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="12" cy="13.5" r="11.5" stroke="#06B16E" />
-              <path d="M6 9.81034L11.775 15.5L27 0.5" stroke="#06B16E" />
-            </svg>{' '}
-          </S.TrainingDone> */}
-        {/* </S.ModalListItem> */}
       </S.ModalList>
     </>
   )
