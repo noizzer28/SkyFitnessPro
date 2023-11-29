@@ -71,7 +71,9 @@ export const ItemText = styled.p`
   line-height: 32px;
 `
 
-export const CourseDirections = styled.section``
+export const CourseDirections = styled.section`
+  margin-bottom: 75px;
+`
 
 export const ListDirections = styled.ul`
   margin-top: 22px;
@@ -81,7 +83,7 @@ export const ListDirections = styled.ul`
   flex-wrap: wrap;
 `
 
-export const ItemDirections = styled.li`
+export const Items = styled.li`
   list-style-type: disc;
   list-style-position: inside;
   font-size: 24px;
@@ -91,14 +93,18 @@ export const ItemDirections = styled.li`
 export const CourseDescription = styled.p`
   font-size: 24px;
   line-height: 32px;
-  margin-top: 75px;
-  margin-bottom: 75px;
+`
+export const ListDescription = styled.ul`
+margin-top: 22px;
+display: flex;
+flex-direction: column;
 `
 
 export const Footer = styled.footer`
   border-radius: 30px;
   background: #f9ebff;
   display: flex;
+  margin-top: 75px;
   margin-bottom: 95px;
 `
 
