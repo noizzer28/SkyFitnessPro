@@ -73,23 +73,21 @@ export const Profile = () => {
         <ModalWindow
           width={366}
           setOpenModalWindow={setLoginChange}
-          childComponent={
-            <ModalProfileChange text="Новый логин:" type="логин" />
-          }
+          childComponent={<ModalProfileChange type="логин" />}
         />
       )}
       {passwordChange && (
         <ModalWindow
           width={366}
           setOpenModalWindow={setPasswordChange}
-          childComponent={<ModalProfileChange text="пароль" type="пароль" />}
+          childComponent={<ModalProfileChange type="пароль" />}
         />
       )}
     </>
   )
 }
 
-export const ProfileBlock = ({ courses }) => {
+const ProfileBlock = ({ courses }) => {
   // функция преобразования объекта в массив
   const objArrList2 = (data) => {
     let arrList = []

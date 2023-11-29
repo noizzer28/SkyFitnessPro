@@ -3,9 +3,12 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updatePassword,
+  signOut,
 } from 'firebase/auth'
 
 const auth = getAuth()
+
 // авторизация пользователя
 export async function login({ email, pass }) {
   const authData = await signInWithEmailAndPassword(auth, email, pass)
@@ -16,6 +19,17 @@ export async function login({ email, pass }) {
 export async function registration({ email, pass }) {
   const regData = await createUserWithEmailAndPassword(auth, email, pass)
   return regData.user
+}
+
+// выход из системы
+export async function signOutUser() {
+  signOut(auth)
+    .then(() => {
+      console.log('вышел')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 export async function getUserProfile() {
@@ -35,14 +49,24 @@ export async function getUserProfile() {
   }
 }
 
-export async function changeLogin(newMail) {
-  updateEmail(auth.currentUser, newMail)
-    .then((response) => {
-      console.log(response)
+export function changeLogin(newMail) {
+  updateEmail(auth.currentUser, 'user@example.com')
+    .then(() => {
+      console.log('логин изменен')
     })
     .catch((error) => {
-      console.log(error)
-      console.log(auth)
+      console.log('какая то ошибка', error)
+    })
+}
+
+export function changePass(newPas) {
+  const user = auth.currentUser
+  updatePassword(user, newPas)
+    .then(() => {
+      console.log('пароль изменен')
+    })
+    .catch((error) => {
+      console.log('какая то ошибка', error)
     })
 }
 

@@ -78,7 +78,6 @@ export const ButtonPurple = styled.button`
   line-height: 24px;
   letter-spacing: -0.05px;
   cursor: pointer;
-
   &:disabled {
     background-color: #303030;
   }

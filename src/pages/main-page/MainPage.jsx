@@ -37,10 +37,10 @@ export const Main = ({ error }) => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
 
-  useEffect(() => {
-    getUserProfile()
-    //  console.log('worked')
-  }, [])
+  //   useEffect(() => {
+  //     getUserProfile()
+  //     //  console.log('worked')
+  //   }, [])
 
   return (
     <>

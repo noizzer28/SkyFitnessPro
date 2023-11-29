@@ -17,7 +17,7 @@ export const saveUserInfoInLocalStorage = (loginData) => {
 export const FormAuth = ({ title, typeLogin }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loginError, setLoginError] = useState(null)
+  const [inputError, setInputError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
@@ -25,23 +25,26 @@ export const FormAuth = ({ title, typeLogin }) => {
 
   const handleClick = async () => {
     try {
+      if (!typeLogin && pass.length < 8 && pass.length > 0) {
+        setInputError('Не менее 8 символов')
+        return
+      }
       if (!email) {
-        setLoginError('Введите email')
+        setInputError('Введите email')
         return
       }
 
       if (!pass) {
-        setLoginError('Введите пароль')
+        setInputError('Введите пароль')
         return
       }
-
       if (!typeLogin && pass !== repPass) {
-        setLoginError('пароли не совпадают')
+        setInputError('пароли не совпадают')
         return
       }
       setIsLoading(true)
 
-      setLoginError('')
+      setInputError('')
       let user = {}
       if (typeLogin) {
         user = await login({ email, pass })
@@ -60,7 +63,7 @@ export const FormAuth = ({ title, typeLogin }) => {
         navigate('/')
       }
     } catch (error) {
-      setLoginError(error.message)
+      setInputError(error.message)
     } finally {
       setIsLoading(false)
     }
@@ -157,7 +160,7 @@ export const FormAuth = ({ title, typeLogin }) => {
             />
           )}
         </S.Inputs>
-        {loginError && <S.Error>{loginError}</S.Error>}
+        {inputError && <S.Error>{inputError}</S.Error>}
         <S.Buttons>
           <S.PrimaryButton disabled={isLoading} onClick={() => handleClick()}>
             {isLoading ? 'Логинимся' : title}

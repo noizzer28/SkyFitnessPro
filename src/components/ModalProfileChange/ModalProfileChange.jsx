@@ -1,19 +1,68 @@
+import { getDatabase, ref, child, push, update, set } from 'firebase/database'
+import { changeLogin, changePass } from 'api'
+import { getAuth, sendSignInLinkToEmail } from 'firebase/auth'
+import { useState } from 'react'
 import * as S from './ModalProfileChange.styles'
 
-export const ModalProfileChange = ({
-  onSubmit,
-  //   children,
-  //   toggleOpen,
-  text,
-  type,
-}) => {
+const userIdts = 'ljkdvn4ear90f8zxvljn'
+const email = 'asmn@mail.ru'
+
+const actionCodeSettings = {
+  url: 'https://fitness-pro-ae1f4.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
+  handleCodeInApp: true,
+}
+
+const auth = getAuth()
+sendSignInLinkToEmail(auth, email, actionCodeSettings)
+  .then(() => {
+    // The link was successfully sent. Inform the user.
+    // Save the email locally so you don't need to ask the user for it again
+    // if they open the link on the same device.
+    //  window.localStorage.setItem('emailForSignIn', email);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code
+    const errorMessage = error.message
+    // ...
+  })
+
+export const ModalProfileChange = ({ type }) => {
+  const [inputError, setInputError] = useState(null)
+  const [pass, setPass] = useState('')
+  const [repPass, setRepPass] = useState('')
   function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1)
   }
 
+  const submitBtn = async () => {
+    if (pass.length < 8 && pass.length > 0) {
+      setInputError('Не менее 8 символов')
+      return
+    }
+    if (!pass) {
+      setInputError('Введите пароль')
+      return
+    }
+    if (type === 'пароль' && pass !== repPass) {
+      setInputError('Пароли не совпадают')
+      return
+    }
+    if (type === 'пароль') {
+      changePass(pass)
+    } else {
+      //   changeLogin('test2@mail.ru')
+      console.log('меняем логин')
+    }
+  }
+
+  //   getAuth()
+  //   writeUserData()
+  //   writeNewPost()
+
   return (
     <>
-      <S.ModalForm onSubmit={onSubmit}>
+      <S.ModalForm>
         <S.ModalLogo>
           <svg
             width="40"
@@ -78,12 +127,20 @@ export const ModalProfileChange = ({
           <S.LogoText>SkyFitnessPro</S.LogoText>
         </S.ModalLogo>
         <S.ModalHeader>Новый {type}:</S.ModalHeader>
-        <S.InputChange placeholder={capitalize(type)}></S.InputChange>
+        <S.InputChange
+          type="password"
+          onChange={(e) => setPass(e.target.value)}
+          placeholder={capitalize(type)}
+        ></S.InputChange>
         {type === 'пароль' && (
-          <S.InputChange placeholder={`Повторите ${type}`}></S.InputChange>
+          <S.InputChange
+            type="password"
+            placeholder={`Повторите ${type}`}
+            onChange={(e) => setRepPass(e.target.value)}
+          ></S.InputChange>
         )}
-
-        <S.SendButton>Отправить</S.SendButton>
+        <S.ModalErrorText>{inputError}</S.ModalErrorText>
+        <S.SendButton onClick={submitBtn}>Отправить</S.SendButton>
       </S.ModalForm>
     </>
   )

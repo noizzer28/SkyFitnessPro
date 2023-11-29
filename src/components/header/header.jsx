@@ -6,6 +6,7 @@ import { removeUser } from 'store/slices/userSlice'
 import { useAuth } from 'hooks/use-auth'
 import useDropdownClose from 'hooks/use-dropdown-close'
 import * as S from './header.styles'
+import { signOutUser } from 'api'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -134,6 +135,7 @@ export const Header = () => {
               </Link>
               <S.DropdownMenuItem
                 onClick={() => {
+                  signOutUser()
                   navigate('/')
                   localStorage.removeItem('userSkyFitnesPro')
                   dispatch(removeUser())

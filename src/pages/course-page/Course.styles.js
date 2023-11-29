@@ -9,6 +9,7 @@ export const CourseTop = styled.div`
   border-radius: 30px;
   background: rgba(205, 205, 205, 0.1);
   backdrop-filter: blur(14.51865291595459px);
+  margin-bottom: 75px;
 `
 
 export const CourseImg = styled.img`
@@ -32,12 +33,13 @@ export const CourseTitle = styled.h1`
   left: 30px;
 `
 
-export const CourseAdvantages = styled.section``
+export const CourseAdvantages = styled.section`
+  margin-bottom: 75px;
+`
 
 export const CourseHeaders = styled.h2`
   font-size: 40px;
   line-height: 48px;
-  margin-top: 75px;
 `
 
 export const ListAdvantages = styled.div`
@@ -95,9 +97,9 @@ export const CourseDescription = styled.p`
   line-height: 32px;
 `
 export const ListDescription = styled.ul`
-margin-top: 22px;
-display: flex;
-flex-direction: column;
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
 `
 
 export const Footer = styled.footer`

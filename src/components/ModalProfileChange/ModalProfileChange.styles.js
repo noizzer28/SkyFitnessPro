@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { ButtonPurple } from '../../App.styles'
 
-export const ModalForm = styled.form``
+export const ModalForm = styled.div``
 export const ModalHeader = styled.h2`
   text-align: left;
   font-size: 22px;
@@ -27,6 +27,15 @@ export const InputChange = styled.input`
     letter-spacing: -0.05px;
     color: #d0cece;
   }
+`
+export const ModalErrorText = styled.p`
+  color: red;
+  font-size: 18px;
+  width: 100%;
+  flex-grow: 1;
+  position: absolute;
+  bottom: 110px;
+  left: 50px;
 `
 export const SendButton = styled(ButtonPurple)`
   margin-top: 28px;

@@ -32,6 +32,11 @@ const CourseBlock = ({ course, idImg }) => {
   const toggleModalWindow = () => {
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
+  if (isOpenModalWindow) {
+    setTimeout(() => {
+      setOpenModalWindow(false)
+    }, 1500)
+  }
 
   return (
     <>
