@@ -36,13 +36,12 @@ const CourseBlock = ({ course, id }) => {
   } else {
     isSubscribed = false
   }
-
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
   const subscribe = () => {
     if (!isSubscribed && email) {
       const db = getDatabase()
       push(ref(db, `/courses/${id}/users`), {
-        user: 'email',
+        user: email,
       })
     }
 
@@ -100,7 +99,7 @@ const CourseBlock = ({ course, id }) => {
             выбором направления и тренера, с которым тренировки принесут
             здоровье и радость!
           </S.FooterText>
-          {!isSubscribed ? (
+          {isSubscribed ? (
             'Поздравляем, вы записаны на курс'
           ) : (
             <S.FooterButton onClick={subscribe}>
