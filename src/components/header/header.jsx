@@ -126,13 +126,6 @@ export const Header = () => {
                   Мой профиль
                 </S.DropdownMenuItem>
               </Link>
-              <Link to={`/workout/1`}>
-                <S.DropdownMenuItem
-                  style={{ color: colorTextBlack ? '' : '#FFF' }}
-                >
-                  Тренировки
-                </S.DropdownMenuItem>
-              </Link>
               <S.DropdownMenuItem
                 onClick={() => {
                   signOutUser()
