@@ -24,7 +24,7 @@ export const Profile = () => {
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
 
-  // запрос на курсы в fireбазе
+  // запрос на курсы в fireбазе//
   const getCourses = () => {
     const dbRef = ref(getDatabase())
     get(child(dbRef, `/users/${id}`))
