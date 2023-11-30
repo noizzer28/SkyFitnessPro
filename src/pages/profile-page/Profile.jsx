@@ -12,45 +12,52 @@ import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
 import { ModalError } from 'components/ModalWindow/ModalWindow'
 import * as S from './Profile.styles'
 
+// функция преобразования объекта в массив
+const objArrList3 = (data) => {
+  let arrList = []
+  Object.entries(data).forEach(([key, value]) => {
+    arrList.push(key)
+  })
+  return arrList
+}
+
 export const Profile = () => {
-  const dispatch = useDispatch()
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
-  const { id } = useSelector((state) => state.user)
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
 
   // запрос на курсы в fireбазе
-  const getCourses = () => {
-    const dbRef = ref(getDatabase())
-    get(child(dbRef, `/users/${id}`))
-      .then((snapshot) => {
-        const data = snapshot.val()
-        if (!userCourses && snapshot.exists()) {
-          setLoading(true)
-          dispatch(
-            setUserCourses({
-              userCourses: data,
-            }),
-          )
-        } else {
-          setLoading(false)
-          //  console.log('No data available')
-          return
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }
+  //   const getCourses = () => {
+  //     const dbRef = ref(getDatabase())
+  //     get(child(dbRef, `/users/${id}`))
+  //       .then((snapshot) => {
+  //         const data = snapshot.val()
+  //         if (!userCourses && snapshot.exists()) {
+  //           setLoading(true)
+  //           dispatch(
+  //             setUserCourses({
+  //               userCourses: data,
+  //             }),
+  //           )
+  //         } else {
+  //           setLoading(false)
+  //           //  console.log('No data available')
+  //           return
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error(error)
+  //       })
+  //   }
 
-  getCourses()
-  useEffect(() => {
-    setLoading(true)
-  }, [])
+  //   getCourses()
+  //   useEffect(() => {
+  //     setLoading(true)
+  //   }, [])
 
   if (isSuccessModal) {
     setTimeout(() => {
@@ -109,7 +116,8 @@ export const Profile = () => {
         </S.AllButtons>
       </S.ProfileInfo>
       {loading && !userCourses && <Loader></Loader>}
-      {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
+      {/* {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>} */}
+      <ProfileBlock></ProfileBlock>
       {/* окно смены пароля или логина */}
       {(passwordChange || loginChange) && (
         <ModalWindow
@@ -122,33 +130,32 @@ export const Profile = () => {
   )
 }
 
-const ProfileBlock = ({ courses }) => {
-  // функция преобразования объекта в массив
-  const objArrList2 = (data) => {
-    let arrList = []
-    Object.entries(data).forEach(([key, value]) => {
-      arrList.push({ key, value })
-    })
-    return arrList
-  }
-
+const ProfileBlock = () => {
+  const { id } = useSelector((state) => state.user)
+  const { courses } = useSelector((state) => state.courses)
   // формируем список курсов
-  const coursesList = objArrList2(courses.courses)
-  const mapCoursesList = coursesList.map((courseCard, index) => (
+  let usersCoursesArr = []
+  courses.map((item) => {
+    if (item.users) {
+      const arrUsers = objArrList3(item.users)
+      if (arrUsers.includes(id)) {
+        usersCoursesArr.push(item)
+      }
+    }
+  })
+  const mapCoursesList = usersCoursesArr.map((courseCard) => (
     <Card
-      key={courseCard.key}
-      id={courseCard.key}
-      name={courseCard.value}
-      position={index + 1}
+      key={courseCard.id}
+      id={courseCard.id}
+      name={courseCard.name}
       typeMain={false}
     ></Card>
   ))
-
   return (
     <>
       <S.CardPart>
         <S.Title>Мои курсы</S.Title>
-        <S.CardList>{mapCoursesList}</S.CardList>
+        <S.CardList>{mapCoursesList} </S.CardList>
       </S.CardPart>
     </>
   )
@@ -157,7 +164,6 @@ const ProfileBlock = ({ courses }) => {
 export const WorkoutSelectionWindow = ({ idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
   const workoutListObj = coursesObj[idCourse].workout
-
   const workoutListArr = objArrList(workoutListObj)
   //el.id - это айдишник тренировки
   // idCourse - это айдишник курса
