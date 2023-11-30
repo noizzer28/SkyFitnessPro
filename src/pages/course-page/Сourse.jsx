@@ -12,8 +12,6 @@ import * as S from './Course.styles'
 export const Сourse = () => {
   const { coursesObj } = useSelector((state) => state.courses)
   const { id } = useParams()
-  const idCourse = id.slice(0, -1)
-  const idImg = id.slice(-1)
 
   return (
     <>
@@ -21,13 +19,14 @@ export const Сourse = () => {
       {!coursesObj ? (
         <Loader></Loader>
       ) : (
-        <CourseBlock course={coursesObj[idCourse]} idImg={idImg}></CourseBlock>
+        <CourseBlock course={coursesObj[id]}></CourseBlock>
       )}
     </>
   )
 }
 // формируем блок курса
-const CourseBlock = ({ course, idImg }) => {
+const CourseBlock = ({ course }) => {
+  console.log(course)
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
   const toggleModalWindow = () => {
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
@@ -36,7 +35,7 @@ const CourseBlock = ({ course, idImg }) => {
   return (
     <>
       <S.CourseTop>
-        <S.CourseImg src={`/img/cardBG_${idImg}.png`} />
+        <S.CourseImg src={`/img/${course.id}.png`} />
         <S.CourseTitle>{course.name}</S.CourseTitle>
       </S.CourseTop>
       <S.CourseAdvantages>
@@ -57,7 +56,7 @@ const CourseBlock = ({ course, idImg }) => {
       <S.CourseDirections>
         <S.CourseHeaders>Направления:</S.CourseHeaders>
         <S.ListDirections>
-          {course.directions.split(', ').map((el) => {
+          {course.directions.map((el) => {
             return <S.Items key={el}>{el}</S.Items>
           })}
         </S.ListDirections>
@@ -67,7 +66,7 @@ const CourseBlock = ({ course, idImg }) => {
       <S.CourseDescription>{course.description2}</S.CourseDescription>
       {course.descriptionList && (
         <S.ListDescription>
-          {course.descriptionList.split('; ').map((el) => {
+          {course.descriptionList.map((el) => {
             return <S.Items key={el}>{el}</S.Items>
           })}
         </S.ListDescription>

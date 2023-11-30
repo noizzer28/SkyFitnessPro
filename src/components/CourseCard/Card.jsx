@@ -4,17 +4,17 @@ import { ModalWindow } from 'components/ModalWindow/ModalWindow'
 import { WorkoutSelectionWindow } from 'pages/profile-page/Profile'
 import * as S from './Card.styles'
 
-export const Card = ({ id, name, position, typeMain }) => {
+export const Card = ({ id, name, typeMain }) => {
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
   const toggleModalWindow = () => {
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
-  //   console.log(id)
+
   return (
     <S.Card style={{ transform: typeMain ? '' : 'none' }}>
-      <S.CardImg src={`/img/cardBG_${position}.png`}></S.CardImg>
+      <S.CardImg src={`/img/${id}.png`}></S.CardImg>
       {typeMain ? (
-        <Link to={`/course/${id}${position}`}>
+        <Link to={`/course/${id}`}>
           <S.CardLink>{name}</S.CardLink>
         </Link>
       ) : (

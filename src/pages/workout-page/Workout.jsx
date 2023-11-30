@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
 import * as S from './workout.styles'
+import { getDatabase, ref, set } from 'firebase/database'
 
 export const Workout = () => {
   const { course } = useParams()
@@ -80,6 +81,13 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
         }
       }),
     )
+    // const db = getDatabase()
+    // set(ref(db), {
+    //   courses: {
+    //     yoga: 1,
+    //   },
+    // })
+
     setSuccessModal((prevValue) => (prevValue = !prevValue))
     setTimeout(() => {
       setModal((prevValue) => (prevValue = !prevValue))

@@ -6,27 +6,14 @@ import { useSelector } from 'react-redux'
 import { getUserProfile } from 'api'
 import * as S from './MainPage.styles'
 
-function counter(i) {
-  if (i <= 5) {
-    return i
-  } else {
-    if (i % 5 === 0) {
-      return 5
-    } else {
-      return i % 5
-    }
-  }
-}
-
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard, index) => (
     <Card
-      key={courseCard._id}
+      key={courseCard.id}
       name={courseCard.name}
-      position={counter(index + 1)}
-      id={courseCard._id}
+      id={courseCard.id}
       typeMain={true}
     ></Card>
   ))
