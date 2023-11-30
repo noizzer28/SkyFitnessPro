@@ -34,35 +34,36 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
 
-  const programm = coursesObj[idCourse]
-  const workout = programm.workout[idWorkout]
-  console.log('workout', workout)
-
-  let exercices = []
-  if (!!workout.exercices) {
-    exercices = workout.exercices.filter(
-      (item) => item !== null && item !== undefined && item !== '',
-    )
-  }
-  console.log('exercices', exercices)
   const progressBarStyles = [
     { base: '#EDECFF', top: '#565EEF' },
     { base: '#FFF2E0', top: '#FF6D00' },
     { base: '#F9EBFF', top: '#9A48F1' },
   ]
+  const programm = coursesObj[idCourse]
+  const workout = programm.workout[idWorkout]
+  let exercices = []
 
-  const progressState = exercices.map((item, index) => {
-    const progress = Math.floor((item.userInput / item.repeat) * 100)
+  if (!!workout.exercices) {
+    exercices = workout.exercices.filter(
+      (item) => item !== null && item !== undefined && item !== '',
+    )
+  }
+
+  const progressArray = exercices.map((item, index) => {
+    let user
+    if (item.users) {
+      user = item.users[userId]
+    }
+    const userInput = user ? user.userInput : 0
+    const progress = Math.floor((userInput / item.repeat) * 100)
     return {
       id: index,
-      userInput: item.userInput,
+      userInput: userInput,
       percentProgress: progress > 100 ? 100 : progress,
       totalValue: item.repeat,
     }
   })
-
-  const [progressValue, setProgressValue] = useState(progressState)
-
+  const [progressValue, setProgressValue] = useState(progressArray)
   const toggleModal = () => {
     setModal((prevValue) => (prevValue = !prevValue))
   }
@@ -84,7 +85,6 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
     )
 
     progressValue.map((item, index) => {
-      console.log(item.userInput)
       update(
         ref(
           db,
@@ -93,7 +93,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
           }/users/${userId}`,
         ),
         {
-          userInput: item.userInput,
+          userInput: parseInt(item.userInput, 10),
         },
       )
     })
