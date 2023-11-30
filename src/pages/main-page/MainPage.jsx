@@ -1,15 +1,14 @@
 import { Card } from '../../components/CourseCard/Card'
 import { Header } from '../../components/header/header'
 import { DarkBG, Container, Loader } from '../../App.styles'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { getUserProfile } from 'api'
 import * as S from './MainPage.styles'
 
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
   // формируем список курсов
-  const mapCoursesList = courses?.map((courseCard, index) => (
+  const mapCoursesList = courses?.map((courseCard) => (
     <Card
       key={courseCard.id}
       name={courseCard.name}
@@ -23,11 +22,6 @@ export const Main = ({ error }) => {
   window.addEventListener('scroll', () => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
-
-  //   useEffect(() => {
-  //     getUserProfile()
-  //     //  console.log('worked')
-  //   }, [])
 
   return (
     <>
