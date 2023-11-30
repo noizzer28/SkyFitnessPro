@@ -23,7 +23,7 @@ export async function registration({ email, pass }) {
 
 // выход из системы
 export async function signOutUser() {
-  signOut(auth)
+  await signOut(auth)
     .then(() => {
       console.log('вышел')
     })
@@ -32,45 +32,46 @@ export async function signOutUser() {
     })
 }
 
-export async function getUserProfile() {
-  const user = auth.currentUser
-  if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName
-    const email = user.email
-    const photoURL = user.photoURL
-    const emailVerified = user.emailVerified
-
-    // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    const uid = user.uid
-    //   console.log(user);
-  }
-}
-
-// export function changeLogin(newMail) {
-//   updateEmail(auth.currentUser, 'user@example.com')
-//     .then(() => {
-//       console.log('логин изменен')
-//     })
-//     .catch((error) => {
-//       console.log('какая то ошибка', error)
-//     })
-// }
-
-export async function changePass(newPas) {
-  let result = null
-  const user = auth.currentUser
-  await updatePassword(user, newPas)
+//смена логина
+export async function changeLogin(newMail) {
+  console.log('текущий mail: ', auth.currentUser.email)
+  await updateEmail(auth.currentUser, newMail)
     .then(() => {
-      result = 'пароль изменен'
+      console.log('логин изменен')
+      console.log(auth.currentUser.email)
     })
     .catch((error) => {
       throw new Error(error)
     })
   return result
 }
+
+// смена пароля
+export async function changePass(newPas) {
+  const user = auth.currentUser
+  await updatePassword(user, newPas)
+    .then(() => {})
+    .catch((error) => {
+      throw new Error(error)
+    })
+}
+
+// export async function getUserProfile() {
+//   const user = auth.currentUser
+//   if (user !== null) {
+// 	 // The user object has basic properties such as display name, email, etc.
+// 	 const displayName = user.displayName
+// 	 const email = user.email
+// 	 const photoURL = user.photoURL
+// 	 const emailVerified = user.emailVerified
+
+// 	 // The user's ID, unique to the Firebase project. Do NOT use
+// 	 // this value to authenticate with your backend server, if
+// 	 // you have one. Use User.getToken() instead.
+// 	 const uid = user.uid
+// 	 //   console.log(user);
+//   }
+// }
 
 // firebase.auth()
 //     .signInWithEmailAndPassword('you@domain.example', 'correcthorsebatterystaple')

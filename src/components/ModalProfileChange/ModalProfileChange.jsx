@@ -4,9 +4,6 @@ import { getAuth, sendSignInLinkToEmail } from 'firebase/auth'
 import { useState } from 'react'
 import * as S from './ModalProfileChange.styles'
 
-// const userIdts = 'ljkdvn4ear90f8zxvljn'
-// const email = 'asmn@mail.ru'
-
 // const actionCodeSettings = {
 //   url: 'https://fitness-pro-ae1f4.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
 //   handleCodeInApp: true,
@@ -33,7 +30,7 @@ export const ModalProfileChange = ({
   setModalError,
 }) => {
   const [inputError, setInputError] = useState('')
-  const [pass, setPass] = useState('')
+  const [inputVal, setInputVal] = useState('')
   const [repPass, setRepPass] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -43,24 +40,25 @@ export const ModalProfileChange = ({
 
   const submitBtn = async () => {
     try {
-      setIsLoading(true)
-      if (pass.length < 6 && pass.length > 0) {
+      if (inputVal.length < 6) {
         return setInputError('Не менее 6 символов')
       }
-      if (!pass) {
+      if (!inputVal) {
         return setInputError('Введите пароль')
       }
-      if (type === 'пароль' && pass !== repPass) {
+      if (type === 'пароль' && inputVal !== repPass) {
         return setInputError('Пароли не совпадают')
       }
+      setIsLoading(true)
 
       if (type === 'пароль') {
-        const result = await changePass(pass)
+        await changePass(inputVal)
         setSuccessModal(true)
         setInputError('')
       } else {
-        //   changeLogin('test2@mail.ru')
-        console.log('меняем логин')
+        await changeLogin(inputVal)
+        setSuccessModal(true)
+        setInputError('')
       }
     } catch (error) {
       console.log(error)
@@ -69,10 +67,6 @@ export const ModalProfileChange = ({
       setIsLoading(false)
     }
   }
-
-  //   getAuth()
-  //   writeUserData()
-  //   writeNewPost()
 
   return (
     <>
@@ -142,8 +136,8 @@ export const ModalProfileChange = ({
         </S.ModalLogo>
         <S.ModalHeader>Новый {type}:</S.ModalHeader>
         <S.InputChange
-          type="password"
-          onChange={(e) => setPass(e.target.value)}
+          type={type === 'пароль' ? 'password' : 'email'}
+          onChange={(e) => setInputVal(e.target.value)}
           placeholder={capitalize(type)}
         ></S.InputChange>
         {type === 'пароль' && (

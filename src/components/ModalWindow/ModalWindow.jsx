@@ -1,14 +1,8 @@
 import * as S from './ModalWindow.styles'
 
-export const ModalWindow = ({
-  setOpenModalWindow,
-  childComponent,
-  width,
-  setModalError,
-}) => {
+export const ModalWindow = ({ setOpenModalWindow, childComponent, width }) => {
   const handleChangeOpen = () => {
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
-    setModalError(false)
   }
   return (
     <S.ModalBackground>

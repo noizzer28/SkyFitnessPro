@@ -19,7 +19,6 @@ export const Profile = () => {
   const [loading, setLoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
-  const { coursesObj } = useSelector((state) => state.courses)
   const { id } = useSelector((state) => state.user)
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
@@ -61,9 +60,14 @@ export const Profile = () => {
     }, 2000)
   }
 
+  // фомирует "начинку" всплывающего окна
   let window = null
   if (isSuccessModal) {
-    window = <ModalSuccess text="Пароль успешно изменен!" />
+    window = (
+      <ModalSuccess
+        text={`${loginChange ? 'Логин' : 'Пароль'} успешно изменен!`}
+      />
+    )
   } else if (isModalError) {
     window = (
       <ModalError
@@ -73,13 +77,19 @@ export const Profile = () => {
   } else {
     window = (
       <ModalProfileChange
-        type="пароль"
+        type={loginChange ? 'логин' : 'пароль'}
         setSuccessModal={setSuccessModal}
         setModalError={setModalError}
       />
     )
   }
 
+  // закрывает модальные окна
+  function closeWindows() {
+    setLoginChange(false)
+    setPasswordChange(false)
+    setModalError(false)
+  }
   return (
     <>
       <Header />
@@ -100,29 +110,11 @@ export const Profile = () => {
       </S.ProfileInfo>
       {loading && !userCourses && <Loader></Loader>}
       {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
-      {/* окно смены логина */}
-      {loginChange && (
+      {/* окно смены пароля или логина */}
+      {(passwordChange || loginChange) && (
         <ModalWindow
           width={366}
-          setOpenModalWindow={setLoginChange}
-          childComponent={
-            isSuccessModal ? (
-              <ModalSuccess text="Логин успешно изменен!" />
-            ) : (
-              <ModalProfileChange
-                type="логин"
-                setSuccessModal={setSuccessModal}
-              />
-            )
-          }
-        />
-      )}
-      {/* окно смены пароля */}
-      {passwordChange && (
-        <ModalWindow
-          width={366}
-          setOpenModalWindow={setPasswordChange}
-          setModalError={setModalError}
+          setOpenModalWindow={closeWindows}
           childComponent={window}
         />
       )}
