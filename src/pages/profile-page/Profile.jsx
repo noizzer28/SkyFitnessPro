@@ -19,6 +19,7 @@ export const Profile = () => {
   const [laoading, setLaoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
+  const { coursesObj } = useSelector((state) => state.courses)
   const { id } = useSelector((state) => state.user)
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
@@ -30,14 +31,14 @@ export const Profile = () => {
       .then((snapshot) => {
         const data = snapshot.val()
         if (!userCourses && snapshot.exists()) {
-          setLaoading(true)
+          setLoading(true)
           dispatch(
             setUserCourses({
               userCourses: data,
             }),
           )
         } else {
-          setLaoading(false)
+          setLoading(false)
           //  console.log('No data available')
           return
         }
@@ -49,8 +50,9 @@ export const Profile = () => {
 
   getCourses()
   useEffect(() => {
-    setLaoading(true)
+    setLoading(true)
   }, [])
+  console.log(coursesObj)
 
   if (isSuccessModal) {
     setTimeout(() => {
@@ -97,7 +99,7 @@ export const Profile = () => {
           </S.ProfileButton>
         </S.AllButtons>
       </S.ProfileInfo>
-      {laoading && !userCourses && <Loader></Loader>}
+      {loading && !userCourses && <Loader></Loader>}
       {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
       {/* окно смены логина */}
       {loginChange && (
