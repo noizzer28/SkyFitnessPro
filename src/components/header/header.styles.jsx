@@ -59,7 +59,6 @@ export const Dropdown = styled.nav`
 export const DropdownMenu = styled.ul`
   position: relative;
   padding: 0 30px 20px;
-  margin-top: 30px;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
