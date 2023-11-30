@@ -15,7 +15,9 @@ export const Profile = () => {
   const dispatch = useDispatch()
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
-  const [laoading, setLaoading] = useState(false)
+  const { coursesObj } = useSelector((state) => state.courses)
+
+  const [loading, setLoading] = useState(false)
   const { id } = useSelector((state) => state.user)
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
@@ -27,14 +29,14 @@ export const Profile = () => {
       .then((snapshot) => {
         const data = snapshot.val()
         if (!userCourses && snapshot.exists()) {
-          setLaoading(true)
+          setLoading(true)
           dispatch(
             setUserCourses({
               userCourses: data,
             }),
           )
         } else {
-          setLaoading(false)
+          setLoading(false)
           //  console.log('No data available')
           return
         }
@@ -46,8 +48,9 @@ export const Profile = () => {
 
   getCourses()
   useEffect(() => {
-    setLaoading(true)
+    setLoading(true)
   }, [])
+  console.log(coursesObj)
 
   return (
     <>
@@ -67,7 +70,7 @@ export const Profile = () => {
           </S.ProfileButton>
         </S.AllButtons>
       </S.ProfileInfo>
-      {laoading && !userCourses && <Loader></Loader>}
+      {loading && !userCourses && <Loader></Loader>}
       {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
       {loginChange && (
         <ModalWindow

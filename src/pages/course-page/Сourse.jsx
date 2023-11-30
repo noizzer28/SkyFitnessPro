@@ -8,28 +8,44 @@ import { Header } from '../../components/header/header'
 import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import * as S from './Course.styles'
+import { getDatabase, ref, set, update, push } from 'firebase/database'
 
 export const Сourse = () => {
   const { coursesObj } = useSelector((state) => state.courses)
   const { id } = useParams()
-  const idCourse = id.slice(0, -1)
-  const idImg = id.slice(-1)
-
   return (
     <>
       <Header />
       {!coursesObj ? (
         <Loader></Loader>
       ) : (
-        <CourseBlock course={coursesObj[idCourse]} idImg={idImg}></CourseBlock>
+        <CourseBlock course={coursesObj[id]} id={id}></CourseBlock>
       )}
     </>
   )
 }
 // формируем блок курса
-const CourseBlock = ({ course, idImg }) => {
+const CourseBlock = ({ course, id }) => {
+  const { email } = useSelector((state) => state.user)
+
+  let isSubscribed
+  if (course.users) {
+    isSubscribed = !!Object.entries(course.users)
+      .filter(([key, value]) => value.user === email)
+      .map(([key, value]) => value.user)
+  } else {
+    isSubscribed = false
+  }
+
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
-  const toggleModalWindow = () => {
+  const subscribe = () => {
+    if (!isSubscribed && email) {
+      const db = getDatabase()
+      push(ref(db, `/courses/${id}/users`), {
+        user: 'email',
+      })
+    }
+
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
   if (isOpenModalWindow) {
@@ -41,7 +57,7 @@ const CourseBlock = ({ course, idImg }) => {
   return (
     <>
       <S.CourseTop>
-        <S.CourseImg src={`/img/cardBG_${idImg}.png`} />
+        <S.CourseImg src={`/img/${course.id}.png`} />
         <S.CourseTitle>{course.name}</S.CourseTitle>
       </S.CourseTop>
       <S.CourseAdvantages>
@@ -62,7 +78,7 @@ const CourseBlock = ({ course, idImg }) => {
       <S.CourseDirections>
         <S.CourseHeaders>Направления:</S.CourseHeaders>
         <S.ListDirections>
-          {course.directions.split(', ').map((el) => {
+          {course.directions.map((el) => {
             return <S.Items key={el}>{el}</S.Items>
           })}
         </S.ListDirections>
@@ -72,7 +88,7 @@ const CourseBlock = ({ course, idImg }) => {
       <S.CourseDescription>{course.description2}</S.CourseDescription>
       {course.descriptionList && (
         <S.ListDescription>
-          {course.descriptionList.split('; ').map((el) => {
+          {course.descriptionList.map((el) => {
             return <S.Items key={el}>{el}</S.Items>
           })}
         </S.ListDescription>
@@ -84,9 +100,13 @@ const CourseBlock = ({ course, idImg }) => {
             выбором направления и тренера, с которым тренировки принесут
             здоровье и радость!
           </S.FooterText>
-          <S.FooterButton onClick={toggleModalWindow}>
-            Записаться на тренировку
-          </S.FooterButton>
+          {isSubscribed ? (
+            'Поздравляем, вы записаны на курс'
+          ) : (
+            <S.FooterButton onClick={subscribe}>
+              Записаться на тренировку
+            </S.FooterButton>
+          )}
         </S.FooterLeft>
         <S.FooterImg src="/img/handset.png" alt="handset" />
       </S.Footer>

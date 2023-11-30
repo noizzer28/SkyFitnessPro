@@ -17,12 +17,6 @@ export const BreadCrumps = styled.ul`
 `
 export const BreadCrumpsItem = styled.li`
   position: relative;
-  margin-right: 30px;
-  &:not(:first-child)::before {
-    content: ' / ';
-    position: absolute;
-    left: -20px;
-  }
 `
 export const CenterBottom = styled.div`
   display: flex;
@@ -44,6 +38,9 @@ export const ExercisesListItem = styled.li`
   line-height: 32px;
   list-style-type: disc;
   max-width: 380px;
+  &:not(:last-child) {
+    margin-bottom: 5px;
+  }
 `
 export const ProgressButton = styled(ButtonPurple)`
   width: 275px;
@@ -51,13 +48,13 @@ export const ProgressButton = styled(ButtonPurple)`
 
 export const Progress = styled.div`
   width: 638px;
-  height: 336px;
   border-radius: 30px;
   background: #f2f2f2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 30px 0;
 `
 export const ProgressHeader = styled.div`
   font-size: 32px;
@@ -73,9 +70,10 @@ export const ProgressCenter = styled.div`
 export const ProgressFlex = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 export const ProgressText = styled.p`
-  max-width: 220px;
+  max-width: 250px;
   font-size: 24px;
   line-height: 32px;
 `
@@ -119,13 +117,13 @@ export const ModalBackground = styled.div`
 `
 export const ModalProgress = styled.div`
   width: 444px;
-  height: 544px;
   background: #fff;
   display: flex;
   align-items: center;
   flex-direction: column;
   z-index: 3;
   gap: 30px;
+  padding-bottom: 45px;
 `
 export const Modaltext = styled.p`
   font-size: 18px;
