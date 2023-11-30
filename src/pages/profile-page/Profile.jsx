@@ -172,8 +172,8 @@ export const WorkoutSelectionWindow = ({ idCourse }) => {
       <S.ModalList>
         {workoutListArr.map((el, index) => {
           return (
-            <S.ModalListItem key={index}>
-              <Link to={`/workout/${idCourse}/${el.id}`}>
+            <S.ModalListItem key={el.url}>
+              <Link to={`/workout/${idCourse}/${index + 1}`}>
                 <S.ModalListLink>
                   <S.TrainingItem>{el.name}</S.TrainingItem>
                   {/* <S.TrainingName>
