@@ -35,7 +35,6 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const [isSuccessModal, setSuccessModal] = useState(false)
 
   const programm = coursesObj[idCourse]
-  console.log('programm', programm)
   const workout = programm.workout[idWorkout]
   console.log('workout', workout)
 
@@ -45,7 +44,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
       (item) => item !== null && item !== undefined && item !== '',
     )
   }
-
+  console.log('exercices', exercices)
   const progressBarStyles = [
     { base: '#EDECFF', top: '#565EEF' },
     { base: '#FFF2E0', top: '#FF6D00' },
