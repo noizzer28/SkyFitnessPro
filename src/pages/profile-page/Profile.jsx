@@ -2,10 +2,7 @@ import { Header } from '../../components/header/header'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { Loader } from '../../App.styles'
-// import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
-// import { setUserCourses } from 'store/slices/userSlice'
 import { objArrList } from 'App'
 import { Link } from 'react-router-dom'
 import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
@@ -15,12 +12,9 @@ import * as S from './Profile.styles'
 export const Profile = () => {
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
-  //   const [loading, setLoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
-  //   const { userCourses } = useSelector((state) => state.user)
-  const { email } = useSelector((state) => state.user)
-  const { id } = useSelector((state) => state.user)
+  const { email, id } = useSelector((state) => state.user)
   const { courses } = useSelector((state) => state.courses)
 
   // формируем список курсов
@@ -44,35 +38,6 @@ export const Profile = () => {
       typeMain={false}
     ></Card>
   ))
-
-  // запрос на курсы в fireбазе
-  //   const getCourses = () => {
-  //     const dbRef = ref(getDatabase())
-  //     get(child(dbRef, `/users/${id}`))
-  //       .then((snapshot) => {
-  //         const data = snapshot.val()
-  //         if (!userCourses && snapshot.exists()) {
-  //           setLoading(true)
-  //           dispatch(
-  //             setUserCourses({
-  //               userCourses: data,
-  //             }),
-  //           )
-  //         } else {
-  //           setLoading(false)
-  //           //  console.log('No data available')
-  //           return
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error)
-  //       })
-  //   }
-
-  //   getCourses()
-  //   useEffect(() => {
-  //     setLoading(true)
-  //   }, [])
 
   if (isSuccessModal) {
     setTimeout(() => {
@@ -114,7 +79,7 @@ export const Profile = () => {
   }
   return (
     <>
-      <Header />
+      <Header></Header>
       <S.ProfileInfo>
         <S.Title>Мой профиль</S.Title>
         <S.AllLines>
@@ -130,9 +95,6 @@ export const Profile = () => {
           </S.ProfileButton>
         </S.AllButtons>
       </S.ProfileInfo>
-      {/* {loading && !userCourses && <Loader></Loader>} */}
-      {/* {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>} */}
-      {/* <ProfileBlock></ProfileBlock> */}
       <S.CardPart>
         <S.Title>Мои курсы</S.Title>
         <S.CardList>{mapCoursesList} </S.CardList>
@@ -149,23 +111,11 @@ export const Profile = () => {
   )
 }
 
-// const ProfileBlock = () => {
-//   return (
-//     <>
-//       <S.CardPart>
-//         <S.Title>Мои курсы</S.Title>
-//         <S.CardList>{mapCoursesList} </S.CardList>
-//       </S.CardPart>
-//     </>
-//   )
-// }
-
 export const WorkoutSelectionWindow = ({ idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
   const workoutListObj = coursesObj[idCourse].workout
   const workoutListArr = objArrList(workoutListObj)
-  //el.id - это айдишник тренировки
-  // idCourse - это айдишник курса
+
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>
