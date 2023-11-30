@@ -8,27 +8,44 @@ import { Header } from '../../components/header/header'
 import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import * as S from './Course.styles'
+import { getDatabase, ref, set, update, push } from 'firebase/database'
 
 export const Сourse = () => {
   const { coursesObj } = useSelector((state) => state.courses)
   const { id } = useParams()
-
   return (
     <>
       <Header />
       {!coursesObj ? (
         <Loader></Loader>
       ) : (
-        <CourseBlock course={coursesObj[id]}></CourseBlock>
+        <CourseBlock course={coursesObj[id]} id={id}></CourseBlock>
       )}
     </>
   )
 }
 // формируем блок курса
-const CourseBlock = ({ course }) => {
-  console.log(course)
+const CourseBlock = ({ course, id }) => {
+  const { email } = useSelector((state) => state.user)
+
+  let isSubscribed
+  if (course.users) {
+    isSubscribed = !!Object.entries(course.users)
+      .filter(([key, value]) => value.user === email)
+      .map(([key, value]) => value.user)
+  } else {
+    isSubscribed = false
+  }
+
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
-  const toggleModalWindow = () => {
+  const subscribe = () => {
+    if (!isSubscribed && email) {
+      const db = getDatabase()
+      push(ref(db, `/courses/${id}/users`), {
+        user: 'email',
+      })
+    }
+
     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   }
 
@@ -78,9 +95,13 @@ const CourseBlock = ({ course }) => {
             выбором направления и тренера, с которым тренировки принесут
             здоровье и радость!
           </S.FooterText>
-          <S.FooterButton onClick={toggleModalWindow}>
-            Записаться на тренировку
-          </S.FooterButton>
+          {isSubscribed ? (
+            'Поздравляем, вы записаны на курс'
+          ) : (
+            <S.FooterButton onClick={subscribe}>
+              Записаться на тренировку
+            </S.FooterButton>
+          )}
         </S.FooterLeft>
         <S.FooterImg src="/img/handset.png" alt="handset" />
       </S.Footer>

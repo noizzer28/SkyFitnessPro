@@ -1,5 +1,5 @@
 import { Header } from '../../components/header/header'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ModalWindow,
   ModalSuccess,
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
 import * as S from './workout.styles'
-import { getDatabase, ref, set } from 'firebase/database'
+import { getDatabase, ref, set, update, add } from 'firebase/database'
 
 export const Workout = () => {
   const { course } = useParams()
@@ -32,15 +32,13 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
-  console.log('all', coursesObj)
-  const programm = coursesObj[idCourse]
-  console.log('programm', programm)
-  const workout = programm.workout[idWorkout]
-  console.log('workout', workout)
 
-  let exercises = []
-  if (!!workout.exercises) {
-    exercises = workout.exercises.filter(
+  const programm = coursesObj[idCourse]
+  const workout = programm.workout[idWorkout]
+
+  let exercices = []
+  if (!!workout.exercices) {
+    exercices = workout.exercices.filter(
       (item) => item !== null && item !== undefined && item !== '',
     )
   }
@@ -51,11 +49,12 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
     { base: '#F9EBFF', top: '#9A48F1' },
   ]
 
-  const progressState = exercises.map((item, index) => {
+  const progressState = exercices.map((item, index) => {
+    const progress = Math.floor((item.userInput / item.repeat) * 100)
     return {
       id: index,
-      userInput: 0,
-      percentProgress: 0,
+      userInput: item.userInput,
+      percentProgress: progress > 100 ? 100 : progress,
       totalValue: item.repeat,
     }
   })
@@ -81,12 +80,21 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
         }
       }),
     )
-    // const db = getDatabase()
-    // set(ref(db), {
-    //   courses: {
-    //     yoga: 1,
-    //   },
-    // })
+    //Вот тут и случилось непоправимое: я для теста попробовала апдейт информации и перезаписала весь courses, будьте осторожнее
+    const db = getDatabase()
+
+    progressValue.map((item, index) => {
+      console.log(item.userInput)
+      update(
+        ref(
+          db,
+          `/courses/${programm.id}/workout/${idWorkout}/exercices/${index + 1}`,
+        ),
+        {
+          userInput: item.userInput,
+        },
+      )
+    })
 
     setSuccessModal((prevValue) => (prevValue = !prevValue))
     setTimeout(() => {
@@ -104,11 +112,12 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   }
 
   function convertYouTubeLink(link) {
-    const regex =
-      /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?feature=player_embedded&v=|watch\?v=))([^"&?\/\s]{11})/
-    const match = link.match(regex)
-    if (match && match[1]) {
-      const embedLink = `https://www.youtube.com/embed/${match[1]}`
+    const prefix = 'https://youtu.be/'
+    const index = link.indexOf(prefix)
+
+    if (index !== -1) {
+      const videoCode = link.substring(index + prefix.length)
+      const embedLink = `https://www.youtube.com/embed/${videoCode}`
       return embedLink
     } else {
       return link
@@ -122,7 +131,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
           {!isSuccessModal ? (
             <S.ModalProgress onClick={(e) => e.stopPropagation()}>
               <S.ModalHeader>Мой прогресс</S.ModalHeader>
-              {exercises.map((item, index) => {
+              {exercices.map((item, index) => {
                 return (
                   <S.ModalBlock key={index}>
                     <S.Modaltext>
@@ -169,12 +178,12 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
             allowFullScreen
           ></iframe>
         </S.Video>
-        {exercises.length > 0 && (
+        {exercices.length > 0 && (
           <S.CenterBottom>
             <S.Exercises>
               <S.ExercisesHeader>Упражнения</S.ExercisesHeader>
               <S.ExercisesList>
-                {exercises.map((item, index) => {
+                {exercices.map((item, index) => {
                   return (
                     <S.ExercisesListItem key={index}>
                       {item.name}
@@ -189,7 +198,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
             <S.Progress>
               <S.ProgressHeader>Мой прогресс по тренировке:</S.ProgressHeader>
               <S.ProgressCenter>
-                {exercises.map((item, index) => {
+                {exercices.map((item, index) => {
                   const { base, top } =
                     progressBarStyles[index % progressBarStyles.length]
                   return (
