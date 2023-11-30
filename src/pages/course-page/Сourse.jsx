@@ -27,17 +27,13 @@ export const Сourse = () => {
 // формируем блок курса
 const CourseBlock = ({ course, id }) => {
   const { email } = useSelector((state) => state.user)
+  const userID = useSelector((state) => state.user.id)
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
   const [isSubscribed, setSubscribe] = useState(false)
 
   useEffect(() => {
     if (course.users) {
-      const array = Object.entries(course.users)
-        .filter(([key, value]) => value.user === email)
-        .map(([key, value]) => value.user)
-      if (array.length > 0) {
-        setSubscribe(true)
-      }
+      setSubscribe(!!Object.keys(course.users).find((key) => key === userID))
     } else {
       setSubscribe(false)
     }
@@ -46,7 +42,7 @@ const CourseBlock = ({ course, id }) => {
   const subscribe = () => {
     if (!isSubscribed && email) {
       const db = getDatabase()
-      push(ref(db, `/courses/${id}/users`), {
+      push(ref(db, `/courses/${id}/users/${userID}`), {
         user: email,
       })
     }
