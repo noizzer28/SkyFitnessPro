@@ -2,33 +2,48 @@ import { Header } from '../../components/header/header'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader } from '../../App.styles'
-import { getDatabase, ref, child, get } from 'firebase/database'
+// import { Loader } from '../../App.styles'
+// import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
-import { setUserCourses } from 'store/slices/userSlice'
+// import { setUserCourses } from 'store/slices/userSlice'
 import { objArrList } from 'App'
 import { Link } from 'react-router-dom'
 import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
 import { ModalError } from 'components/ModalWindow/ModalWindow'
 import * as S from './Profile.styles'
 
-// функция преобразования объекта в массив
-const objArrList3 = (data) => {
-  let arrList = []
-  Object.entries(data).forEach(([key, value]) => {
-    arrList.push(key)
-  })
-  return arrList
-}
-
 export const Profile = () => {
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
-  const [loading, setLoading] = useState(false)
+  //   const [loading, setLoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
-  const { userCourses } = useSelector((state) => state.user)
+  //   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
+  const { id } = useSelector((state) => state.user)
+  const { courses } = useSelector((state) => state.courses)
+
+  // формируем список курсов
+  let usersCoursesArr = []
+  courses.map((item) => {
+    if (item.users) {
+      let arrList = []
+      Object.entries(item.users).forEach(([key, value]) => {
+        arrList.push(key)
+      })
+      if (arrList.includes(id)) {
+        usersCoursesArr.push(item)
+      }
+    }
+  })
+  const mapCoursesList = usersCoursesArr.map((courseCard) => (
+    <Card
+      key={courseCard.id}
+      id={courseCard.id}
+      name={courseCard.name}
+      typeMain={false}
+    ></Card>
+  ))
 
   // запрос на курсы в fireбазе
   //   const getCourses = () => {
@@ -68,7 +83,7 @@ export const Profile = () => {
   }
 
   // фомирует "начинку" всплывающего окна
-  let window = null
+  let window
   if (isSuccessModal) {
     window = (
       <ModalSuccess
@@ -115,9 +130,13 @@ export const Profile = () => {
           </S.ProfileButton>
         </S.AllButtons>
       </S.ProfileInfo>
-      {loading && !userCourses && <Loader></Loader>}
+      {/* {loading && !userCourses && <Loader></Loader>} */}
       {/* {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>} */}
-      <ProfileBlock></ProfileBlock>
+      {/* <ProfileBlock></ProfileBlock> */}
+      <S.CardPart>
+        <S.Title>Мои курсы</S.Title>
+        <S.CardList>{mapCoursesList} </S.CardList>
+      </S.CardPart>
       {/* окно смены пароля или логина */}
       {(passwordChange || loginChange) && (
         <ModalWindow
@@ -130,36 +149,16 @@ export const Profile = () => {
   )
 }
 
-const ProfileBlock = () => {
-  const { id } = useSelector((state) => state.user)
-  const { courses } = useSelector((state) => state.courses)
-  // формируем список курсов
-  let usersCoursesArr = []
-  courses.map((item) => {
-    if (item.users) {
-      const arrUsers = objArrList3(item.users)
-      if (arrUsers.includes(id)) {
-        usersCoursesArr.push(item)
-      }
-    }
-  })
-  const mapCoursesList = usersCoursesArr.map((courseCard) => (
-    <Card
-      key={courseCard.id}
-      id={courseCard.id}
-      name={courseCard.name}
-      typeMain={false}
-    ></Card>
-  ))
-  return (
-    <>
-      <S.CardPart>
-        <S.Title>Мои курсы</S.Title>
-        <S.CardList>{mapCoursesList} </S.CardList>
-      </S.CardPart>
-    </>
-  )
-}
+// const ProfileBlock = () => {
+//   return (
+//     <>
+//       <S.CardPart>
+//         <S.Title>Мои курсы</S.Title>
+//         <S.CardList>{mapCoursesList} </S.CardList>
+//       </S.CardPart>
+//     </>
+//   )
+// }
 
 export const WorkoutSelectionWindow = ({ idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
