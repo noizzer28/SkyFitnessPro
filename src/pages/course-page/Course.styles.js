@@ -45,12 +45,11 @@ export const CourseHeaders = styled.h2`
 export const ListAdvantages = styled.div`
   display: flex;
   gap: 87px;
-  margin-top: 40px;
+  padding-top: 40px;
 `
 
 export const ItemAdvantages = styled.div`
   width: 335px;
-  height: 128px;
   display: flex;
   gap: 24px;
 `

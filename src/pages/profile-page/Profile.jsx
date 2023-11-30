@@ -16,7 +16,7 @@ export const Profile = () => {
   const dispatch = useDispatch()
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
-  const [laoading, setLaoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
   const { coursesObj } = useSelector((state) => state.courses)
@@ -24,7 +24,7 @@ export const Profile = () => {
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
 
-  // запрос на курсы в fireбазе//
+  // запрос на курсы в fireбазе
   const getCourses = () => {
     const dbRef = ref(getDatabase())
     get(child(dbRef, `/users/${id}`))
@@ -52,7 +52,6 @@ export const Profile = () => {
   useEffect(() => {
     setLoading(true)
   }, [])
-  console.log(coursesObj)
 
   if (isSuccessModal) {
     setTimeout(() => {
