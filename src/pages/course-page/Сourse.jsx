@@ -100,7 +100,7 @@ const CourseBlock = ({ course, id }) => {
             выбором направления и тренера, с которым тренировки принесут
             здоровье и радость!
           </S.FooterText>
-          {isSubscribed ? (
+          {!isSubscribed ? (
             'Поздравляем, вы записаны на курс'
           ) : (
             <S.FooterButton onClick={subscribe}>
