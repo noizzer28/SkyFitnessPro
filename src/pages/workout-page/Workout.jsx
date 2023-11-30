@@ -29,12 +29,15 @@ export const Workout = () => {
 
 export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
+  const db = getDatabase()
   const userId = useSelector((state) => state.user.id)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
 
   const programm = coursesObj[idCourse]
+  console.log('programm', programm)
   const workout = programm.workout[idWorkout]
+  console.log('workout', workout)
 
   let exercices = []
   if (!!workout.exercices) {
@@ -80,8 +83,6 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
         }
       }),
     )
-    //Вот тут и случилось непоправимое: я для теста попробовала апдейт информации и перезаписала весь courses, будьте осторожнее
-    const db = getDatabase()
 
     progressValue.map((item, index) => {
       console.log(item.userInput)

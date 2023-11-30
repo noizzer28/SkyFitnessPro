@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   ModalWindow,
@@ -27,22 +27,27 @@ export const Сourse = () => {
 // формируем блок курса
 const CourseBlock = ({ course, id }) => {
   const { email } = useSelector((state) => state.user)
-
-  let isSubscribed
-  if (course.users) {
-    isSubscribed = !!Object.entries(course.users)
-      .filter(([key, value]) => value.user === email)
-      .map(([key, value]) => value.user)
-  } else {
-    isSubscribed = false
-  }
-
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
+  const [isSubscribed, setSubscribe] = useState(false)
+
+  useEffect(() => {
+    if (course.users) {
+      const array = Object.entries(course.users)
+        .filter(([key, value]) => value.user === email)
+        .map(([key, value]) => value.user)
+      if (array.length > 0) {
+        setSubscribe(true)
+      }
+    } else {
+      setSubscribe(false)
+    }
+  }, [course])
+
   const subscribe = () => {
     if (!isSubscribed && email) {
       const db = getDatabase()
       push(ref(db, `/courses/${id}/users`), {
-        user: 'email',
+        user: email,
       })
     }
 
