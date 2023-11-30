@@ -30,6 +30,7 @@ export const Workout = () => {
 
 export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
+  const userId = useSelector((state) => state.user.id)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
 
@@ -88,7 +89,9 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
       update(
         ref(
           db,
-          `/courses/${programm.id}/workout/${idWorkout}/exercices/${index + 1}`,
+          `/courses/${programm.id}/workout/${idWorkout}/exercices/${
+            index + 1
+          }/users/${userId}`,
         ),
         {
           userInput: item.userInput,
