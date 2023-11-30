@@ -51,3 +51,19 @@ export const ModalCloseButton = styled.button`
     color: #606060;
   }
 `
+export const ModalErrorLogo = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`
+export const ModalErrorLogoText = styled.p`
+  color: #000;
+  font-size: 26px;
+  font-weight: 400;
+`
+export const ModalErrorText = styled.h2`
+  font-size: 24px;
+  line-height: 48px;
+  text-align: center;
+  line-height: 150%;
+`

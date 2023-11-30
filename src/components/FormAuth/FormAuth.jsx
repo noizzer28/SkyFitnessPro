@@ -25,25 +25,19 @@ export const FormAuth = ({ title, typeLogin }) => {
 
   const handleClick = async () => {
     try {
-      if (!typeLogin && pass.length < 8 && pass.length > 0) {
-        setInputError('Не менее 8 символов')
-        return
-      }
       if (!email) {
-        setInputError('Введите email')
-        return
+        return setInputError('Введите email')
       }
-
       if (!pass) {
-        setInputError('Введите пароль')
-        return
+        return setInputError('Введите пароль')
       }
       if (!typeLogin && pass !== repPass) {
-        setInputError('пароли не совпадают')
-        return
+        return setInputError('пароли не совпадают')
+      }
+      if (!typeLogin && pass.length < 8 && pass.length > 0) {
+        return setInputError('Не менее 8 символов')
       }
       setIsLoading(true)
-
       setInputError('')
       let user = {}
       if (typeLogin) {

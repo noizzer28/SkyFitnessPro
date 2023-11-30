@@ -31,14 +31,14 @@ export const InputChange = styled.input`
 export const ModalErrorText = styled.p`
   color: red;
   font-size: 18px;
-  width: 100%;
   flex-grow: 1;
   position: absolute;
-  bottom: 110px;
+  bottom: 100px;
   left: 50px;
+  max-width: 278px;
 `
 export const SendButton = styled(ButtonPurple)`
-  margin-top: 28px;
+  margin-top: 40px;
 `
 export const LogoText = styled.p`
   color: #000;

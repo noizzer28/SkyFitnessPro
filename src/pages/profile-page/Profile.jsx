@@ -8,7 +8,8 @@ import { Card } from '../../components/CourseCard/Card'
 import { setUserCourses } from 'store/slices/userSlice'
 import { objArrList } from 'App'
 import { Link } from 'react-router-dom'
-import { ModalWindow } from 'components/ModalWindow/ModalWindow'
+import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
+import { ModalError } from 'components/ModalWindow/ModalWindow'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
@@ -16,6 +17,8 @@ export const Profile = () => {
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
   const [laoading, setLaoading] = useState(false)
+  const [isSuccessModal, setSuccessModal] = useState(false)
+  const [isModalError, setModalError] = useState('')
   const { id } = useSelector((state) => state.user)
   const { userCourses } = useSelector((state) => state.user)
   const { email } = useSelector((state) => state.user)
@@ -49,6 +52,33 @@ export const Profile = () => {
     setLaoading(true)
   }, [])
 
+  if (isSuccessModal) {
+    setTimeout(() => {
+      setSuccessModal(false)
+      setPasswordChange(false)
+      setLoginChange(false)
+    }, 2000)
+  }
+
+  let window = null
+  if (isSuccessModal) {
+    window = <ModalSuccess text="Пароль успешно изменен!" />
+  } else if (isModalError) {
+    window = (
+      <ModalError
+        text={`Не удалось изменить пароль по причине: ${isModalError}`}
+      />
+    )
+  } else {
+    window = (
+      <ModalProfileChange
+        type="пароль"
+        setSuccessModal={setSuccessModal}
+        setModalError={setModalError}
+      />
+    )
+  }
+
   return (
     <>
       <Header />
@@ -69,18 +99,30 @@ export const Profile = () => {
       </S.ProfileInfo>
       {laoading && !userCourses && <Loader></Loader>}
       {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>}
+      {/* окно смены логина */}
       {loginChange && (
         <ModalWindow
           width={366}
           setOpenModalWindow={setLoginChange}
-          childComponent={<ModalProfileChange type="логин" />}
+          childComponent={
+            isSuccessModal ? (
+              <ModalSuccess text="Логин успешно изменен!" />
+            ) : (
+              <ModalProfileChange
+                type="логин"
+                setSuccessModal={setSuccessModal}
+              />
+            )
+          }
         />
       )}
+      {/* окно смены пароля */}
       {passwordChange && (
         <ModalWindow
           width={366}
           setOpenModalWindow={setPasswordChange}
-          childComponent={<ModalProfileChange type="пароль" />}
+          setModalError={setModalError}
+          childComponent={window}
         />
       )}
     </>

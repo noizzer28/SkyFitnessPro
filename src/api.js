@@ -49,25 +49,27 @@ export async function getUserProfile() {
   }
 }
 
-export function changeLogin(newMail) {
-  updateEmail(auth.currentUser, 'user@example.com')
-    .then(() => {
-      console.log('логин изменен')
-    })
-    .catch((error) => {
-      console.log('какая то ошибка', error)
-    })
-}
+// export function changeLogin(newMail) {
+//   updateEmail(auth.currentUser, 'user@example.com')
+//     .then(() => {
+//       console.log('логин изменен')
+//     })
+//     .catch((error) => {
+//       console.log('какая то ошибка', error)
+//     })
+// }
 
-export function changePass(newPas) {
+export async function changePass(newPas) {
+  let result = null
   const user = auth.currentUser
-  updatePassword(user, newPas)
+  await updatePassword(user, newPas)
     .then(() => {
-      console.log('пароль изменен')
+      result = 'пароль изменен'
     })
     .catch((error) => {
-      console.log('какая то ошибка', error)
+      throw new Error(error)
     })
+  return result
 }
 
 // firebase.auth()

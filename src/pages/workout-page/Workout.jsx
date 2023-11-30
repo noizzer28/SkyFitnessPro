@@ -12,7 +12,6 @@ import * as S from './workout.styles'
 export const Workout = () => {
   const { course } = useParams()
   const { id } = useParams()
-
   const { coursesObj } = useSelector((state) => state.courses)
 
   return (
