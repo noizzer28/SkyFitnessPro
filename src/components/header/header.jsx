@@ -22,7 +22,7 @@ export const Header = () => {
   const node = useRef()
   useDropdownClose(node, () => {
     if (isProfileMenu) {
-      setProfileMenu(true)
+      setProfileMenu(false)
     }
   })
 
