@@ -51,12 +51,12 @@ export const ModalProfileChange = ({
       }
       setIsLoading(true)
 
-      if (type === 'пароль') {
-        await changePass(inputVal)
+      if (type === 'логин') {
+        await changeLogin(inputVal)
         setSuccessModal(true)
         setInputError('')
       } else {
-        await changeLogin(inputVal)
+        await changePass(inputVal)
         setSuccessModal(true)
         setInputError('')
       }

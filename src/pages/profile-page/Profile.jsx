@@ -18,11 +18,6 @@ export const Profile = () => {
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
 
-  if (!email) {
-    useAuth()
-  }
-  //   useEffect(() => {}, [])
-
   // формируем список курсов
   let usersCoursesArr = []
   courses.map((item) => {

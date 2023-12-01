@@ -34,7 +34,6 @@ export async function signOutUser() {
 
 //смена логина
 export async function changeLogin(newMail) {
-  console.log('текущий mail: ', auth.currentUser.email)
   await updateEmail(auth.currentUser, newMail)
     .then(() => {
       console.log('логин изменен')
@@ -43,7 +42,6 @@ export async function changeLogin(newMail) {
     .catch((error) => {
       throw new Error(error)
     })
-  return result
 }
 
 // смена пароля
