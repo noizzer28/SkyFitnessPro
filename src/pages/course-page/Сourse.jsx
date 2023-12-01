@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import {
   ModalWindow,
   ModalSuccess,
+  ModalError,
 } from '../../components/ModalWindow/ModalWindow'
 import { Header } from '../../components/header/header'
 import { useSelector } from 'react-redux'
@@ -24,13 +25,13 @@ export const Сourse = () => {
     </>
   )
 }
+
 // формируем блок курса
 const CourseBlock = ({ course, id }) => {
   const { email } = useSelector((state) => state.user)
   const userID = useSelector((state) => state.user.id)
   const [isOpenModalWindow, setOpenModalWindow] = useState(false)
   const [isSubscribed, setSubscribe] = useState(false)
-
   useEffect(() => {
     if (course.users) {
       setSubscribe(!!Object.keys(course.users).find((key) => key === userID))
@@ -115,7 +116,13 @@ const CourseBlock = ({ course, id }) => {
       {isOpenModalWindow && (
         <ModalWindow
           setOpenModalWindow={setOpenModalWindow}
-          childComponent={<ModalSuccess text={'Вы успешно записались!'} />}
+          childComponent={
+            email ? (
+              <ModalSuccess text={'Вы успешно записались!'} />
+            ) : (
+              <ModalError text={'Пожалуйста авторизуйтесь'} />
+            )
+          }
         />
       )}
     </>
