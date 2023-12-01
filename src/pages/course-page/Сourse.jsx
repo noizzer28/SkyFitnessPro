@@ -7,8 +7,8 @@ import {
 import { Header } from '../../components/header/header'
 import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
-import * as S from './Course.styles'
 import { getDatabase, ref, set, update, push } from 'firebase/database'
+import * as S from './Course.styles'
 
 export const Сourse = () => {
   const { coursesObj } = useSelector((state) => state.courses)

@@ -1,21 +1,27 @@
-import { Header } from '../../components/header/header'
-import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Header } from '../../components/header/header'
+import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { Card } from '../../components/CourseCard/Card'
 import { objArrList } from 'App'
-import { Link } from 'react-router-dom'
 import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
 import { ModalError } from 'components/ModalWindow/ModalWindow'
+import { useAuth } from 'hooks/use-auth'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
+  const { email, id } = useSelector((state) => state.user)
+  const { courses } = useSelector((state) => state.courses)
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
-  const { email, id } = useSelector((state) => state.user)
-  const { courses } = useSelector((state) => state.courses)
+
+  if (!email) {
+    useAuth()
+  }
+  //   useEffect(() => {}, [])
 
   // формируем список курсов
   let usersCoursesArr = []

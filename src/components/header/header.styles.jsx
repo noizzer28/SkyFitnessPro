@@ -21,6 +21,7 @@ export const HeaderFlex = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 `
 export const HeaderUserLogo = styled.div`
   width: 50px;
@@ -55,21 +56,24 @@ export const EnterButton = styled(ButtonPurple)`
 `
 export const Dropdown = styled.nav`
   position: absolute;
+  top: 0px;
+  right: 0px;
 `
 export const DropdownMenu = styled.ul`
   position: relative;
   padding: 0 30px 20px;
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
+  text-align: end;
   width: 200px;
-  right: -80px;
-  top: 80px;
+  right: -30px;
+  top: 55px;
   z-index: 3;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
+  transform: translateY(-40px);
   transition: 0.5s;
+  font-size: 20px;
+  backdrop-filter: blur(3px);
+  border-radius: 15px;
 
   ${(props) =>
     props.open &&
