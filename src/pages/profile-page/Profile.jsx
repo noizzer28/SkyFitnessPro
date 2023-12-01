@@ -38,7 +38,6 @@ export const Profile = () => {
       typeMain={false}
     ></Card>
   ))
-
   if (isSuccessModal) {
     setTimeout(() => {
       setSuccessModal(false)
@@ -97,7 +96,11 @@ export const Profile = () => {
       </S.ProfileInfo>
       <S.CardPart>
         <S.Title>Мои курсы</S.Title>
-        <S.CardList>{mapCoursesList} </S.CardList>
+        {mapCoursesList.length > 0 ? (
+          <S.CardList>{mapCoursesList} </S.CardList>
+        ) : (
+          <S.CardPartText>Вы не записаны ни на один курс</S.CardPartText>
+        )}
       </S.CardPart>
       {/* окно смены пароля или логина */}
       {(passwordChange || loginChange) && (
