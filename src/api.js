@@ -1,9 +1,10 @@
 import {
-  updateEmail,
   getAuth,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateEmail,
   updatePassword,
+  onAuthStateChanged,
   signOut,
 } from 'firebase/auth'
 
@@ -32,16 +33,24 @@ export async function signOutUser() {
     })
 }
 
-//смена логина
+// смена логина
 export async function changeLogin(newMail) {
+  let userData
   await updateEmail(auth.currentUser, newMail)
     .then(() => {
       console.log('логин изменен')
-      console.log(auth.currentUser.email)
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          //  console.log(user)
+          userData = user
+        }
+      })
     })
     .catch((error) => {
       throw new Error(error)
     })
+  return userData
 }
 
 // смена пароля
