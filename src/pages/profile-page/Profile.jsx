@@ -126,38 +126,48 @@ const ProfileBlock = () => {
 
 // всплывающее окно выбора тренировок
 export const WorkoutSelectionWindow = ({ idCourse }) => {
+  const { id } = useSelector((state) => state.user)
   const { coursesObj } = useSelector((state) => state.courses)
   const workoutListObj = coursesObj[idCourse].workout
   const workoutListArr = objArrList(workoutListObj)
-
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>
       <S.ModalList>
         {workoutListArr.map((el, index) => {
+          const elExercices = el.exercices?.slice(1)
+          const resultOne = elExercices?.filter((item) => {
+            return item.users[id]?.userInput >= item.repeat
+          })
           return (
-            <S.ModalListItem key={el.url}>
+            <S.ModalListItem
+              key={el.url}
+              style={{ borderColor: resultOne?.length ? '#06B16E' : '' }}
+            >
               <Link to={`/workout/${idCourse}/${index + 1}`}>
                 <S.ModalListLink>
-                  <S.TrainingItem>{el.name}</S.TrainingItem>
-                  {/* <S.TrainingName>
-                    Йога на каждый день / {index + 1} день
-                  </S.TrainingName> */}
-                  {/* <S.TrainingDone>
-                    <svg
-                      width="28"
-                      height="26"
-                      viewBox="0 0 28 26"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle cx="12" cy="13.5" r="11.5" stroke="#06B16E" />
-                      <path
-                        d="M6 9.81034L11.775 15.5L27 0.5"
-                        stroke="#06B16E"
-                      />
-                    </svg>{' '}
-                  </S.TrainingDone> */}
+                  <S.TrainingItem
+                    style={{ color: resultOne?.length ? '#06B16E' : '' }}
+                  >
+                    {el.name}
+                  </S.TrainingItem>
+                  {!!resultOne?.length && (
+                    <S.TrainingDone>
+                      <svg
+                        width="28"
+                        height="26"
+                        viewBox="0 0 28 26"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle cx="12" cy="13.5" r="11.5" stroke="#06B16E" />
+                        <path
+                          d="M6 9.81034L11.775 15.5L27 0.5"
+                          stroke="#06B16E"
+                        />
+                      </svg>{' '}
+                    </S.TrainingDone>
+                  )}
                 </S.ModalListLink>
               </Link>
             </S.ModalListItem>

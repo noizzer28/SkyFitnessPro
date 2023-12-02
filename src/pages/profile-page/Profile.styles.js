@@ -72,7 +72,8 @@ export const ModalList = styled.ul`
 export const ModalListItem = styled.li`
   overflow: hidden;
   border-radius: 26px;
-  border: 1px solid #000;
+  border: 1px solid;
+  border-color: #000;
   &:not(:last-child) {
     margin-bottom: 12px;
   }
@@ -90,7 +91,7 @@ export const TrainingItem = styled.h5`
   font-size: 20px;
   line-height: 115%;
   letter-spacing: -0.05px;
-  margin: 0 27px 6px;
+  margin: 0 29px 6px;
 `
 export const TrainingName = styled.p`
   color: #000;

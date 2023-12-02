@@ -71,6 +71,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
 
   const handleProgress = () => {
     if (!isErrorInputNumber) {
+      setErrorInputNumber('')
       setProgressValue((prevData) =>
         prevData.map((item) => {
           if (item.totalValue <= item.userInput) {
@@ -116,7 +117,6 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
         ),
       )
       setErrorInputNumber('')
-      console.log(+newValue)
     } else {
       setErrorInputNumber(id)
     }
