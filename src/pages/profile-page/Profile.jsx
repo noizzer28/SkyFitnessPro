@@ -15,8 +15,9 @@ export const Profile = () => {
   const { courses } = useSelector((state) => state.courses)
   return (
     <>
-      <Header></Header>
-      {courses ? <ProfileBlock></ProfileBlock> : <Loader></Loader>}
+      {/* <Header></Header> */}
+      <div>Привет</div>
+      {/* {courses ? <ProfileBlock></ProfileBlock> : <Loader></Loader>} */}
     </>
   )
 }
