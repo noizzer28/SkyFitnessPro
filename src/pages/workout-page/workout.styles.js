@@ -152,3 +152,9 @@ export const ModalBlock = styled.div`
   width: 361px;
 `
 export const ModalButton = styled(ButtonPurple)``
+
+export const ModalErrorText = styled.p`
+  color: red;
+  font-size: 18px;
+  max-width: 360px;
+`
