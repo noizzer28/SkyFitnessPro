@@ -8,9 +8,20 @@ import { objArrList } from 'App'
 import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
 import { ModalError } from 'components/ModalWindow/ModalWindow'
 import { useAuth } from 'hooks/use-auth'
+import { Loader } from 'App.styles'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
+  const { courses } = useSelector((state) => state.courses)
+  return (
+    <>
+      <Header></Header>
+      {courses ? <ProfileBlock></ProfileBlock> : <Loader></Loader>}
+    </>
+  )
+}
+
+const ProfileBlock = () => {
   const { email, id } = useSelector((state) => state.user)
   const { courses } = useSelector((state) => state.courses)
   const [loginChange, setLoginChange] = useState(false)
@@ -79,7 +90,6 @@ export const Profile = () => {
   }
   return (
     <>
-      <Header></Header>
       <S.ProfileInfo>
         <S.Title>Мой профиль</S.Title>
         <S.AllLines>
@@ -115,6 +125,7 @@ export const Profile = () => {
   )
 }
 
+// всплывающее окно выбора тренировок
 export const WorkoutSelectionWindow = ({ idCourse }) => {
   const { coursesObj } = useSelector((state) => state.courses)
   const workoutListObj = coursesObj[idCourse].workout
