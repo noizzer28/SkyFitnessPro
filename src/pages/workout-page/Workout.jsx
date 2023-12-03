@@ -49,7 +49,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
       (item) => item !== null && item !== undefined && item !== '',
     )
   }
-
+  console.log(exercices)
   const progressArray = exercices.map((item, index) => {
     let user
     if (item.users) {
@@ -158,6 +158,11 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
                       onChange={(e) =>
                         updateProgressValue(index, e.target.value)
                       }
+                      onKeyDown={(e) => {
+                        if (!/^\d$/.test(e.key) && e.key !== 'Backspace') {
+                          e.preventDefault()
+                        }
+                      }}
                     ></S.ModalInput>
                     {isErrorInputNumber === index && (
                       <S.ModalErrorText>
@@ -193,7 +198,6 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
             width="1160"
             height="639"
             src={convertYouTubeLink(workout.url)}
-            title="Красота и здоровье / Йога на каждый день / 2 день / Алексей Казубский"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
