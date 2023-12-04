@@ -1,27 +1,32 @@
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Header } from '../../components/header/header'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-// import { Loader } from '../../App.styles'
-// import { getDatabase, ref, child, get } from 'firebase/database'
 import { Card } from '../../components/CourseCard/Card'
-// import { setUserCourses } from 'store/slices/userSlice'
 import { objArrList } from 'App'
-import { Link } from 'react-router-dom'
 import { ModalSuccess, ModalWindow } from 'components/ModalWindow/ModalWindow'
 import { ModalError } from 'components/ModalWindow/ModalWindow'
+import { Loader } from 'App.styles'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
+  const { courses } = useSelector((state) => state.courses)
+  return (
+    <>
+      <Header></Header>
+      {courses ? <ProfileBlock></ProfileBlock> : <Loader></Loader>}
+    </>
+  )
+}
+
+const ProfileBlock = () => {
+  const { email, id } = useSelector((state) => state.user)
+  const { courses } = useSelector((state) => state.courses)
   const [loginChange, setLoginChange] = useState(false)
   const [passwordChange, setPasswordChange] = useState(false)
-  //   const [loading, setLoading] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
   const [isModalError, setModalError] = useState('')
-  //   const { userCourses } = useSelector((state) => state.user)
-  const { email } = useSelector((state) => state.user)
-  const { id } = useSelector((state) => state.user)
-  const { courses } = useSelector((state) => state.courses)
 
   // формируем список курсов
   let usersCoursesArr = []
@@ -44,36 +49,6 @@ export const Profile = () => {
       typeMain={false}
     ></Card>
   ))
-
-  // запрос на курсы в fireбазе
-  //   const getCourses = () => {
-  //     const dbRef = ref(getDatabase())
-  //     get(child(dbRef, `/users/${id}`))
-  //       .then((snapshot) => {
-  //         const data = snapshot.val()
-  //         if (!userCourses && snapshot.exists()) {
-  //           setLoading(true)
-  //           dispatch(
-  //             setUserCourses({
-  //               userCourses: data,
-  //             }),
-  //           )
-  //         } else {
-  //           setLoading(false)
-  //           //  console.log('No data available')
-  //           return
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error)
-  //       })
-  //   }
-
-  //   getCourses()
-  //   useEffect(() => {
-  //     setLoading(true)
-  //   }, [])
-
   if (isSuccessModal) {
     setTimeout(() => {
       setSuccessModal(false)
@@ -114,7 +89,6 @@ export const Profile = () => {
   }
   return (
     <>
-      <Header />
       <S.ProfileInfo>
         <S.Title>Мой профиль</S.Title>
         <S.AllLines>
@@ -130,12 +104,13 @@ export const Profile = () => {
           </S.ProfileButton>
         </S.AllButtons>
       </S.ProfileInfo>
-      {/* {loading && !userCourses && <Loader></Loader>} */}
-      {/* {userCourses && <ProfileBlock courses={userCourses}></ProfileBlock>} */}
-      {/* <ProfileBlock></ProfileBlock> */}
       <S.CardPart>
         <S.Title>Мои курсы</S.Title>
-        <S.CardList>{mapCoursesList} </S.CardList>
+        {mapCoursesList.length > 0 ? (
+          <S.CardList>{mapCoursesList} </S.CardList>
+        ) : (
+          <S.CardPartText>Вы не записаны ни на один курс</S.CardPartText>
+        )}
       </S.CardPart>
       {/* окно смены пароля или логина */}
       {(passwordChange || loginChange) && (
@@ -149,51 +124,50 @@ export const Profile = () => {
   )
 }
 
-// const ProfileBlock = () => {
-//   return (
-//     <>
-//       <S.CardPart>
-//         <S.Title>Мои курсы</S.Title>
-//         <S.CardList>{mapCoursesList} </S.CardList>
-//       </S.CardPart>
-//     </>
-//   )
-// }
-
+// всплывающее окно выбора тренировок
 export const WorkoutSelectionWindow = ({ idCourse }) => {
+  const { id } = useSelector((state) => state.user)
   const { coursesObj } = useSelector((state) => state.courses)
   const workoutListObj = coursesObj[idCourse].workout
   const workoutListArr = objArrList(workoutListObj)
-  //el.id - это айдишник тренировки
-  // idCourse - это айдишник курса
   return (
     <>
       <S.ModalTitle>Выберите тренировку</S.ModalTitle>
       <S.ModalList>
         {workoutListArr.map((el, index) => {
+          const elExercices = el.exercices?.slice(1)
+          const resultOne = elExercices?.filter((item) => {
+            return item.users[id]?.userInput >= item.repeat
+          })
           return (
-            <S.ModalListItem key={el.url}>
+            <S.ModalListItem
+              key={el.url}
+              style={{ borderColor: resultOne?.length ? '#06B16E' : '' }}
+            >
               <Link to={`/workout/${idCourse}/${index + 1}`}>
                 <S.ModalListLink>
-                  <S.TrainingItem>{el.name}</S.TrainingItem>
-                  {/* <S.TrainingName>
-                    Йога на каждый день / {index + 1} день
-                  </S.TrainingName> */}
-                  {/* <S.TrainingDone>
-                    <svg
-                      width="28"
-                      height="26"
-                      viewBox="0 0 28 26"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle cx="12" cy="13.5" r="11.5" stroke="#06B16E" />
-                      <path
-                        d="M6 9.81034L11.775 15.5L27 0.5"
-                        stroke="#06B16E"
-                      />
-                    </svg>{' '}
-                  </S.TrainingDone> */}
+                  <S.TrainingItem
+                    style={{ color: resultOne?.length ? '#06B16E' : '' }}
+                  >
+                    {el.name}
+                  </S.TrainingItem>
+                  {!!resultOne?.length && (
+                    <S.TrainingDone>
+                      <svg
+                        width="28"
+                        height="26"
+                        viewBox="0 0 28 26"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle cx="12" cy="13.5" r="11.5" stroke="#06B16E" />
+                        <path
+                          d="M6 9.81034L11.775 15.5L27 0.5"
+                          stroke="#06B16E"
+                        />
+                      </svg>{' '}
+                    </S.TrainingDone>
+                  )}
                 </S.ModalListLink>
               </Link>
             </S.ModalListItem>

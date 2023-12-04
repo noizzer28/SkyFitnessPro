@@ -33,6 +33,7 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   const userId = useSelector((state) => state.user.id)
   const [isModal, setModal] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
+  const [isErrorInputNumber, setErrorInputNumber] = useState('')
 
   const progressBarStyles = [
     { base: '#EDECFF', top: '#565EEF' },
@@ -69,48 +70,56 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
   }
 
   const handleProgress = () => {
-    setProgressValue((prevData) =>
-      prevData.map((item) => {
-        if (item.totalValue <= item.userInput) {
-          return { ...item, percentProgress: 100 }
-        } else {
-          return {
-            ...item,
-            percentProgress: Math.floor(
-              (item.userInput / item.totalValue) * 100,
-            ),
+    if (!isErrorInputNumber) {
+      setErrorInputNumber('')
+      setProgressValue((prevData) =>
+        prevData.map((item) => {
+          if (item.totalValue <= item.userInput) {
+            return { ...item, percentProgress: 100 }
+          } else {
+            return {
+              ...item,
+              percentProgress: Math.floor(
+                (item.userInput / item.totalValue) * 100,
+              ),
+            }
           }
-        }
-      }),
-    )
-
-    progressValue.map((item, index) => {
-      update(
-        ref(
-          db,
-          `/courses/${programm.id}/workout/${idWorkout}/exercices/${
-            index + 1
-          }/users/${userId}`,
-        ),
-        {
-          userInput: parseInt(item.userInput, 10),
-        },
+        }),
       )
-    })
 
-    setSuccessModal((prevValue) => (prevValue = !prevValue))
-    setTimeout(() => {
-      setModal((prevValue) => (prevValue = !prevValue))
+      progressValue.map((item, index) => {
+        update(
+          ref(
+            db,
+            `/courses/${programm.id}/workout/${idWorkout}/exercices/${
+              index + 1
+            }/users/${userId}`,
+          ),
+          {
+            userInput: parseInt(item.userInput, 10),
+          },
+        )
+      })
+
       setSuccessModal((prevValue) => (prevValue = !prevValue))
-    }, 1500)
+      setTimeout(() => {
+        setModal((prevValue) => (prevValue = !prevValue))
+        setSuccessModal((prevValue) => (prevValue = !prevValue))
+      }, 1500)
+    }
   }
 
   const updateProgressValue = (id, newValue) => {
-    setProgressValue((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, userInput: newValue } : item,
-      ),
-    )
+    if (newValue === String(newValue.match(/\d+/g))) {
+      setProgressValue((prevData) =>
+        prevData.map((item) =>
+          item.id === id ? { ...item, userInput: +newValue } : item,
+        ),
+      )
+      setErrorInputNumber('')
+    } else {
+      setErrorInputNumber(id)
+    }
   }
 
   function convertYouTubeLink(link) {
@@ -125,7 +134,6 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
       return link
     }
   }
-
   return (
     <>
       {isModal && (
@@ -151,10 +159,20 @@ export const WorkoutBlock = ({ idWorkout, idCourse }) => {
                         updateProgressValue(index, e.target.value)
                       }
                     ></S.ModalInput>
+                    {isErrorInputNumber === index && (
+                      <S.ModalErrorText>
+                        Введите только цифровые значения
+                      </S.ModalErrorText>
+                    )}
                   </S.ModalBlock>
                 )
               })}
-              <S.ModalButton onClick={handleProgress}>Отправить</S.ModalButton>
+              <S.ModalButton
+                onClick={handleProgress}
+                disabled={isErrorInputNumber}
+              >
+                Отправить
+              </S.ModalButton>
             </S.ModalProgress>
           ) : (
             <ModalWindow

@@ -2,27 +2,9 @@ import { getDatabase, ref, child, push, update, set } from 'firebase/database'
 import { changeLogin, changePass } from 'api'
 import { getAuth, sendSignInLinkToEmail } from 'firebase/auth'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUser } from 'store/slices/userSlice'
 import * as S from './ModalProfileChange.styles'
-
-// const actionCodeSettings = {
-//   url: 'https://fitness-pro-ae1f4.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
-//   handleCodeInApp: true,
-// }
-
-// const auth = getAuth()
-// sendSignInLinkToEmail(auth, email, actionCodeSettings)
-//   .then(() => {
-//     // The link was successfully sent. Inform the user.
-//     // Save the email locally so you don't need to ask the user for it again
-//     // if they open the link on the same device.
-//     //  window.localStorage.setItem('emailForSignIn', email);
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code
-//     const errorMessage = error.message
-//     // ...
-//   })
 
 export const ModalProfileChange = ({
   type,
@@ -33,6 +15,7 @@ export const ModalProfileChange = ({
   const [inputVal, setInputVal] = useState('')
   const [repPass, setRepPass] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const dispatch = useDispatch()
 
   function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1)
@@ -51,12 +34,19 @@ export const ModalProfileChange = ({
       }
       setIsLoading(true)
 
-      if (type === 'пароль') {
-        await changePass(inputVal)
+      if (type === 'логин') {
+        const userData = await changeLogin(inputVal)
+        dispatch(
+          setUser({
+            email: userData.email,
+            id: userData.uid,
+            token: userData.accessToken,
+          }),
+        )
         setSuccessModal(true)
         setInputError('')
       } else {
-        await changeLogin(inputVal)
+        await changePass(inputVal)
         setSuccessModal(true)
         setInputError('')
       }

@@ -4,9 +4,9 @@ import { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { removeUser } from 'store/slices/userSlice'
 import { useAuth } from 'hooks/use-auth'
-import useDropdownClose from 'hooks/use-dropdown-close'
-import * as S from './header.styles'
+import { useDropdownClose } from 'hooks/use-dropdown-close'
 import { signOutUser } from 'api'
+import * as S from './header.styles'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ export const Header = () => {
   const node = useRef()
   useDropdownClose(node, () => {
     if (isProfileMenu) {
-      setProfileMenu()
+      setProfileMenu(false)
     }
   })
 

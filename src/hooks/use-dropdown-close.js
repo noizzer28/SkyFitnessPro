@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const useDropdownClose = (ref, handler) => {
+export const useDropdownClose = (ref, handler) => {
   useEffect(() => {
     const listener = (event) => {
       if (!ref.current || ref.current.contains(event.target)) {
@@ -14,5 +14,3 @@ const useDropdownClose = (ref, handler) => {
     }
   }, [ref, handler])
 }
-
-export default useDropdownClose

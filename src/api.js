@@ -1,8 +1,8 @@
 import {
-  updateEmail,
   getAuth,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateEmail,
   updatePassword,
   signOut,
 } from 'firebase/auth'
@@ -32,18 +32,16 @@ export async function signOutUser() {
     })
 }
 
-//смена логина
+// смена логина
 export async function changeLogin(newMail) {
-  console.log('текущий mail: ', auth.currentUser.email)
   await updateEmail(auth.currentUser, newMail)
     .then(() => {
       console.log('логин изменен')
-      console.log(auth.currentUser.email)
     })
     .catch((error) => {
       throw new Error(error)
     })
-  return result
+  return auth.currentUser
 }
 
 // смена пароля
@@ -55,26 +53,3 @@ export async function changePass(newPas) {
       throw new Error(error)
     })
 }
-
-// export async function getUserProfile() {
-//   const user = auth.currentUser
-//   if (user !== null) {
-// 	 // The user object has basic properties such as display name, email, etc.
-// 	 const displayName = user.displayName
-// 	 const email = user.email
-// 	 const photoURL = user.photoURL
-// 	 const emailVerified = user.emailVerified
-
-// 	 // The user's ID, unique to the Firebase project. Do NOT use
-// 	 // this value to authenticate with your backend server, if
-// 	 // you have one. Use User.getToken() instead.
-// 	 const uid = user.uid
-// 	 //   console.log(user);
-//   }
-// }
-
-// firebase.auth()
-//     .signInWithEmailAndPassword('you@domain.example', 'correcthorsebatterystaple')
-//     .then(function(userCredential) {
-//         userCredential.user.updateEmail('newyou@domain.example')
-//     })
