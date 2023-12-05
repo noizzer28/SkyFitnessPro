@@ -13,9 +13,10 @@ export const Main = ({ error }) => {
   const { coursesUse } = useCourses()
   console.log(courses)
   console.log(coursesUse)
+  const list = courses || coursesUse
 
   // формируем список курсов
-  const mapCoursesList = coursesUse?.map((courseCard) => (
+  const mapCoursesList = list?.map((courseCard) => (
     <Card
       key={courseCard.id}
       name={courseCard.name}

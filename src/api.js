@@ -29,7 +29,7 @@ export async function getCour() {
     .then(async (snapshot) => {
       if (snapshot.exists()) {
         const data = await snapshot.val()
-        dataCour = objArrList(data)
+        dataCour = await objArrList(data)
         //   DispatchData(dataCour)
       } else {
         console.log('No data available')
