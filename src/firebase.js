@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 
-const firebaseConfig2 = {
+const firebaseConfig = {
   apiKey: 'AIzaSyB-wRQxSLi02iluYOtQb3MIYHHKzhUfkMA',
   authDomain: 'fitness-pro-ae1f4.firebaseapp.com',
   databaseURL:
@@ -10,16 +10,14 @@ const firebaseConfig2 = {
   messagingSenderId: '1034773898251',
   appId: '1:1034773898251:web:7dfa7ec88e44363287d30e',
 }
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENFER_ID,
-  appId: process.env.REACT_APP_FIREBASE_API_ID,
-}
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+//   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+//   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+//   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENFER_ID,
+//   appId: process.env.REACT_APP_FIREBASE_API_ID,
+// }
 
-console.log(firebaseConfig)
-console.log(firebaseConfig2)
 export const app = initializeApp(firebaseConfig)
