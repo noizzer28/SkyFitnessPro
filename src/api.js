@@ -11,7 +11,6 @@ import { objArrList } from 'App'
 
 // чтение данных о курсах
 const dbRef = ref(getDatabase())
-
 export async function getCour() {
   let dataCour
   await get(child(dbRef, `/courses`))
