@@ -6,6 +6,40 @@ import {
   updatePassword,
   signOut,
 } from 'firebase/auth'
+import { getDatabase, ref, child, get } from 'firebase/database'
+import { objArrList } from 'App'
+import { useDispatch } from 'react-redux'
+import { setCourses } from 'store/slices/coursesSlice'
+
+// чтение данных о курсах
+const dbRef = ref(getDatabase())
+
+// export const DispatchData = (data) => {
+//   const dispatch = useDispatch()
+//   dispatch(
+//     setCourses({
+//       courses: data,
+//     }),
+//   )
+// }
+
+export async function getCour() {
+  let dataCour
+  await get(child(dbRef, `/courses`))
+    .then(async (snapshot) => {
+      if (snapshot.exists()) {
+        const data = await snapshot.val()
+        dataCour = objArrList(data)
+        //   DispatchData(dataCour)
+      } else {
+        console.log('No data available')
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  return dataCour
+}
 
 const auth = getAuth()
 

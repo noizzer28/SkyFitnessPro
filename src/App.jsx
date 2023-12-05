@@ -23,9 +23,7 @@ export const App = () => {
     const db = getDatabase()
     const starCountRef = ref(db, '/courses')
     onValue(starCountRef, (snapshot) => {
-      console.log('пошел запрос')
       const data = snapshot.val()
-      console.log('data: ', data)
       if (!data) {
         setDataBaseError(
           'Извините, курсы не найдены, либо нет подключения к интернету',
@@ -43,9 +41,9 @@ export const App = () => {
     })
   }
 
-  useEffect(() => {
-    getCourses()
-  }, [])
+  //   useEffect(() => {
+  //     getCourses()
+  //   }, [])
 
   return (
     <>

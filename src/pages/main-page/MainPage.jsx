@@ -3,10 +3,17 @@ import { Header } from '../../components/header/header'
 import { DarkBG, Container, Loader } from '../../App.styles'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { getCour } from 'api'
+import { objArrList } from 'App'
+import { useCourses } from 'hooks/use-courses'
 import * as S from './MainPage.styles'
 
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
+  const { coursesUse } = useCourses()
+
+  console.log(courses)
+
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard) => (
     <Card

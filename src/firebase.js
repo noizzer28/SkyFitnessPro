@@ -8,7 +8,6 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENFER_ID,
   appId: process.env.REACT_APP_FIREBASE_API_ID,
-  abc111111111: process.env.REACT_APP_ABC111111111,
 
   //   apiKey: 'AIzaSyB-wRQxSLi02iluYOtQb3MIYHHKzhUfkMA',
   //   authDomain: 'fitness-pro-ae1f4.firebaseapp.com',
@@ -19,6 +18,5 @@ const firebaseConfig = {
   //   messagingSenderId: '1034773898251',
   //   appId: '1:1034773898251:web:7dfa7ec88e44363287d30e',
 }
-console.log(process.env)
 
 export const app = initializeApp(firebaseConfig)
