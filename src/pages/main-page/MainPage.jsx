@@ -11,6 +11,9 @@ export const Main = ({ error }) => {
   setTimeout(() => {
     console.log(courses)
   }, 2500)
+  setTimeout(() => {
+    console.log(courses)
+  }, 12500)
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard) => (
     <Card
