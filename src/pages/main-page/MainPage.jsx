@@ -8,6 +8,9 @@ import * as S from './MainPage.styles'
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
   console.log(courses)
+  setTimeout(() => {
+    console.log(courses)
+  }, 2500)
   // формируем список курсов
   const mapCoursesList = courses?.map((courseCard) => (
     <Card
