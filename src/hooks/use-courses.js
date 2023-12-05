@@ -13,6 +13,7 @@ export function useCourses() {
     getCour().then((data) => {
       coursesGetDataObj = data
       coursesGetData = objArrList(data)
+      console.log(coursesGetData)
       dispatch(
         setCourses({
           courses: coursesGetData,
@@ -20,10 +21,11 @@ export function useCourses() {
         }),
       )
     })
-  }, [])
+  }, [dispatch])
+  const { courses, coursesObj } = useSelector((state) => state.courses)
 
   return {
-    coursesUse: coursesGetData,
-    coursesObjUse: coursesGetDataObj,
+    coursesUse: courses,
+    coursesObjUse: coursesObj,
   }
 }

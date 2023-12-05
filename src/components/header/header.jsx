@@ -13,7 +13,6 @@ export const Header = () => {
   const navigate = useNavigate()
   const { isAuth, email } = useAuth()
   const [isProfileMenu, setProfileMenu] = useState(false)
-
   let colorTextBlack = true
   if (useLocation().pathname === '/') {
     colorTextBlack = false

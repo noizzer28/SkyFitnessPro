@@ -11,11 +11,11 @@ import * as S from './MainPage.styles'
 export const Main = ({ error }) => {
   const { courses } = useSelector((state) => state.courses)
   const { coursesUse } = useCourses()
-
   console.log(courses)
+  console.log(coursesUse)
 
   // формируем список курсов
-  const mapCoursesList = courses?.map((courseCard) => (
+  const mapCoursesList = coursesUse?.map((courseCard) => (
     <Card
       key={courseCard.id}
       name={courseCard.name}
