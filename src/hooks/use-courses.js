@@ -6,7 +6,6 @@ import { objArrList } from 'App'
 
 export function useCourses() {
   const dispatch = useDispatch()
-  //   const { courses } = useSelector((state) => state.courses)
   let coursesGetDataObj
   let coursesGetData
   useEffect(() => {

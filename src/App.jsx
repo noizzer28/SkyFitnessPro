@@ -18,6 +18,8 @@ export const App = () => {
   const [dataBaseError, setDataBaseError] = useState(null)
   const dispatch = useDispatch()
 
+  //   console.log(process.env)
+
   // запрос на курсы в fireбазе
   const getCourses = () => {
     const db = getDatabase()
@@ -41,9 +43,9 @@ export const App = () => {
     })
   }
 
-  //   useEffect(() => {
-  //     getCourses()
-  //   }, [])
+  useEffect(() => {
+    getCourses()
+  }, [])
 
   return (
     <>
