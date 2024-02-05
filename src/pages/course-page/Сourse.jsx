@@ -5,7 +5,7 @@ import {
   ModalSuccess,
   ModalError,
 } from '../../components/ModalWindow/ModalWindow'
-import { Header } from '../../components/header/header'
+import { Header } from 'components/header/Header'
 import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { getDatabase, ref, set, update, push } from 'firebase/database'

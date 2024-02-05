@@ -6,7 +6,7 @@ import { removeUser } from 'store/slices/userSlice'
 import { useAuth } from 'hooks/use-auth'
 import { useDropdownClose } from 'hooks/use-dropdown-close'
 import { signOutUser } from 'api'
-import * as S from './header.styles'
+import * as S from './Header.styles'
 
 export const Header = () => {
   const dispatch = useDispatch()

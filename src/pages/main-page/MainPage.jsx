@@ -1,5 +1,5 @@
 import { Card } from '../../components/CourseCard/Card'
-import { Header } from '../../components/header/header'
+import { Header } from '../../components/header/Header'
 import { DarkBG, Container, Loader } from '../../App.styles'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
