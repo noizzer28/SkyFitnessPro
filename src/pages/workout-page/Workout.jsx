@@ -1,5 +1,5 @@
-import { Header } from '../../components/header/header'
-import { useState, useEffect } from 'react'
+import { Header } from '../../components/header/Header'
+import { useState } from 'react'
 import {
   ModalWindow,
   ModalSuccess,
@@ -7,8 +7,8 @@ import {
 import { useSelector } from 'react-redux'
 import { Loader } from '../../App.styles'
 import { useParams } from 'react-router-dom'
+import { getDatabase, ref, update } from 'firebase/database'
 import * as S from './workout.styles'
-import { getDatabase, ref, set, update, add } from 'firebase/database'
 
 export const Workout = () => {
   const { course } = useParams()

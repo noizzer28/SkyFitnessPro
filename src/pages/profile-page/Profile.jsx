@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Header } from '../../components/header/header'
+import { Header } from '../../components/header/Header'
 import { ModalProfileChange } from '../../components/ModalProfileChange/ModalProfileChange'
 import { Card } from '../../components/CourseCard/Card'
 import { objArrList } from 'App'

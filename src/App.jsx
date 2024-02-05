@@ -1,5 +1,5 @@
 import { AppRoutes } from './routes'
-import { getDatabase, ref, onValue } from 'firebase/database'
+import { getDatabase, ref, onValue, child, get } from 'firebase/database'
 import { useEffect, useState } from 'react'
 import { setCourses } from 'store/slices/coursesSlice'
 import { useDispatch } from 'react-redux'
@@ -17,10 +17,10 @@ export const objArrList = (data) => {
 export const App = () => {
   const [dataBaseError, setDataBaseError] = useState(null)
   const dispatch = useDispatch()
+  const db = getDatabase()
 
   // запрос на курсы в fireбазе
   const getCourses = () => {
-    const db = getDatabase()
     const starCountRef = ref(db, '/courses')
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val()
