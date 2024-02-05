@@ -1,6 +1,6 @@
 # SkyFitnessPro
 
-<img width="379" alt="image" src="https://imageban.ru/show/2024/02/05/eb84fdffab7bd58a0f760d358e09d061/png">
+<img width="379" alt="image" src="https://i7.imageban.ru/out/2024/02/05/eb84fdffab7bd58a0f760d358e09d061.png">
 
 Командная разработка сайт для онлайн школы тренировок "SkyFitnessPro"
 
