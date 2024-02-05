@@ -1,6 +1,6 @@
 # SkyFitnessPro
 
-<img width="379" alt="image" src="[URL=https://imageban.ru/show/2024/02/05/eb84fdffab7bd58a0f760d358e09d061/png][IMG]https://i7.imageban.ru/thumbs/2024.02.05/eb84fdffab7bd58a0f760d358e09d061.png[/IMG][/URL]">
+<img width="379" alt="image" src="https://private-user-images.githubusercontent.com/92600602/302211818-0abf9775-c3c7-48e6-9203-ad4321dec0d7.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDcxMTk1ODIsIm5iZiI6MTcwNzExOTI4MiwicGF0aCI6Ii85MjYwMDYwMi8zMDIyMTE4MTgtMGFiZjk3NzUtYzNjNy00OGU2LTkyMDMtYWQ0MzIxZGVjMGQ3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMDUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjA1VDA3NDgwMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMyMTljYTY2YzI2OTIyOTJhNWYzM2Y4NjdiNDVjOGYyNjdmMzAyZjA2NzkwZWRjMGY4ZGFkNjNhNDlkMGFkNDkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.HCR-qB_jNAF1Z6oz-hTwFu3fQpqCcbG6XBtJLUyrpuI">
 
 Командная разработка сайт для онлайн школы тренировок "SkyFitnessPro"
 
@@ -13,20 +13,17 @@
 
 ## В проекте принимали учствие:
 
-Анна Шатилова (AnnaDanceLife)
-Арсений Халиуллин (ArseniyKhal)
-Виктория Колосова (noizzer28)
-Юлия Миль (JulieMille)
+- Анна Шатилова (AnnaDanceLife)
+- Арсений Халиуллин (ArseniyKhal)
+- Виктория Колосова (noizzer28)
+- Юлия Миль (JulieMille)
 
 ## Установка
 
 ### Бекенд
 
 В качестве базы данных используется ([Google Firebase](https://firebase.google.com/docs/firestore/quickstart?authuser=0&hl=ru)).
-
 Данные курсов содержатся ([здесь](https://docs.google.com/document/d/1i982bVLvoD-tI8Uv1hK0D6mS3_-wPspaK8E3fcHVhgI/edit)).
-
-Склонируйте репозиторий. Из корневой папки проекта, где находится скрипт `docker-compose.yaml`, запустите скрипт:
 
 ### Фронтенд
 
